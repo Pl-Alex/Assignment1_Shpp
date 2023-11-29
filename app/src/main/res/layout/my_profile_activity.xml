@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:background="?attr/colorPrimary"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/my_profile_primary_margin">
+
+            <TextView
+                android:id="@+id/textView_setting"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+
+                android:text="@string/my_profile_activity_settings"
+                android:textAppearance="?attr/textAppearanceHeadlineMedium"
+                android:textColor="?attr/colorOnPrimary" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/button_log_out"
+                style="@style/Assignment1.BorderedButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:paddingHorizontal="35dp"
+
+                android:text="@string/my_profile_activity_log_out"
+                android:textAppearance="?attr/textAppearanceLabelSmall"
+                android:textColor="?attr/colorOutline"
+
+                app:strokeColor="?attr/colorOutline" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/imageView_profileImage"
+                android:layout_width="@dimen/my_profile_picture_size"
+                android:layout_height="@dimen/my_profile_picture_size"
+                android:layout_centerHorizontal="true"
+                android:layout_marginBottom="@dimen/my_profile_picture_bottom_margin"
+                app:cardCornerRadius="@dimen/my_profile_picture_size">
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:contentDescription=""
+                    android:src="@drawable/default_profile_image"
+                    tools:ignore="ContentDescription" />
+            </androidx.cardview.widget.CardView>
+
+            <TextView
+                android:id="@+id/textView_nameSurname"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/imageView_profileImage"
+                android:layout_centerHorizontal="true"
+
+                android:text="Name Surname"
+                android:textAppearance="?attr/textAppearanceLabelLarge"
+                android:textColor="?attr/colorOnPrimary"
+                tools:ignore="HardcodedText" />
+
+            <TextView
+                android:id="@+id/textView_career"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/textView_nameSurname"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="@dimen/my_profile_secondary_margin"
+
+                android:text="Career"
+                android:textAppearance="?attr/textAppearanceLabelSmall"
+                android:textColor="?attr/colorOutline"
+                tools:ignore="HardcodedText" />
+
+            <TextView
+                android:id="@+id/textView_address"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/textView_career"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="@dimen/my_profile_primary_margin"
+
+                android:text="Home address"
+                android:textAppearance="?attr/textAppearanceLabelSmall"
+                android:textColor="?attr/colorOutline"
+                tools:ignore="HardcodedText" />
+        </RelativeLayout>
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/my_profile_logo_group_bottom_margin"
+            android:orientation="horizontal"
+            android:layout_above="@id/button_editProfile"
+            android:layout_centerHorizontal="true">
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/facebook_logo"
+                android:layout_marginEnd="@dimen/my_profile_primary_margin"
+                android:contentDescription="facebook"
+                tools:ignore="HardcodedText" />
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/linkedin_logo"
+                android:layout_marginStart="@dimen/my_profile_primary_margin"
+                android:layout_marginEnd="@dimen/my_profile_primary_margin"
+                android:contentDescription="linkedin"
+                tools:ignore="HardcodedText" />
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/instagram_logo"
+                android:layout_marginStart="@dimen/my_profile_primary_margin"
+                android:contentDescription="instagram"
+                tools:ignore="HardcodedText" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/textView_settingsTip"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@id/button_editProfile"
+            android:layout_centerHorizontal="true"
+
+            android:text="@string/my_profile_activity_go_settings_tip"
+            android:textAppearance="?attr/textAppearanceLabelSmall"
+            android:textColor="?attr/colorOnBackground" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/button_editProfile"
+            style="@style/Assignment1.BorderedButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_above="@id/button_viewMyContacts"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginTop="16dp"
+
+            android:text="@string/my_profile_activity_edit_profile"
+            android:textAppearance="?attr/textAppearanceLabelSmall"
+            android:textColor="?attr/colorOnBackground"
+            app:strokeColor="?attr/colorOnBackground" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/button_viewMyContacts"
+            style="@style/Assignment1.ColorButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="16dp"
+
+            android:backgroundTint="?attr/colorAccent"
+
+            android:letterSpacing="0.09"
+            android:text="@string/my_profile_activity_view_my_contacts"
+            android:textAllCaps="true"
+            android:textAppearance="?attr/textAppearanceLabelMedium"
+            android:textColor="?attr/colorOnTertiary" />
+    </RelativeLayout>
+</LinearLayout>

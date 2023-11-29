@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="my_profile_upper_bar_margin">17dp</dimen>
+    <dimen name="my_profile_primary_margin">16dp</dimen>
+    <dimen name="my_profile_secondary_margin">8dp</dimen>
+    <dimen name="my_profile_picture_bottom_margin">24dp</dimen>
+    <dimen name="my_profile_picture_size">113dp</dimen>
+    <dimen name="my_profile_logo_group_bottom_margin">95dp</dimen>
+
+    <dimen name="auth_primary_margin">16dp</dimen>
+    <dimen name="auth_secondary_margin">8dp</dimen>
+    <dimen name="auth_tertiary_margin">24dp</dimen>
+
+
+
+</resources>
