@@ -10,6 +10,7 @@
     <dimen name="auth_primary_margin">16dp</dimen>
     <dimen name="auth_secondary_margin">8dp</dimen>
     <dimen name="auth_tertiary_margin">24dp</dimen>
+    <dimen name="auth_editText_padding">39dp</dimen>
 
 
 

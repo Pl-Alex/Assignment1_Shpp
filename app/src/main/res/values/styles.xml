@@ -20,8 +20,13 @@
     </style>
 
     <style name="Widget.App.CheckBox" parent="Widget.Material3.CompoundButton.CheckBox">
-        <item name="buttonTint">?attr/colorOnPrimary</item>
-        <item name="buttonIconTint">?attr/colorOnPrimary</item>
+        <item name="buttonTint">@color/button_tint</item>
+        <item name="buttonIconTint">@color/button_icon_tint</item>
+    </style>
+
+    <style name="TextInputLayoutStyle" parent="Widget.MaterialComponents.TextInputLayout.FilledBox">
+        <item name="boxStrokeColor">#fff</item>
+        <item name="boxStrokeWidth">1dp</item>
     </style>
 
 </resources>

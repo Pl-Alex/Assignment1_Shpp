@@ -48,7 +48,7 @@
             android:layout_height="match_parent">
 
             <androidx.cardview.widget.CardView
-                android:id="@+id/imageView_profileImage"
+                android:id="@+id/cardView_profileImageContainer"
                 android:layout_width="@dimen/my_profile_picture_size"
                 android:layout_height="@dimen/my_profile_picture_size"
                 android:layout_centerHorizontal="true"
@@ -56,9 +56,11 @@
                 app:cardCornerRadius="@dimen/my_profile_picture_size">
 
                 <ImageView
+                    android:id="@+id/imageView_profileImage"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:contentDescription=""
+                    android:scaleType="centerCrop"
                     android:src="@drawable/default_profile_image"
                     tools:ignore="ContentDescription" />
             </androidx.cardview.widget.CardView>
@@ -67,7 +69,7 @@
                 android:id="@+id/textView_nameSurname"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/imageView_profileImage"
+                android:layout_below="@id/cardView_profileImageContainer"
                 android:layout_centerHorizontal="true"
 
                 android:text="Name Surname"
@@ -111,31 +113,34 @@
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/my_profile_logo_group_bottom_margin"
-            android:orientation="horizontal"
             android:layout_above="@id/button_editProfile"
-            android:layout_centerHorizontal="true">
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="@dimen/my_profile_logo_group_bottom_margin"
+            android:orientation="horizontal">
+
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/facebook_logo"
                 android:layout_marginEnd="@dimen/my_profile_primary_margin"
                 android:contentDescription="facebook"
+                android:src="@drawable/facebook_logo"
                 tools:ignore="HardcodedText" />
+
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/linkedin_logo"
                 android:layout_marginStart="@dimen/my_profile_primary_margin"
                 android:layout_marginEnd="@dimen/my_profile_primary_margin"
                 android:contentDescription="linkedin"
+                android:src="@drawable/linkedin_logo"
                 tools:ignore="HardcodedText" />
+
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/instagram_logo"
                 android:layout_marginStart="@dimen/my_profile_primary_margin"
                 android:contentDescription="instagram"
+                android:src="@drawable/instagram_logo"
                 tools:ignore="HardcodedText" />
         </LinearLayout>
 

@@ -9,6 +9,8 @@
         <item name="colorOnPrimary">@color/white</item>
         <item name="colorOnSecondary">@color/white</item>
         <item name="colorOnBackground">@color/blue</item>
+        <item name="colorError">@color/red</item>
+        <item name="android:textColorHint">@color/orange</item>
 
         <item name="colorOutline">@color/light_gray_1</item>
 
@@ -18,9 +20,12 @@
         <item name="textAppearanceLabelSmall">@style/TextAppearance.Assignment1.LabelSmall</item>
         <item name="textAppearanceBodyMedium">@style/TextAppearance.Assignment1.BodyMedium</item>
 
-        <item name="checkboxStyle">@style/Widget.App.CheckBox</item>
+
+        <item name="textInputFilledStyle">@style/TextInputLayoutStyle</item>
 
     </style>
 
     <style name="Theme.Assignment1" parent="Base.Theme.Assignment1" />
+
+
 </resources>

@@ -45,50 +45,79 @@
         android:layout_margin="@dimen/auth_primary_margin"
         android:layout_marginTop="@dimen/auth_tertiary_margin">
 
+
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/filledTextField_email"
+            android:id="@+id/inputLayout_email"
             style="?attr/textInputFilledStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/auth_activity_email"
+            android:inputType="textEmailAddress"
+
+            android:textColorHint="?attr/colorOutline"
             app:boxBackgroundColor="?attr/colorPrimary"
             app:boxStrokeColor="?attr/colorOutline"
+
+            app:boxStrokeWidthFocused="1dp"
+
+            app:errorIconDrawable="@null"
+            app:expandedHintEnabled="false"
+            app:hintAnimationEnabled="false"
             app:hintTextAppearance="?attr/textAppearanceLabelSmall"
             app:hintTextColor="?attr/colorOutline">
 
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/inputEditText_email"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textAppearance="?attr/textAppearanceLabelSmall"
-                android:textColor="?attr/colorOutline" />
-
-
+                android:layout_marginTop="@dimen/auth_primary_margin"
+                android:lines="1"
+                android:paddingTop="@dimen/auth_editText_padding"
+                android:textAppearance="?attr/textAppearanceLabelLarge"
+                android:textColor="?attr/colorOnPrimary"
+                android:textCursorDrawable="@null" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/filledTextField_password"
+            android:id="@+id/inputLayout_password"
             style="?attr/textInputFilledStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/filledTextField_email"
+            android:layout_below="@id/inputLayout_email"
             android:hint="@string/auth_activity_password"
+
+            android:inputType="textPassword"
+
+            android:textColorHint="?attr/colorOutline"
             app:boxBackgroundColor="?attr/colorPrimary"
             app:boxStrokeColor="?attr/colorOutline"
+
+            app:boxStrokeWidthFocused="1dp"
+
+            app:errorIconDrawable="@null"
+            app:expandedHintEnabled="false"
+            app:hintAnimationEnabled="false"
             app:hintTextAppearance="?attr/textAppearanceLabelSmall"
             app:hintTextColor="?attr/colorOutline">
 
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/inputEditText_password"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textAppearance="?attr/textAppearanceLabelSmall"
-                android:textColor="?attr/colorOutline" />
+                android:layout_marginTop="@dimen/auth_primary_margin"
+                android:lines="1"
+                android:paddingTop="@dimen/auth_editText_padding"
+                android:textAppearance="?attr/textAppearanceLabelLarge"
+                android:textColor="?attr/colorOnPrimary"
+                android:textCursorDrawable="@null" />
         </com.google.android.material.textfield.TextInputLayout>
 
-        <CheckBox
+        <com.google.android.material.checkbox.MaterialCheckBox
+            android:id="@+id/checkBox_remember"
             style="@style/Widget.App.CheckBox"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/filledTextField_password"
+            android:layout_below="@id/inputLayout_password"
             android:layout_marginTop="7dp"
             android:text="@string/auth_activity_remember_me"
             android:textAppearance="?attr/textAppearanceLabelSmall"
@@ -110,7 +139,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:backgroundTint="@color/white"
-            android:text="@string/auth_google"
+            android:text="@string/auth_activity_google"
             android:textAllCaps="true"
             android:textAppearance="?attr/textAppearanceLabelMedium"
             android:textColor="@color/black"
@@ -123,7 +152,7 @@
             android:layout_below="@id/button_singInGoogle"
             android:layout_centerHorizontal="true"
             android:layout_marginVertical="@dimen/auth_secondary_margin"
-            android:text="@string/auth_or"
+            android:text="@string/auth_activity_or"
             android:textAppearance="?attr/textAppearanceLabelLarge"
             android:textColor="?attr/colorOnPrimary" />
 
