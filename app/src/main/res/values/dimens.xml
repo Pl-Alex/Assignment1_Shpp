@@ -3,15 +3,31 @@
     <dimen name="my_profile_upper_bar_margin">17dp</dimen>
     <dimen name="my_profile_primary_margin">16dp</dimen>
     <dimen name="my_profile_secondary_margin">8dp</dimen>
-    <dimen name="my_profile_picture_bottom_margin">24dp</dimen>
+    <dimen name="my_profile_textView_nameSurname_top_margin">24dp</dimen>
     <dimen name="my_profile_picture_size">113dp</dimen>
     <dimen name="my_profile_logo_group_bottom_margin">95dp</dimen>
 
-    <dimen name="auth_primary_margin">16dp</dimen>
-    <dimen name="auth_secondary_margin">8dp</dimen>
-    <dimen name="auth_tertiary_margin">24dp</dimen>
     <dimen name="auth_editText_padding">39dp</dimen>
+    <dimen name="auth_label1_top_margin">145dp</dimen>
+    <dimen name="auth_label2_top_margin">8dp</dimen>
+    <dimen name="auth_inputLayout_email_top_margin">24dp</dimen>
+    <dimen name="auth_inputLayout_password_top_margin">24dp</dimen>
+    <dimen name="auth_checkBox_remember_top_margin">16dp</dimen>
+    <dimen name="auth_horizontal_margin">16dp</dimen>
+    <dimen name="auth_orLabel_top_margin">8dp</dimen>
+    <dimen name="auth_button_register_top_margin">8dp</dimen>
+    <dimen name="auth_button_google_bottom_margin">8dp</dimen>
+    <dimen name="auth_textView_orLabel_bottom_margin">8dp</dimen>
+    <dimen name="auth_button_register_bottom_margin">16dp</dimen>
+    <dimen name="auth_textView_termsAndConditions_bottom_margin">8dp</dimen>
+    <dimen name="auth_textView_SingIn_start_margin">12dp</dimen>
+    <dimen name="auth_layout_margin">16dp</dimen>
 
-
-
+    <dimen name="my_profile_layout_margin">16dp</dimen>
+    <dimen name="my_profile_cardView_profileImageContainer_top_margin">15dp</dimen>
+    <dimen name="my_profile_textView_career_top_margin">8dp</dimen>
+    <dimen name="my_profile_textView_address_top_margin">16dp</dimen>
+    <dimen name="my_profile_button_editProfile_bottom_margin16dp">16dp</dimen>
+    <dimen name="my_profile_textView_settingsTip_bottom_margin">16dp</dimen>
+    <dimen name="my_profile_imageView_socialLogo1_bottom_margin">95dp</dimen>
 </resources>
