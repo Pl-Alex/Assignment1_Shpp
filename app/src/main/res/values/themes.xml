@@ -4,25 +4,24 @@
         <item name="colorPrimary">@color/blue</item>
         <item name="colorSecondary">@color/orange</item>
 
-        <item name="android:colorBackground">@color/white</item>
+        <item name="colorBackgroundFloating">@color/white</item>
 
         <item name="colorOnPrimary">@color/white</item>
         <item name="colorOnSecondary">@color/white</item>
         <item name="colorOnBackground">@color/blue</item>
+        <item name="colorOnSurface">@color/white</item>
         <item name="colorError">@color/red</item>
+        <item name="colorOutline">@color/light_gray_1</item>
         <item name="android:textColorHint">@color/orange</item>
 
-        <item name="colorOutline">@color/light_gray_1</item>
-
-        <item name="textAppearanceHeadlineMedium">@style/TextAppearance.Assignment1.HeadlineMedium</item>
+        <item name="textAppearanceHeadlineMedium">@style/TextAppearance.Assignment1.HeadlineMedium
+        </item>
         <item name="textAppearanceLabelLarge">@style/TextAppearance.Assignment1.LabelLarge</item>
         <item name="textAppearanceLabelMedium">@style/TextAppearance.Assignment1.LabelMedium</item>
         <item name="textAppearanceLabelSmall">@style/TextAppearance.Assignment1.LabelSmall</item>
         <item name="textAppearanceBodyMedium">@style/TextAppearance.Assignment1.BodyMedium</item>
 
-
         <item name="textInputFilledStyle">@style/TextInputLayoutStyle</item>
-
     </style>
 
     <style name="Theme.Assignment1" parent="Base.Theme.Assignment1" />

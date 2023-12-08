@@ -1,192 +1,211 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:background="?attr/colorBackgroundFloating">
 
-    <LinearLayout
-        android:layout_width="match_parent"
+    <View
+        android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_weight="1"
         android:background="?attr/colorPrimary"
-        android:orientation="vertical">
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHeight_percent="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-        <RelativeLayout
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/topGuideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_begin="@dimen/my_profile_layout_margin" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/bottomGuideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_end="@dimen/my_profile_layout_margin" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/leftGuideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="@dimen/my_profile_layout_margin" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/rightGuideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_end="@dimen/my_profile_layout_margin" />
+
+    <TextView
+        android:id="@+id/textView_setting"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/my_profile_activity_settings"
+        android:textAppearance="?attr/textAppearanceHeadlineMedium"
+        android:textColor="?attr/colorOnPrimary"
+        app:layout_constraintBottom_toBottomOf="@id/button_log_out"
+        app:layout_constraintStart_toStartOf="@id/leftGuideline"
+        app:layout_constraintTop_toTopOf="@id/button_log_out" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/button_log_out"
+        style="@style/Assignment1.BorderedButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingHorizontal="35dp"
+        android:text="@string/my_profile_activity_log_out"
+        android:textAppearance="?attr/textAppearanceLabelSmall"
+        android:textColor="?attr/colorOutline"
+        app:layout_constraintEnd_toEndOf="@id/rightGuideline"
+        app:layout_constraintTop_toTopOf="@id/topGuideline"
+        app:strokeColor="?attr/colorOutline" />
+
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardView_profileImageContainer"
+        android:layout_width="@dimen/my_profile_picture_size"
+        android:layout_height="@dimen/my_profile_picture_size"
+        android:layout_marginTop="@dimen/my_profile_cardView_profileImageContainer_top_margin"
+        app:cardCornerRadius="@dimen/my_profile_picture_size"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/button_log_out">
+
+        <ImageView
+            android:id="@+id/imageView_profileImage"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/my_profile_primary_margin">
+            android:layout_height="match_parent"
+            android:contentDescription=""
+            android:scaleType="centerCrop"
+            android:src="@drawable/default_profile_image"
+            tools:ignore="ContentDescription" />
+    </androidx.cardview.widget.CardView>
 
-            <TextView
-                android:id="@+id/textView_setting"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
+    <TextView
+        android:id="@+id/textView_nameSurname"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/my_profile_textView_nameSurname_top_margin"
+        android:text="Name Surname"
+        android:textAppearance="?attr/textAppearanceLabelLarge"
+        android:textColor="?attr/colorOnPrimary"
+        app:layout_constraintEnd_toEndOf="@id/cardView_profileImageContainer"
+        app:layout_constraintStart_toStartOf="@id/cardView_profileImageContainer"
+        app:layout_constraintTop_toBottomOf="@id/cardView_profileImageContainer"
+        tools:ignore="HardcodedText" />
 
-                android:text="@string/my_profile_activity_settings"
-                android:textAppearance="?attr/textAppearanceHeadlineMedium"
-                android:textColor="?attr/colorOnPrimary" />
+    <TextView
+        android:id="@+id/textView_career"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/my_profile_textView_career_top_margin"
+        android:text="Career"
+        android:textAppearance="?attr/textAppearanceLabelSmall"
+        android:textColor="?attr/colorOutline"
+        app:layout_constraintEnd_toEndOf="@id/textView_nameSurname"
+        app:layout_constraintStart_toStartOf="@id/textView_nameSurname"
+        app:layout_constraintTop_toBottomOf="@id/textView_nameSurname"
+        tools:ignore="HardcodedText" />
 
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/button_log_out"
-                style="@style/Assignment1.BorderedButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true"
-                android:paddingHorizontal="35dp"
+    <TextView
+        android:id="@+id/textView_address"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/my_profile_textView_address_top_margin"
+        android:text="Home address"
+        android:textAppearance="?attr/textAppearanceLabelSmall"
+        android:textColor="?attr/colorOutline"
+        app:layout_constraintEnd_toEndOf="@id/textView_career"
+        app:layout_constraintStart_toStartOf="@id/textView_career"
+        app:layout_constraintTop_toBottomOf="@id/textView_career"
+        tools:ignore="HardcodedText" />
 
-                android:text="@string/my_profile_activity_log_out"
-                android:textAppearance="?attr/textAppearanceLabelSmall"
-                android:textColor="?attr/colorOutline"
+    <ImageView
+        android:id="@+id/imageView_socialLogo1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/my_profile_primary_margin"
+        android:layout_marginBottom="@dimen/my_profile_imageView_socialLogo1_bottom_margin"
+        android:contentDescription="facebook"
+        android:src="@drawable/facebook_logo"
+        app:layout_constraintBottom_toTopOf="@id/button_editProfile"
+        app:layout_constraintEnd_toStartOf="@id/imageView_socialLogo2"
+        app:layout_constraintHorizontal_chainStyle="packed"
+        app:layout_constraintStart_toStartOf="@id/leftGuideline"
+        tools:ignore="HardcodedText" />
 
-                app:strokeColor="?attr/colorOutline" />
-        </RelativeLayout>
+    <ImageView
+        android:id="@+id/imageView_socialLogo2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/my_profile_primary_margin"
+        android:layout_marginEnd="@dimen/my_profile_primary_margin"
+        android:contentDescription="linkedin"
+        android:src="@drawable/linkedin_logo"
+        app:layout_constraintEnd_toStartOf="@id/imageView_socialLogo3"
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
+        app:layout_constraintStart_toEndOf="@id/imageView_socialLogo1"
+        app:layout_constraintTop_toTopOf="@id/imageView_socialLogo1"
+        tools:ignore="HardcodedText" />
 
-            <androidx.cardview.widget.CardView
-                android:id="@+id/cardView_profileImageContainer"
-                android:layout_width="@dimen/my_profile_picture_size"
-                android:layout_height="@dimen/my_profile_picture_size"
-                android:layout_centerHorizontal="true"
-                android:layout_marginBottom="@dimen/my_profile_picture_bottom_margin"
-                app:cardCornerRadius="@dimen/my_profile_picture_size">
+    <ImageView
+        android:id="@+id/imageView_socialLogo3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/my_profile_primary_margin"
+        android:contentDescription="instagram"
+        android:src="@drawable/instagram_logo"
+        app:layout_constraintEnd_toStartOf="@id/rightGuideline"
+        app:layout_constraintStart_toEndOf="@id/imageView_socialLogo2"
+        app:layout_constraintTop_toTopOf="@id/imageView_socialLogo2"
+        tools:ignore="HardcodedText" />
 
-                <ImageView
-                    android:id="@+id/imageView_profileImage"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:contentDescription=""
-                    android:scaleType="centerCrop"
-                    android:src="@drawable/default_profile_image"
-                    tools:ignore="ContentDescription" />
-            </androidx.cardview.widget.CardView>
 
-            <TextView
-                android:id="@+id/textView_nameSurname"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/cardView_profileImageContainer"
-                android:layout_centerHorizontal="true"
+    <TextView
+        android:id="@+id/textView_settingsTip"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/my_profile_textView_settingsTip_bottom_margin"
+        android:text="@string/my_profile_activity_go_settings_tip"
+        android:textAppearance="?attr/textAppearanceLabelSmall"
+        android:textColor="?attr/colorOnBackground"
+        app:layout_constraintBottom_toTopOf="@id/button_editProfile"
+        app:layout_constraintEnd_toEndOf="@id/button_editProfile"
+        app:layout_constraintStart_toStartOf="@id/button_editProfile" />
 
-                android:text="Name Surname"
-                android:textAppearance="?attr/textAppearanceLabelLarge"
-                android:textColor="?attr/colorOnPrimary"
-                tools:ignore="HardcodedText" />
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/button_editProfile"
+        style="@style/Assignment1.BorderedButton"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/my_profile_button_editProfile_bottom_margin16dp"
+        android:text="@string/my_profile_activity_edit_profile"
+        android:textAppearance="?attr/textAppearanceLabelSmall"
+        android:textColor="?attr/colorOnBackground"
+        app:layout_constraintBottom_toTopOf="@id/button_viewMyContacts"
+        app:layout_constraintEnd_toEndOf="@id/button_viewMyContacts"
+        app:layout_constraintStart_toStartOf="@id/button_viewMyContacts"
+        app:strokeColor="?attr/colorOnBackground" />
 
-            <TextView
-                android:id="@+id/textView_career"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/textView_nameSurname"
-                android:layout_centerHorizontal="true"
-                android:layout_marginTop="@dimen/my_profile_secondary_margin"
-
-                android:text="Career"
-                android:textAppearance="?attr/textAppearanceLabelSmall"
-                android:textColor="?attr/colorOutline"
-                tools:ignore="HardcodedText" />
-
-            <TextView
-                android:id="@+id/textView_address"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/textView_career"
-                android:layout_centerHorizontal="true"
-                android:layout_marginTop="@dimen/my_profile_primary_margin"
-
-                android:text="Home address"
-                android:textAppearance="?attr/textAppearanceLabelSmall"
-                android:textColor="?attr/colorOutline"
-                tools:ignore="HardcodedText" />
-        </RelativeLayout>
-    </LinearLayout>
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1">
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_above="@id/button_editProfile"
-            android:layout_centerHorizontal="true"
-            android:layout_marginBottom="@dimen/my_profile_logo_group_bottom_margin"
-            android:orientation="horizontal">
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="@dimen/my_profile_primary_margin"
-                android:contentDescription="facebook"
-                android:src="@drawable/facebook_logo"
-                tools:ignore="HardcodedText" />
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/my_profile_primary_margin"
-                android:layout_marginEnd="@dimen/my_profile_primary_margin"
-                android:contentDescription="linkedin"
-                android:src="@drawable/linkedin_logo"
-                tools:ignore="HardcodedText" />
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/my_profile_primary_margin"
-                android:contentDescription="instagram"
-                android:src="@drawable/instagram_logo"
-                tools:ignore="HardcodedText" />
-        </LinearLayout>
-
-        <TextView
-            android:id="@+id/textView_settingsTip"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_above="@id/button_editProfile"
-            android:layout_centerHorizontal="true"
-
-            android:text="@string/my_profile_activity_go_settings_tip"
-            android:textAppearance="?attr/textAppearanceLabelSmall"
-            android:textColor="?attr/colorOnBackground" />
-
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/button_editProfile"
-            style="@style/Assignment1.BorderedButton"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_above="@id/button_viewMyContacts"
-            android:layout_marginHorizontal="16dp"
-            android:layout_marginTop="16dp"
-
-            android:text="@string/my_profile_activity_edit_profile"
-            android:textAppearance="?attr/textAppearanceLabelSmall"
-            android:textColor="?attr/colorOnBackground"
-            app:strokeColor="?attr/colorOnBackground" />
-
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/button_viewMyContacts"
-            style="@style/Assignment1.ColorButton"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_centerHorizontal="true"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="16dp"
-            android:layout_marginBottom="16dp"
-
-            android:backgroundTint="?attr/colorAccent"
-
-            android:letterSpacing="0.09"
-            android:text="@string/my_profile_activity_view_my_contacts"
-            android:textAllCaps="true"
-            android:textAppearance="?attr/textAppearanceLabelMedium"
-            android:textColor="?attr/colorOnTertiary" />
-    </RelativeLayout>
-</LinearLayout>
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/button_viewMyContacts"
+        style="@style/Assignment1.ColorButton"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:backgroundTint="?attr/colorAccent"
+        android:letterSpacing="0.09"
+        android:text="@string/my_profile_activity_view_my_contacts"
+        android:textAllCaps="true"
+        android:textAppearance="?attr/textAppearanceLabelMedium"
+        android:textColor="?attr/colorOnTertiary"
+        app:layout_constraintBottom_toBottomOf="@id/bottomGuideline"
+        app:layout_constraintEnd_toEndOf="@id/rightGuideline"
+        app:layout_constraintStart_toStartOf="@id/leftGuideline" />
+</androidx.constraintlayout.widget.ConstraintLayout>

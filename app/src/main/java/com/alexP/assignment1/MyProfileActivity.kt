@@ -9,7 +9,7 @@ import com.bumptech.glide.Glide
 
 class MyProfileActivity : AppCompatActivity() {
 
-    lateinit var binding: MyProfileActivityBinding
+    private lateinit var binding: MyProfileActivityBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = MyProfileActivityBinding.inflate(layoutInflater)

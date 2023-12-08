@@ -19,10 +19,6 @@
         <item name="backgroundTint">@android:color/transparent</item>
     </style>
 
-    <style name="Widget.App.CheckBox" parent="Widget.Material3.CompoundButton.CheckBox">
-        <item name="buttonTint">@color/button_tint</item>
-        <item name="buttonIconTint">@color/button_icon_tint</item>
-    </style>
 
     <style name="TextInputLayoutStyle" parent="Widget.MaterialComponents.TextInputLayout.FilledBox">
         <item name="boxStrokeColor">#fff</item>
