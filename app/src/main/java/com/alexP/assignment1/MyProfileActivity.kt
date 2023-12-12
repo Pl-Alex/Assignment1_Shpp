@@ -1,15 +1,13 @@
 package com.alexP.assignment1
 
 import android.os.Bundle
-import android.os.PersistableBundle
 import androidx.appcompat.app.AppCompatActivity
-import com.alexP.assignment1.databinding.AuthActivityBinding
 import com.alexP.assignment1.databinding.MyProfileActivityBinding
 import com.bumptech.glide.Glide
 
 class MyProfileActivity : AppCompatActivity() {
 
-    lateinit var binding: MyProfileActivityBinding
+    private lateinit var binding: MyProfileActivityBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = MyProfileActivityBinding.inflate(layoutInflater)

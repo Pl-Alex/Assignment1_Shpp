@@ -5,7 +5,7 @@ import com.alexP.assignment1.R
 import com.alexP.assignment1.validator.base.BaseValidator
 import com.alexP.assignment1.validator.base.ValidateResult
 
-class EmailValidator(val email: String) : BaseValidator() {
+class EmailValidator(private val email: String) : BaseValidator() {
     override fun validate(): ValidateResult {
         val isValid =
             !TextUtils.isEmpty(email) && android.util.Patterns.EMAIL_ADDRESS.matcher(email)

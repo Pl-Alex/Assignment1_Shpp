@@ -4,7 +4,7 @@ import com.alexP.assignment1.R
 import com.alexP.assignment1.validator.base.BaseValidator
 import com.alexP.assignment1.validator.base.ValidateResult
 
-class EmptyValidator(val input: String) : BaseValidator(){
+class EmptyValidator(private val input: String) : BaseValidator(){
     override fun validate(): ValidateResult {
         val isValid = input.isNotEmpty()
         return ValidateResult(
