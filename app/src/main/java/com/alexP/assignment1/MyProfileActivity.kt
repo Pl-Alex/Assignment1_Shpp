@@ -1,9 +1,7 @@
 package com.alexP.assignment1
 
 import android.os.Bundle
-import android.os.PersistableBundle
 import androidx.appcompat.app.AppCompatActivity
-import com.alexP.assignment1.databinding.AuthActivityBinding
 import com.alexP.assignment1.databinding.MyProfileActivityBinding
 import com.bumptech.glide.Glide
 

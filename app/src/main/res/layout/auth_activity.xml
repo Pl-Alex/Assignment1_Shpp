@@ -132,13 +132,15 @@
     <com.google.android.material.checkbox.MaterialCheckBox
         android:id="@+id/checkBox_remember"
         android:layout_width="wrap_content"
-        app:buttonIconTint="?attr/colorOnPrimary"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/auth_checkBox_remember_top_margin"
+
+        android:buttonTint="?attr/colorOnPrimary"
         android:includeFontPadding="false"
         android:text="@string/auth_activity_remember_me"
         android:textAppearance="?attr/textAppearanceLabelSmall"
         android:textColor="?attr/colorOutline"
+
         app:layout_constraintStart_toStartOf="@id/leftGuideline"
         app:layout_constraintTop_toBottomOf="@id/inputLayout_password" />
 

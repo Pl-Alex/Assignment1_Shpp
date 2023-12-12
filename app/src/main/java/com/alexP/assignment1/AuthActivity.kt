@@ -20,6 +20,7 @@ const val PREF_PASSWORD_VALUE = "PREF_PASSWORD_VALUE"
 class AuthActivity : AppCompatActivity() {
 
     private lateinit var binding: AuthActivityBinding
+
     private lateinit var preferences: SharedPreferences
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -28,6 +29,7 @@ class AuthActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         preferences = getSharedPreferences(APP_PREFERENCES, Context.MODE_PRIVATE)
+
 
         binding.inputEditTextEmail.setText(preferences.getString(PREF_EMAIL_VALUE, ""))
         binding.inputEditTextPassword.setText(preferences.getString(PREF_PASSWORD_VALUE, ""))
@@ -66,7 +68,7 @@ class AuthActivity : AppCompatActivity() {
         }
     }
 
-    fun parseEmail(email: String): String {
+    private fun parseEmail(email: String): String {
         val namePart = email.substringBefore('@')
 
         return namePart.split('.')
