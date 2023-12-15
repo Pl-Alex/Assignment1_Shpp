@@ -5,6 +5,7 @@ import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
+import android.view.LayoutInflater
 import androidx.appcompat.app.AppCompatActivity
 import com.alexP.assignment1.databinding.AuthActivityBinding
 import com.alexP.assignment1.validator.EmailValidator
@@ -17,30 +18,35 @@ const val APP_PREFERENCES = "APP_PREFERENCES"
 const val PREF_EMAIL_VALUE = "PREF_EMAIL_VALUE"
 const val PREF_PASSWORD_VALUE = "PREF_PASSWORD_VALUE"
 
-class AuthActivity : AppCompatActivity() {
-
-    private lateinit var binding: AuthActivityBinding
+class AuthActivity : BaseActivity<AuthActivityBinding>() {
 
     private lateinit var preferences: SharedPreferences
+    override fun inflate(inflater: LayoutInflater): AuthActivityBinding {
+        return AuthActivityBinding.inflate(inflater)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = AuthActivityBinding.inflate(layoutInflater)
-        setContentView(binding.root)
 
         preferences = getSharedPreferences(APP_PREFERENCES, Context.MODE_PRIVATE)
+        checkSharedPreferences()
+        setListeners()
+    }
 
-
+    private fun checkSharedPreferences() {
+        //TODO Змінити логіку, щоб данні з SharedPreferences зчитувались лише, коли останній раз була встановлена галочка у полі "remember me"
         binding.inputEditTextEmail.setText(preferences.getString(PREF_EMAIL_VALUE, ""))
         binding.inputEditTextPassword.setText(preferences.getString(PREF_PASSWORD_VALUE, ""))
+    }
+
+    private fun setListeners() {
         binding.buttonRegister.setOnClickListener {
             onRegisterButtonPressed()
         }
-
     }
 
     private fun onRegisterButtonPressed() {
-
+// TODO винести у viewmodel шматки коду, які не потрібні для актівіті і не потребують контексту
         val email = binding.inputEditTextEmail.text.toString()
         val password = binding.inputEditTextPassword.text.toString()
 
@@ -48,7 +54,7 @@ class AuthActivity : AppCompatActivity() {
             EmptyValidator(email), EmailValidator(email)
         )
         binding.inputLayoutEmail.error =
-            if (!emailValidations.isSuccess) getString(emailValidations.message) else null
+            if (emailValidations.isSuccess.not()) getString(emailValidations.message) else null
 
         val passwordValidations = BaseValidator.validate(
             EmptyValidator(password), PasswordValidator(password)
@@ -65,6 +71,7 @@ class AuthActivity : AppCompatActivity() {
             val intent = Intent(this, MyProfileActivity::class.java)
             intent.putExtra("email", parseEmail(email))
             startActivity(intent, ActivityOptions.makeSceneTransitionAnimation(this).toBundle())
+            finish()
         }
     }
 

@@ -10,6 +10,7 @@ class MyProfileActivity : AppCompatActivity() {
     private lateinit var binding: MyProfileActivityBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         binding = MyProfileActivityBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
@@ -18,6 +19,6 @@ class MyProfileActivity : AppCompatActivity() {
 
         Glide.with(this)
             .load("https://unsplash.com/photos/_vnKbf9K-Vo/download?ixid=M3wxMjA3fDB8MXxhbGx8MTE4fHx8fHx8Mnx8MTcwMTgxMDA2MHw&force=true&w=640")
-            .into(binding.imageViewProfileImage)
+            .into(binding.cardViewProfileImageContainer)
     }
 }

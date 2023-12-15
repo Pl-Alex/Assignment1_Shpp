@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <dimen name="padding_horizontal">35dp</dimen>
+
     <dimen name="my_profile_upper_bar_margin">17dp</dimen>
     <dimen name="my_profile_primary_margin">16dp</dimen>
     <dimen name="my_profile_secondary_margin">8dp</dimen>

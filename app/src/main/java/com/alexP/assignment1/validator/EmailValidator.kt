@@ -1,6 +1,7 @@
 package com.alexP.assignment1.validator
 
 import android.text.TextUtils
+import android.util.Patterns
 import com.alexP.assignment1.R
 import com.alexP.assignment1.validator.base.BaseValidator
 import com.alexP.assignment1.validator.base.ValidateResult
@@ -8,8 +9,7 @@ import com.alexP.assignment1.validator.base.ValidateResult
 class EmailValidator(private val email: String) : BaseValidator() {
     override fun validate(): ValidateResult {
         val isValid =
-            !TextUtils.isEmpty(email) && android.util.Patterns.EMAIL_ADDRESS.matcher(email)
-                .matches()
+            !TextUtils.isEmpty(email) && Patterns.EMAIL_ADDRESS.matcher(email).matches()
         return ValidateResult(
             isValid,
             if (isValid) R.string.text_validation_success
