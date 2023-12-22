@@ -69,34 +69,15 @@
 
 
     <com.google.android.material.imageview.ShapeableImageView
-        android:id="@+id/cardView_profileImageContainer"
+        android:id="@+id/imageView_profileImage"
         android:layout_width="@dimen/my_profile_picture_size"
         android:layout_height="@dimen/my_profile_picture_size"
-        app:layout_constraintDimensionRatio="1:1"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/button_log_out"
         app:shapeAppearanceOverlay="@style/rounded"
-        app:srcCompat="@drawable/default_profile_image" />
-    <!--    <androidx.cardview.widget.CardView-->
-    <!--        android:id="@+id/cardView_profileImageContainer"-->
-    <!--        android:layout_width="@dimen/my_profile_picture_size"-->
-    <!--        android:layout_height="@dimen/my_profile_picture_size"-->
-    <!--        android:layout_marginTop="@dimen/my_profile_cardView_profileImageContainer_top_margin"-->
-    <!--        app:cardCornerRadius="@dimen/my_profile_picture_size"-->
-    <!--        app:layout_constraintEnd_toEndOf="parent"-->
-    <!--        app:layout_constraintStart_toStartOf="parent"-->
-    <!--        app:layout_constraintTop_toBottomOf="@id/button_log_out">-->
-
-    <!--        <ImageView-->
-    <!--            android:id="@+id/imageView_profileImage"-->
-    <!--            android:layout_width="match_parent"-->
-    <!--            android:layout_height="match_parent"-->
-    <!--            android:contentDescription=""-->
-    <!--            android:scaleType="centerCrop"-->
-    <!--            android:src="@drawable/default_profile_image"-->
-    <!--            tools:ignore="ContentDescription" />-->
-    <!--    </androidx.cardview.widget.CardView>-->
+        app:srcCompat="@drawable/default_profile_image"
+        android:scaleType="centerCrop"/>
 
     <TextView
         android:id="@+id/textView_nameSurname"
@@ -106,9 +87,9 @@
         android:text="Name Surname"
         android:textAppearance="?attr/textAppearanceLabelLarge"
         android:textColor="?attr/colorOnPrimary"
-        app:layout_constraintEnd_toEndOf="@id/cardView_profileImageContainer"
-        app:layout_constraintStart_toStartOf="@id/cardView_profileImageContainer"
-        app:layout_constraintTop_toBottomOf="@id/cardView_profileImageContainer"
+        app:layout_constraintEnd_toEndOf="@id/imageView_profileImage"
+        app:layout_constraintStart_toStartOf="@id/imageView_profileImage"
+        app:layout_constraintTop_toBottomOf="@id/imageView_profileImage"
         tools:ignore="HardcodedText" />
 
     <TextView
@@ -138,18 +119,18 @@
         tools:ignore="HardcodedText" />
 
     <!--TODO почитати про flow-->
-<!--    <androidx.constraintlayout.helper.widget.Flow-->
-<!--        android:id="@+id/flow"-->
-<!--        android:layout_width="0dp"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_marginBottom="@dimen/my_profile_imageView_socialLogo1_bottom_margin"-->
-<!--        android:orientation="horizontal"-->
-<!--        app:constraint_referenced_ids="imageView_socialLogo1,imageView_socialLogo2,imageView_socialLogo3"-->
-<!--        app:flow_wrapMode="chain"-->
-<!--        app:layout_constraintBottom_toTopOf="@id/button_editProfile"-->
-<!--        app:layout_constraintEnd_toEndOf="@id/rightGuideline"-->
-<!--        app:layout_constraintHorizontal_chainStyle="packed"-->
-<!--        app:layout_constraintStart_toStartOf="@id/leftGuideline" />-->
+    <!--    <androidx.constraintlayout.helper.widget.Flow-->
+    <!--        android:id="@+id/flow"-->
+    <!--        android:layout_width="0dp"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:layout_marginBottom="@dimen/my_profile_imageView_socialLogo1_bottom_margin"-->
+    <!--        android:orientation="horizontal"-->
+    <!--        app:constraint_referenced_ids="imageView_socialLogo1,imageView_socialLogo2,imageView_socialLogo3"-->
+    <!--        app:flow_wrapMode="chain"-->
+    <!--        app:layout_constraintBottom_toTopOf="@id/button_editProfile"-->
+    <!--        app:layout_constraintEnd_toEndOf="@id/rightGuideline"-->
+    <!--        app:layout_constraintHorizontal_chainStyle="packed"-->
+    <!--        app:layout_constraintStart_toStartOf="@id/leftGuideline" />-->
 
 
     <TextView

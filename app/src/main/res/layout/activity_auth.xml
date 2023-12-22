@@ -10,32 +10,28 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_begin="@dimen/auth_layout_margin"
-        app:layout_constraintGuide_percent="0.04" />
+        app:layout_constraintGuide_begin="@dimen/auth_layout_margin" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/bottomGuideline"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_end="@dimen/auth_layout_margin"
-        app:layout_constraintGuide_percent="0.96" />
+        app:layout_constraintGuide_end="@dimen/auth_layout_margin" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/leftGuideline"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_begin="@dimen/auth_layout_margin"
-        app:layout_constraintGuide_percent="0.04" />
+        app:layout_constraintGuide_begin="@dimen/auth_layout_margin" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/rightGuideline"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_end="@dimen/auth_layout_margin"
-        app:layout_constraintGuide_percent="0.96" />
+        app:layout_constraintGuide_end="@dimen/auth_layout_margin"/>
 
     <TextView
         android:id="@+id/textView_label1"
@@ -140,7 +136,6 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/auth_checkBox_remember_top_margin"
 
-
         android:includeFontPadding="false"
         android:text="@string/auth_activity_remember_me"
         android:textAppearance="?attr/textAppearanceLabelSmall"
@@ -161,7 +156,7 @@
         android:textAppearance="?attr/textAppearanceLabelMedium"
         android:textColor="@color/black"
         app:cornerRadius="6dp"
-        app:icon="@drawable/logo_google"
+        app:icon="@drawable/google_logo"
         app:iconGravity="textStart"
         app:iconTint="@null"
         app:layout_constraintBottom_toTopOf="@id/textView_orLabel"
