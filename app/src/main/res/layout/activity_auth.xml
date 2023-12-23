@@ -31,7 +31,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_end="@dimen/auth_layout_margin" />
+        app:layout_constraintGuide_end="@dimen/auth_layout_margin"/>
 
     <TextView
         android:id="@+id/textView_label1"
@@ -82,7 +82,7 @@
         app:layout_constraintTop_toBottomOf="@id/textView_label2">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/inputEditText_email"
+            android:id="@+id/inputEditTextEmail"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:lines="1"
@@ -119,9 +119,10 @@
         app:layout_constraintTop_toBottomOf="@id/inputLayout_email">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/inputEditText_password"
+            android:id="@+id/inputEditTextPassword"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:inputType="textPassword"
             android:lines="1"
             android:paddingTop="@dimen/auth_editText_padding"
             android:textAppearance="?attr/textAppearanceLabelLarge"
@@ -130,16 +131,16 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.checkbox.MaterialCheckBox
-        android:id="@+id/checkBox_remember"
+        android:id="@+id/checkBoxRemember"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/auth_checkBox_remember_top_margin"
 
-        android:buttonTint="?attr/colorOnPrimary"
         android:includeFontPadding="false"
         android:text="@string/auth_activity_remember_me"
         android:textAppearance="?attr/textAppearanceLabelSmall"
         android:textColor="?attr/colorOutline"
+        app:buttonIcon="@drawable/checkbox_remember_me"
 
         app:layout_constraintStart_toStartOf="@id/leftGuideline"
         app:layout_constraintTop_toBottomOf="@id/inputLayout_password" />
@@ -155,9 +156,9 @@
         android:textAppearance="?attr/textAppearanceLabelMedium"
         android:textColor="@color/black"
         app:cornerRadius="6dp"
-        app:icon="@drawable/logo_google"
+        app:icon="@drawable/google_logo"
         app:iconGravity="textStart"
-        app:iconTint="?attr/colorPrimary"
+        app:iconTint="@null"
         app:layout_constraintBottom_toTopOf="@id/textView_orLabel"
         app:layout_constraintEnd_toEndOf="@id/rightGuideline"
         app:layout_constraintStart_toStartOf="@id/leftGuideline" />
