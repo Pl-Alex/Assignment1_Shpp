@@ -10,17 +10,13 @@ import androidx.datastore.preferences.preferencesDataStore
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import com.alexP.assignment1.databinding.ActivityAuthBinding
-import com.alexP.assignment1.validator.EmailValidator
-import com.alexP.assignment1.validator.EmptyValidator
-import com.alexP.assignment1.validator.PasswordValidator
-import com.alexP.assignment1.validator.base.BaseValidator
 import kotlinx.coroutines.launch
 
 
 class AuthActivity : BaseActivity<ActivityAuthBinding>() {
 
     private val dataStore: DataStore<Preferences> by preferencesDataStore(name = "user_preferences")
-    private lateinit var viewModel: AuthViewModel;
+    private lateinit var viewModel: AuthViewModel
 
     override fun inflate(inflater: LayoutInflater): ActivityAuthBinding {
         return ActivityAuthBinding.inflate(inflater)
@@ -29,7 +25,7 @@ class AuthActivity : BaseActivity<ActivityAuthBinding>() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        viewModel = ViewModelProvider(this).get(AuthViewModel::class.java)
+        viewModel = ViewModelProvider(this)[AuthViewModel::class.java]
 
         setPreferencesValues()
         setListeners()

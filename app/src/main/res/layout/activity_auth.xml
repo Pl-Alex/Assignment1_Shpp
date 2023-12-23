@@ -82,7 +82,7 @@
         app:layout_constraintTop_toBottomOf="@id/textView_label2">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/inputEditText_email"
+            android:id="@+id/inputEditTextEmail"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:lines="1"
@@ -119,7 +119,7 @@
         app:layout_constraintTop_toBottomOf="@id/inputLayout_email">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/inputEditText_password"
+            android:id="@+id/inputEditTextPassword"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:inputType="textPassword"
@@ -131,7 +131,7 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.checkbox.MaterialCheckBox
-        android:id="@+id/checkBox_remember"
+        android:id="@+id/checkBoxRemember"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/auth_checkBox_remember_top_margin"

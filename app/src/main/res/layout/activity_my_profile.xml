@@ -44,7 +44,6 @@
         app:layout_constraintGuide_end="@dimen/my_profile_layout_margin" />
 
     <TextView
-        android:id="@+id/textView_setting"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/my_profile_activity_settings"
@@ -72,12 +71,12 @@
         android:id="@+id/imageView_profileImage"
         android:layout_width="@dimen/my_profile_picture_size"
         android:layout_height="@dimen/my_profile_picture_size"
+        android:scaleType="centerCrop"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/button_log_out"
         app:shapeAppearanceOverlay="@style/rounded"
-        app:srcCompat="@drawable/default_profile_image"
-        android:scaleType="centerCrop"/>
+        app:srcCompat="@drawable/default_profile_image" />
 
     <TextView
         android:id="@+id/textView_nameSurname"
@@ -106,7 +105,6 @@
         tools:ignore="HardcodedText" />
 
     <TextView
-        android:id="@+id/textView_address"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/my_profile_textView_address_top_margin"
@@ -118,23 +116,7 @@
         app:layout_constraintTop_toBottomOf="@id/textView_career"
         tools:ignore="HardcodedText" />
 
-    <!--TODO почитати про flow-->
-    <!--    <androidx.constraintlayout.helper.widget.Flow-->
-    <!--        android:id="@+id/flow"-->
-    <!--        android:layout_width="0dp"-->
-    <!--        android:layout_height="wrap_content"-->
-    <!--        android:layout_marginBottom="@dimen/my_profile_imageView_socialLogo1_bottom_margin"-->
-    <!--        android:orientation="horizontal"-->
-    <!--        app:constraint_referenced_ids="imageView_socialLogo1,imageView_socialLogo2,imageView_socialLogo3"-->
-    <!--        app:flow_wrapMode="chain"-->
-    <!--        app:layout_constraintBottom_toTopOf="@id/button_editProfile"-->
-    <!--        app:layout_constraintEnd_toEndOf="@id/rightGuideline"-->
-    <!--        app:layout_constraintHorizontal_chainStyle="packed"-->
-    <!--        app:layout_constraintStart_toStartOf="@id/leftGuideline" />-->
-
-
     <TextView
-        android:id="@+id/textView_settingsTip"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/my_profile_textView_settingsTip_bottom_margin"
@@ -151,6 +133,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/my_profile_button_editProfile_bottom_margin16dp"
+
         android:text="@string/my_profile_activity_edit_profile"
         android:textAppearance="?attr/textAppearanceLabelSmall"
         android:textColor="?attr/colorOnBackground"
@@ -174,44 +157,41 @@
         app:layout_constraintEnd_toEndOf="@id/rightGuideline"
         app:layout_constraintStart_toStartOf="@id/leftGuideline" />
 
+    <androidx.constraintlayout.helper.widget.Flow
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/my_profile_imageView_socialLogo1_bottom_margin"
+        android:orientation="horizontal"
+        app:constraint_referenced_ids="imageView_socialLogo1,imageView_socialLogo2,imageView_socialLogo3"
+        app:flow_horizontalGap="@dimen/my_profile_icons_flow_gap"
+        app:flow_horizontalStyle="packed"
+        app:flow_wrapMode="chain"
+        app:layout_constraintBottom_toTopOf="@id/button_editProfile"
+        app:layout_constraintEnd_toEndOf="@id/rightGuideline"
+        app:layout_constraintStart_toStartOf="@id/leftGuideline" />
+
     <ImageView
         android:id="@+id/imageView_socialLogo1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="@dimen/my_profile_primary_margin"
-        android:layout_marginBottom="@dimen/my_profile_imageView_socialLogo1_bottom_margin"
         android:contentDescription="facebook"
         android:src="@drawable/facebook_logo"
-        app:layout_constraintBottom_toTopOf="@id/button_editProfile"
-        app:layout_constraintEnd_toStartOf="@id/imageView_socialLogo2"
-        app:layout_constraintHorizontal_chainStyle="packed"
-        app:layout_constraintStart_toStartOf="@id/leftGuideline"
         tools:ignore="HardcodedText" />
 
     <ImageView
         android:id="@+id/imageView_socialLogo2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/my_profile_primary_margin"
-        android:layout_marginEnd="@dimen/my_profile_primary_margin"
         android:contentDescription="linkedin"
         android:src="@drawable/linkedin_logo"
-        app:layout_constraintEnd_toStartOf="@id/imageView_socialLogo3"
-
-        app:layout_constraintStart_toEndOf="@id/imageView_socialLogo1"
-        app:layout_constraintTop_toTopOf="@id/imageView_socialLogo1"
         tools:ignore="HardcodedText" />
 
     <ImageView
         android:id="@+id/imageView_socialLogo3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/my_profile_primary_margin"
         android:contentDescription="instagram"
         android:src="@drawable/instagram_logo"
-        app:layout_constraintEnd_toStartOf="@id/rightGuideline"
-        app:layout_constraintStart_toEndOf="@id/imageView_socialLogo2"
-        app:layout_constraintTop_toTopOf="@id/imageView_socialLogo2"
         tools:ignore="HardcodedText" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,8 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <style name="opensans" parent="@android:style/TextAppearance.Small">
-        <item name="android:fontFamily">@font/opensans_semibold</item>
-    </style>
 
     <style name="Assignment1.BorderedButton" parent="Theme.Material3.DayNight.NoActionBar">
         <item name="cornerRadius">6dp</item>
