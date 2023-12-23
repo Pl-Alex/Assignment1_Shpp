@@ -1,81 +1,98 @@
 package com.alexP.assignment1
 
 import android.app.ActivityOptions
-import android.content.Context
 import android.content.Intent
-import android.content.SharedPreferences
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
-import com.alexP.assignment1.databinding.AuthActivityBinding
-import com.alexP.assignment1.validator.EmailValidator
-import com.alexP.assignment1.validator.EmptyValidator
-import com.alexP.assignment1.validator.PasswordValidator
-import com.alexP.assignment1.validator.base.BaseValidator
-import java.util.Locale
+import android.view.LayoutInflater
+import androidx.datastore.core.DataStore
+import androidx.datastore.preferences.core.Preferences
+import androidx.datastore.preferences.preferencesDataStore
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
+import com.alexP.assignment1.databinding.ActivityAuthBinding
+import kotlinx.coroutines.launch
 
-const val APP_PREFERENCES = "APP_PREFERENCES"
-const val PREF_EMAIL_VALUE = "PREF_EMAIL_VALUE"
-const val PREF_PASSWORD_VALUE = "PREF_PASSWORD_VALUE"
 
-class AuthActivity : AppCompatActivity() {
+class AuthActivity : BaseActivity<ActivityAuthBinding>() {
 
-    private lateinit var binding: AuthActivityBinding
+    private val dataStore: DataStore<Preferences> by preferencesDataStore(name = "user_preferences")
+    private lateinit var viewModel: AuthViewModel
 
-    private lateinit var preferences: SharedPreferences
+    override fun inflate(inflater: LayoutInflater): ActivityAuthBinding {
+        return ActivityAuthBinding.inflate(inflater)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = AuthActivityBinding.inflate(layoutInflater)
-        setContentView(binding.root)
 
-        preferences = getSharedPreferences(APP_PREFERENCES, Context.MODE_PRIVATE)
+        viewModel = ViewModelProvider(this)[AuthViewModel::class.java]
 
+        setPreferencesValues()
+        setListeners()
+    }
 
-        binding.inputEditTextEmail.setText(preferences.getString(PREF_EMAIL_VALUE, ""))
-        binding.inputEditTextPassword.setText(preferences.getString(PREF_PASSWORD_VALUE, ""))
+    private fun setPreferencesValues() {
+        lifecycleScope.launch {
+            if (viewModel.readBoolean(dataStore, "remember_state") == true) {
+                binding.inputEditTextEmail.setText(viewModel.readString(dataStore, "email"))
+                binding.inputEditTextPassword.setText(viewModel.readString(dataStore, "password"))
+                binding.checkBoxRemember.isChecked = true
+            }
+        }
+    }
+
+    private fun setListeners() {
         binding.buttonRegister.setOnClickListener {
             onRegisterButtonPressed()
         }
-
     }
 
     private fun onRegisterButtonPressed() {
-
-        val email = binding.inputEditTextEmail.text.toString()
-        val password = binding.inputEditTextPassword.text.toString()
-
-        val emailValidations = BaseValidator.validate(
-            EmptyValidator(email), EmailValidator(email)
+        val emailValidationError = viewModel.validateEmail(
+            binding.inputEditTextEmail.text.toString()
         )
-        binding.inputLayoutEmail.error =
-            if (!emailValidations.isSuccess) getString(emailValidations.message) else null
+        if (emailValidationError != null) {
+            binding.inputLayoutEmail.error =
+                getString(emailValidationError)
+        } else {
+            binding.inputLayoutEmail.error = null
+        }
 
-        val passwordValidations = BaseValidator.validate(
-            EmptyValidator(password), PasswordValidator(password)
+        val passwordValidationError = viewModel.validatePassword(
+            binding.inputEditTextPassword.text.toString()
         )
-        binding.inputLayoutPassword.error =
-            if (!passwordValidations.isSuccess) getString(passwordValidations.message) else null
+        if (passwordValidationError != null) {
+            binding.inputLayoutPassword.error =
+                getString(passwordValidationError)
+        } else {
+            binding.inputLayoutPassword.error = null
+        }
 
-        if (emailValidations.isSuccess && passwordValidations.isSuccess) {
-            preferences.edit()
-                .putString(PREF_EMAIL_VALUE, email)
-                .putString(PREF_PASSWORD_VALUE, password)
-                .apply()
+        if (emailValidationError == null && passwordValidationError == null) {
+            lifecycleScope.launch {
+                viewModel.saveString(
+                    dataStore, "email",
+                    binding.inputEditTextEmail.text.toString()
+                )
+                viewModel.saveString(
+                    dataStore, "password",
+                    binding.inputEditTextPassword.text.toString()
+                )
+                viewModel.saveBoolean(
+                    dataStore, "remember_state",
+                    binding.checkBoxRemember.isChecked
+                )
+            }
 
             val intent = Intent(this, MyProfileActivity::class.java)
-            intent.putExtra("email", parseEmail(email))
+            intent.putExtra(
+                "email", viewModel.parseEmail(
+                    binding.inputEditTextEmail.text.toString()
+                )
+            )
             startActivity(intent, ActivityOptions.makeSceneTransitionAnimation(this).toBundle())
+            finish()
         }
     }
 
-    private fun parseEmail(email: String): String {
-        val namePart = email.substringBefore('@')
-
-        return namePart.split('.')
-            .joinToString(" ") { it ->
-                it.replaceFirstChar {
-                    if (it.isLowerCase()) it.titlecase(Locale.getDefault()) else it.toString()
-                }
-            }
-    }
 }
