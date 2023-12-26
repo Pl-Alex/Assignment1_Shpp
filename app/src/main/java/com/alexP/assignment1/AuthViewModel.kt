@@ -45,14 +45,14 @@ class AuthViewModel : ViewModel() {
         val emailValidations = BaseValidator.validate(
             EmptyValidator(email), EmailValidator(email)
         )
-        return if (emailValidations.isSuccess.not()) emailValidations.message else null
+        return if (!emailValidations.isSuccess) emailValidations.message else null
     }
 
     fun validatePassword(password: String) : Int?{
         val passwordValidations = BaseValidator.validate(
             EmptyValidator(password), PasswordValidator(password)
         )
-        return if (passwordValidations.isSuccess.not()) passwordValidations.message else null
+        return if (!passwordValidations.isSuccess) passwordValidations.message else null
     }
 
 

@@ -21,16 +21,21 @@ class PasswordValidator(private val password: String) : BaseValidator() {
     private val containsSpecialChar = specialCharRegex.containsMatchIn(password)
 
     override fun validate(): ValidateResult {
-        if (!password.matches(allowedCharactersRegex))
-            return ValidateResult(false, R.string.text_validation_error_contain_invalid_characters)
-        if (!(containsUppercase && containsLowercase && containsDigit && containsSpecialChar))
-            return ValidateResult(false, R.string.text_validation_error_needs_specified_characters)
-        if (password.length < minPasswordLength)
-            return ValidateResult(false, R.string.text_validation_error_min_pass_length)
-        if (password.length > maxPasswordLength)
-            return ValidateResult(false, R.string.text_validation_error_max_pass_length)
-        return ValidateResult(true, R.string.text_validation_success)
+        return when {
+            !password.matches(allowedCharactersRegex) ->
+                ValidateResult(false, R.string.text_validation_error_contain_invalid_characters)
+
+            !(containsUppercase && containsLowercase && containsDigit && containsSpecialChar) ->
+                ValidateResult(false, R.string.text_validation_error_needs_specified_characters)
+
+            password.length < minPasswordLength ->
+                ValidateResult(false, R.string.text_validation_error_min_pass_length)
+
+            password.length > maxPasswordLength ->
+                ValidateResult(false, R.string.text_validation_error_max_pass_length)
+
+            else ->
+                ValidateResult(true, R.string.text_validation_success)
+        }
     }
-
-
 }

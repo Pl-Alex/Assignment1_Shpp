@@ -5,7 +5,6 @@
     <string name="my_profile_activity_go_settings_tip">Go to settings and fill out the profile</string>
     <string name="my_profile_activity_edit_profile">Edit profile</string>
     <string name="my_profile_activity_view_my_contacts">View my contacts</string>
-
     <string name="auth_activity_fill_out_the_profile_tip">Fill out the profile and go to the application!</string>
     <string name="auth_activity_email" translatable="false">E-mail</string>
     <string name="auth_activity_password">Password</string>
@@ -25,4 +24,9 @@
     <string name="text_validation_error_max_pass_length">Password must have maximum 24 characters</string>
     <string name="text_validation_error_contain_invalid_characters">Password must contains only A-Z,  a-z, numbers or special characters</string>
     <string name="text_validation_error_needs_specified_characters">Password must contains at least one character of each type: A-Z,  a-z, numbers and special characters</string>
+    <string name="career" translatable="false">Career</string>
+    <string name="home_address" translatable="false">Home address</string>
+    <string name="facebook" translatable="false">facebook</string>
+    <string name="linkedin" translatable="false">linkedin</string>
+    <string name="instagram" translatable="false">instagram</string>
 </resources>

@@ -10,7 +10,7 @@
     <string name="auth_activity_password">Пароль</string>
     <string name="auth_activity_remember_me">Запам\'ятати мене</string>
     <string name="auth_activity_register">Зареєструватись</string>
-    <string name="auth_activity_terms_and_conditions">"Натискаючи Зареєструватись ви погоджуєтесь з нашими "</string>
+    <string name="auth_activity_terms_and_conditions">Натискаючи Зареєструватись ви погоджуєтесь з нашими</string>
     <string name="auth_activity_already_have_an_account">Вже маєте акаунт?</string>
     <string name="auth_activity_sing_in">Увійти</string>
     <string name="auth_activity_or">або</string>

@@ -7,7 +7,7 @@ import androidx.viewbinding.ViewBinding
 
 abstract class BaseActivity<out VB : ViewBinding> : AppCompatActivity() {
 
-    private lateinit var _binding: VB
+    private var _binding: VB? = null
     val binding
         get() = _binding
 
@@ -16,6 +16,11 @@ abstract class BaseActivity<out VB : ViewBinding> : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         _binding = inflate(layoutInflater)
-        setContentView(_binding.root)
+        setContentView(_binding?.root)
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        _binding = null
     }
 }
