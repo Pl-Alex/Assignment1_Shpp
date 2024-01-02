@@ -11,6 +11,11 @@ dependencyResolutionManagement {
         google()
         mavenCentral()
     }
+//    versionCatalogs {
+//        create("libs") {
+//            from(files("gradle/lib.versions.toml"))
+//        }
+//    }
 }
 
 rootProject.name = "Assignment1"

@@ -18,6 +18,13 @@ class MyProfileActivity : BaseActivity<ActivityMyProfileBinding>() {
 
     private val dataStore: DataStore<Preferences> by preferencesDataStore(name = "user_preferences")
 
+    companion object {
+        const val EMAIL = "email"
+        const val IMAGE_LINK =
+            "https://unsplash.com/photos/_vnKbf9K-Vo/download?ixid=M3wxMjA3fDB8MXxhbGx8MTE4fHx8fHx8Mnx8MTcwMTgxMDA2MHw&force=true&w=640"
+        const val REMEMBER_STATE = "remember_state"
+    }
+
     override fun inflate(inflater: LayoutInflater): ActivityMyProfileBinding {
         return ActivityMyProfileBinding.inflate(inflater)
     }
@@ -25,34 +32,36 @@ class MyProfileActivity : BaseActivity<ActivityMyProfileBinding>() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        val email = intent.getStringExtra("email")
-        binding.textViewNameSurname.text = email
+        val email = intent.getStringExtra(EMAIL)
+        binding?.textViewNameSurname?.text = email
 
-        Glide.with(this)
-            .load("https://unsplash.com/photos/_vnKbf9K-Vo/download?ixid=M3wxMjA3fDB8MXxhbGx8MTE4fHx8fHx8Mnx8MTcwMTgxMDA2MHw&force=true&w=640")
-            .into(binding.imageViewProfileImage)
+        binding?.let {
+            Glide.with(this)
+                .load(IMAGE_LINK)
+                .into(it.imageViewProfileImage)
+        }
 
         setListeners()
     }
 
     private fun setListeners() {
-        binding.buttonLogOut.setOnClickListener {
+        binding?.buttonLogOut?.setOnClickListener {
             onLogOutButtonPressed()
         }
     }
 
     private fun onLogOutButtonPressed() {
         lifecycleScope.launch {
-            logout()
+            cleanStorage()
         }
         val intent = Intent(this, AuthActivity::class.java)
         startActivity(intent, ActivityOptions.makeSceneTransitionAnimation(this).toBundle())
         finish()
     }
 
-    private suspend fun logout() {
+    private suspend fun cleanStorage() {
         dataStore.edit { pref ->
-            pref[booleanPreferencesKey("remember_state")] = false
+            pref[booleanPreferencesKey(REMEMBER_STATE)] = false
         }
     }
 }

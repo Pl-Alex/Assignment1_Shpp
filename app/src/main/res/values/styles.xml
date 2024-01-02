@@ -16,7 +16,6 @@
         <item name="backgroundTint">@android:color/transparent</item>
     </style>
 
-
     <style name="TextInputLayoutStyle" parent="Widget.MaterialComponents.TextInputLayout.FilledBox">
         <item name="boxStrokeColor">#fff</item>
         <item name="boxStrokeWidth">1dp</item>

@@ -33,17 +33,25 @@
         android:orientation="vertical"
         app:layout_constraintGuide_end="@dimen/auth_layout_margin" />
 
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/centralVerticalGuideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.5" />
+
+
     <TextView
         android:id="@+id/textView_lets_get_acquainted"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/auth_label1_top_margin"
+        android:layout_marginTop="@dimen/auth_landscape_label1_top_margin"
         android:text="@string/auth_activity_lets_get_acquainted"
         android:textAppearance="?attr/textAppearanceHeadlineMedium"
         android:textColor="?attr/colorOnPrimary"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="@id/topGuideline" />
 
     <TextView
         android:id="@+id/textView_fill_out_the_profile_tip"
@@ -74,7 +82,7 @@
         app:hintAnimationEnabled="false"
         app:hintTextAppearance="?attr/textAppearanceLabelSmall"
         app:hintTextColor="?attr/colorOutline"
-        app:layout_constraintEnd_toEndOf="@id/rightGuideline"
+        app:layout_constraintEnd_toEndOf="@id/centralVerticalGuideline"
         app:layout_constraintStart_toStartOf="@id/leftGuideline"
         app:layout_constraintTop_toBottomOf="@id/textView_fill_out_the_profile_tip">
 
@@ -105,7 +113,7 @@
         app:hintAnimationEnabled="false"
         app:hintTextAppearance="?attr/textAppearanceLabelSmall"
         app:hintTextColor="?attr/colorOutline"
-        app:layout_constraintEnd_toEndOf="@id/rightGuideline"
+        app:layout_constraintEnd_toEndOf="@id/centralVerticalGuideline"
         app:layout_constraintStart_toStartOf="@id/leftGuideline"
         app:layout_constraintTop_toBottomOf="@id/inputLayout_email">
 
@@ -133,10 +141,24 @@
         app:layout_constraintStart_toStartOf="@id/leftGuideline"
         app:layout_constraintTop_toBottomOf="@id/inputLayout_password" />
 
+    <androidx.constraintlayout.helper.widget.Flow
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:constraint_referenced_ids="button_singInGoogle, textView_orLabel, button_register"
+        app:flow_horizontalStyle="packed"
+        app:flow_verticalGap="@dimen/auth_buttons_flow_gap"
+        app:flow_wrapMode="chain"
+        app:layout_constraintBottom_toBottomOf="@id/inputLayout_password"
+        app:layout_constraintEnd_toEndOf="@id/rightGuideline"
+        app:layout_constraintStart_toStartOf="@id/centralVerticalGuideline"
+        app:layout_constraintTop_toTopOf="@id/inputLayout_email" />
+
     <Button
         android:id="@+id/button_singInGoogle"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/auth_button_google_left_margin"
         android:layout_marginBottom="@dimen/auth_button_google_bottom_margin"
         android:backgroundTint="@color/white"
         android:text="@string/auth_activity_google"
@@ -147,9 +169,9 @@
         app:icon="@drawable/google_logo"
         app:iconGravity="textStart"
         app:iconTint="@null"
-        app:layout_constraintBottom_toTopOf="@id/textView_orLabel"
         app:layout_constraintEnd_toEndOf="@id/rightGuideline"
-        app:layout_constraintStart_toStartOf="@id/leftGuideline" />
+        app:layout_constraintStart_toStartOf="@id/centralVerticalGuideline"
+        app:layout_constraintTop_toTopOf="@id/inputLayout_email" />
 
     <TextView
         android:id="@+id/textView_orLabel"
@@ -157,27 +179,27 @@
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="@dimen/auth_orLabel_top_margin"
-        android:layout_marginBottom="@dimen/auth_textView_orLabel_bottom_margin"
         android:text="@string/auth_activity_or"
         android:textAppearance="?attr/textAppearanceLabelLarge"
         android:textColor="?attr/colorOnPrimary"
-        app:layout_constraintBottom_toTopOf="@id/button_register"
-        app:layout_constraintEnd_toEndOf="@id/inputLayout_email"
-        app:layout_constraintStart_toStartOf="@id/inputLayout_email" />
+        app:layout_constraintBottom_toTopOf="@+id/button_register"
+        app:layout_constraintEnd_toEndOf="@id/rightGuideline"
+        app:layout_constraintStart_toStartOf="@id/button_singInGoogle"
+        app:layout_constraintTop_toBottomOf="@id/button_singInGoogle" />
 
     <Button
         android:id="@+id/button_register"
         style="@style/Assignment1.BorderedButton"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/auth_button_register_bottom_margin"
+        android:layout_marginTop="@dimen/auth_activity_button_register_marginTop"
         android:paddingVertical="@dimen/auth_activity_button_register_paddingVertical"
         android:text="@string/auth_activity_register"
         android:textAllCaps="true"
         android:textColor="?attr/colorOnPrimary"
-        app:layout_constraintBottom_toTopOf="@id/textView_termsAndConditions"
         app:layout_constraintEnd_toEndOf="@id/rightGuideline"
-        app:layout_constraintStart_toStartOf="@id/leftGuideline"
+        app:layout_constraintStart_toStartOf="@id/button_singInGoogle"
+        app:layout_constraintTop_toBottomOf="@id/textView_orLabel"
         app:strokeColor="?attr/colorSecondary" />
 
     <TextView
@@ -185,14 +207,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="@dimen/auth_textView_termsAndConditions_bottom_margin"
+        android:layout_marginTop="@dimen/auth_textView_termsAndConditions_top_margin"
         android:gravity="center_horizontal"
         android:text="@string/auth_activity_terms_and_conditions"
         android:textAppearance="?attr/textAppearanceBodyMedium"
         android:textColor="?attr/colorOnPrimary"
-        app:layout_constraintBottom_toTopOf="@id/textView_haveAccount"
         app:layout_constraintEnd_toEndOf="@id/button_singInGoogle"
-        app:layout_constraintStart_toStartOf="@id/button_singInGoogle" />
+        app:layout_constraintStart_toStartOf="@id/button_singInGoogle"
+        app:layout_constraintTop_toBottomOf="@id/button_register" />
 
     <TextView
         android:id="@+id/textView_haveAccount"
