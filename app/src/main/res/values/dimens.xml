@@ -34,4 +34,5 @@
     <dimen name="auth_textView_termsAndConditions_top_margin">16dp</dimen>
     <dimen name="auth_buttons_flow_gap">8dp</dimen>
     <dimen name="my_profile_imageView_profileImage_end_margin">24dp</dimen>
+    <dimen name="auth_inputLayout_email_end_margin">8dp</dimen>
 </resources>
