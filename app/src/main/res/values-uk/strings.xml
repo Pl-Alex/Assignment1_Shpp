@@ -21,4 +21,11 @@
     <string name="text_validation_error_max_pass_length">Пароль повинен бути меншим за 24 знаки</string>
     <string name="text_validation_error_contain_invalid_characters">Пароль мусить містити тільки A-Z,  a-z, числа або спеціальні символи</string>
     <string name="text_validation_error_needs_specified_characters">Пароль мусить містити як мінімум один знак кожного типу: A-Z,  a-z, числа або спеціальні символи</string>
+    <string name="item_contact_delete_contact">Видалити контакт</string>
+    <string name="item_contact_name_surname">Повне ім\'я</string>
+    <string name="item_contact_career">Діяльність</string>
+    <string name="contacts_activity_contacts">Контакти</string>
+    <string name="contacts_activity_back">back</string>
+    <string name="contacts_activity_search">search\n</string>
+    <string name="contacts_activity_add_contacts">Додати контакти</string>
 </resources>

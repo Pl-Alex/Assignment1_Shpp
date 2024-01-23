@@ -1,4 +1,4 @@
-package com.alexP.assignment1
+package com.alexP.assignment1.ui
 
 import android.app.ActivityOptions
 import android.content.Intent

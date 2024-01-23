@@ -7,4 +7,5 @@
     <color name="light_gray_1">#B2B2B3</color>
     <color name="dark_gray">#212121</color>
     <color name="red">#FF0000</color>
+    <color name="text_gray">#828282</color>
 </resources>

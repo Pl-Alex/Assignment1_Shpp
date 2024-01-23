@@ -1,10 +1,12 @@
 <resources>
+
     <!-- Base application theme. -->
     <style name="Base.Theme.Assignment1" parent="Theme.Material3.DayNight.NoActionBar">
         <item name="colorPrimary">@color/dark_gray</item>
         <item name="colorSecondary">@color/orange</item>
 
         <item name="colorBackgroundFloating">@color/dark_gray</item>
+
 
         <item name="colorOnPrimary">@color/white</item>
         <item name="colorOnSecondary">@color/white</item>

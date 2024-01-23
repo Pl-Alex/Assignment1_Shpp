@@ -77,4 +77,10 @@ dependencies {
     // AndroidX Lifecycle components for managing UI-related data
     implementation(libs.lifecycleRuntime)
     implementation(libs.lifecycleViewmodel)
+
+    // Card View
+    implementation(libs.cardView)
+
+    // Fake data generation
+    implementation(libs.javaFaker)
 }

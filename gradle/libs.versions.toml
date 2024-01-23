@@ -10,6 +10,8 @@ junit = "4.13.2"
 testExtJUnit = "1.1.5"
 espresso = "3.5.1"
 datastore = "1.0.0"
+cardview = "1.0.0"
+javafaker = "1.0.2"
 [libraries]
 androidx-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "ktx" }
 androidx-appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "appcompat" }
@@ -24,4 +26,6 @@ junit = { group = "junit", name = "junit", version.ref = "junit" }
 testExtJUnit = { group = "androidx.test.ext", name = "junit", version.ref = "testExtJUnit" }
 espressoCore = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espresso" }
 datastorePreferences = { group = "androidx.datastore", name = "datastore-preferences", version.ref = "datastore" }
+cardView = { group = "androidx.cardview", name = "cardview", version.ref = "cardview" }
+javaFaker = { group = "com.github.javafaker", name = "javafaker", version.ref = "javafaker"}
 [plugins]

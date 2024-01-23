@@ -34,4 +34,18 @@
     <dimen name="auth_textView_termsAndConditions_top_margin">16dp</dimen>
     <dimen name="auth_buttons_flow_gap">8dp</dimen>
     <dimen name="my_profile_imageView_profileImage_end_margin">24dp</dimen>
+
+    <dimen name="contacts_item_contact_main_padding">8dp</dimen>
+    <dimen name="item_contact_padding_end">10dp</dimen>
+    <dimen name="item_contact_contact_image_size">50dp</dimen>
+    <dimen name="item_contact_textView_contact_name_surname_margin_start">16dp</dimen>
+    <dimen name="contacts_recyclerView_horizontal_padding">16dp</dimen>
+    <dimen name="contacts_recyclerView_vertical_spacing">16dp</dimen>
+    <dimen name="contacts_topbar_height">149dp</dimen>
+    <dimen name="contacts_contacts_textView_top_margin">10dp</dimen>
+    <dimen name="contacts_back_imageButton_start_margin">16dp</dimen>
+    <dimen name="min_icon_size">32dp</dimen>
+    <dimen name="contacts_back_imageButton_end_margin">16dp</dimen>
+    <dimen name="contacts_addContact_button_top_margin">16dp</dimen>
+    <dimen name="contacts_recyclerView_horizontal_spacing">16dp</dimen>
 </resources>

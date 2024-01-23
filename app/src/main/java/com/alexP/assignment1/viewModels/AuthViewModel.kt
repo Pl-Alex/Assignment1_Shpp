@@ -1,4 +1,4 @@
-package com.alexP.assignment1
+package com.alexP.assignment1.viewModels
 
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
@@ -6,10 +6,10 @@ import androidx.datastore.preferences.core.booleanPreferencesKey
 import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.stringPreferencesKey
 import androidx.lifecycle.ViewModel
-import com.alexP.assignment1.validator.EmailValidator
-import com.alexP.assignment1.validator.EmptyValidator
-import com.alexP.assignment1.validator.PasswordValidator
-import com.alexP.assignment1.validator.base.BaseValidator
+import com.alexP.assignment1.utils.validator.EmailValidator
+import com.alexP.assignment1.utils.validator.EmptyValidator
+import com.alexP.assignment1.utils.validator.PasswordValidator
+import com.alexP.assignment1.utils.validator.base.BaseValidator
 import kotlinx.coroutines.flow.first
 import java.util.Locale
 

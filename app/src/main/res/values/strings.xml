@@ -29,4 +29,13 @@
     <string name="facebook" translatable="false">facebook</string>
     <string name="linkedin" translatable="false">linkedin</string>
     <string name="instagram" translatable="false">instagram</string>
+    <string name="item_contact_delete_contact">delete contact</string>
+    <string name="item_contact_name_surname">Name Surname</string>
+    <string name="item_contact_career">Career</string>
+    <string name="contacts_activity_contacts">Contacts</string>
+    <string name="contacts_activity_back">back</string>
+    <string name="contacts_activity_search">search\n</string>
+    <string name="contacts_activity_add_contacts">Add contacts</string>
+
+
 </resources>

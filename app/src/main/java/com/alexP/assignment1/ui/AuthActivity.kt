@@ -1,4 +1,4 @@
-package com.alexP.assignment1
+package com.alexP.assignment1.ui
 
 import android.app.ActivityOptions
 import android.content.Intent
@@ -9,6 +9,7 @@ import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.preferencesDataStore
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
+import com.alexP.assignment1.viewModels.AuthViewModel
 import com.alexP.assignment1.databinding.ActivityAuthBinding
 import kotlinx.coroutines.launch
 

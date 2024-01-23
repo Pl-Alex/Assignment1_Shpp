@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <View
+        android:id="@+id/topbar_bg"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:background="@color/blue"
+        app:layout_constraintHeight_percent="0.15"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:layout_editor_absoluteX="31dp" />
+
+    <ImageButton
+        android:id="@+id/back_imageButton"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_marginStart="@dimen/contacts_back_imageButton_start_margin"
+        android:background="@null"
+        android:contentDescription="@string/contacts_activity_back"
+        android:minWidth="@dimen/min_icon_size"
+        android:src="@drawable/ic_back"
+        app:layout_constraintBottom_toBottomOf="@id/contacts_textView"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/contacts_textView"
+        tools:ignore="TouchTargetSizeCheck" />
+
+    <TextView
+        android:id="@+id/contacts_textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/contacts_contacts_textView_top_margin"
+        android:text="@string/contacts_activity_contacts"
+        android:textAppearance="?attr/textAppearanceHeadlineMedium"
+        android:textColor="?attr/colorOnPrimary"
+        app:layout_constraintEnd_toEndOf="@id/topbar_bg"
+        app:layout_constraintStart_toStartOf="@id/topbar_bg"
+        app:layout_constraintTop_toTopOf="@id/topbar_bg" />
+
+    <ImageButton
+        android:id="@+id/search_imageButton"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_marginEnd="@dimen/contacts_back_imageButton_end_margin"
+        android:background="@null"
+        android:contentDescription="@string/contacts_activity_search"
+        android:minWidth="@dimen/min_icon_size"
+        android:src="@drawable/ic_search"
+        app:layout_constraintBottom_toBottomOf="@id/contacts_textView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/contacts_textView"
+        tools:ignore="TouchTargetSizeCheck" />
+
+    <Button
+        android:id="@+id/addContact_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/contacts_addContact_button_top_margin"
+        android:background="@null"
+        android:padding="0dp"
+        android:text="@string/contacts_activity_add_contacts"
+        android:textAppearance="?attr/textAppearanceLabelSmall"
+        android:textColor="?attr/colorOnPrimary"
+        app:layout_constraintStart_toStartOf="@id/back_imageButton"
+        app:layout_constraintTop_toBottomOf="@id/contacts_textView" />
+
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/topbar_bg"
+        tools:itemCount="20"
+        tools:listitem="@layout/item_contact" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
