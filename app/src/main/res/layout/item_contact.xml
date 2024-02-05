@@ -33,7 +33,7 @@
             android:textAppearance="@style/TextAppearance.Assignment1.LabelLarge"
             android:textColor="@color/dark_gray"
             app:layout_constraintBottom_toTopOf="@id/textView_contact_career"
-            app:layout_constraintEnd_toStartOf="@id/trash"
+            app:layout_constraintEnd_toStartOf="@id/button_trash"
             app:layout_constraintStart_toEndOf="@id/imageView_contactImage"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_chainStyle="packed" />
@@ -47,12 +47,12 @@
             android:textAppearance="@style/TextAppearance.Assignment1.BodyMedium"
             android:textColor="@color/text_gray"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@id/trash"
+            app:layout_constraintEnd_toStartOf="@id/button_trash"
             app:layout_constraintStart_toStartOf="@id/textView_contact_full_name"
             app:layout_constraintTop_toBottomOf="@id/textView_contact_full_name" />
 
         <ImageButton
-            android:id="@+id/trash"
+            android:id="@+id/button_trash"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@null"
@@ -62,7 +62,9 @@
             android:src="@drawable/ic_trash"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            android:clickable="true"
+            android:focusable="true" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

@@ -3,9 +3,13 @@ package com.alexP.assignment1.viewModels
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.alexP.assignment1.model.Contact
 import com.alexP.assignment1.model.ContactsListener
 import com.alexP.assignment1.model.ContactsService
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
 class ContactsViewModel(
     private val contactsServices: ContactsService
@@ -13,6 +17,10 @@ class ContactsViewModel(
 
     private val _contacts = MutableLiveData<List<Contact>>()
     val contacts: LiveData<List<Contact>> = _contacts
+
+    private val deletedContacts = mutableListOf<Contact>()
+
+    private var cleanDeletedContactsJob: Job? = null
 
     private val listener: ContactsListener = {
         _contacts.value = it
@@ -31,8 +39,21 @@ class ContactsViewModel(
         contactsServices.addListener(listener)
     }
 
-    fun deleteContact(contact: Contact){
+    fun deleteContact(contact: Contact) {
+        deletedContacts.add(contact)
         contactsServices.deleteContact(contact)
+
+        cleanDeletedContactsJob?.cancel()
+        cleanDeletedContactsJob = viewModelScope.launch {
+            delay(5000)
+            deletedContacts.remove(contact)
+        }
     }
 
+    fun recoverContacts() {
+        deletedContacts.forEach {
+            contactsServices.addContact(it)
+        }
+        deletedContacts.clear()
+    }
 }

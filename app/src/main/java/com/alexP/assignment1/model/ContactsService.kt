@@ -1,7 +1,7 @@
 package com.alexP.assignment1.model
 
+
 import com.github.javafaker.Faker
-import java.util.Collections
 
 typealias ContactsListener = (contacts: List<Contact>) -> Unit
 
@@ -11,8 +11,9 @@ class ContactsService {
     private val listeners = mutableListOf<ContactsListener>()
 
     init {
+
         val faker = Faker.instance()
-        contacts = (1..40).map {
+        contacts = (0..40).map {
             Contact(
                 id = it.toLong(),
                 phone = faker.phoneNumber().phoneNumber(),
@@ -38,12 +39,9 @@ class ContactsService {
         }
     }
 
-    fun moveContact(contact: Contact, moveBy: Int) {
-        val oldIndex = contacts.indexOfFirst { it.id == contact.id }
-        if (oldIndex == -1) return
-        val newIndex = oldIndex + moveBy
-        if (newIndex < 0 || newIndex > contacts.size) return
-        Collections.swap(contacts, oldIndex, newIndex)
+    fun addContact(contact: Contact) {
+        contacts.add(0, contact)
+        contacts = contacts.sortedWith(compareBy { it.id }).toMutableList()
         notifyChanges()
     }
 
