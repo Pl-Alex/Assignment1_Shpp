@@ -36,6 +36,16 @@
     <string name="contacts_activity_back">back</string>
     <string name="contacts_activity_search">search\n</string>
     <string name="contacts_activity_add_contacts">Add contacts</string>
+    <string name="search">search</string>
+    <string name="add_contact_image">add contact image</string>
+    <string name="save">save</string>
+    <string name="username">Username</string>
+    <string name="email">Email</string>
+    <string name="phone">Phone</string>
+    <string name="address">Address</string>
+    <string name="dateOfBirth">Date of birth</string>
+    <string name="email_address_hint">name@gmail.com</string>
+    <string name="phone_hint">(264)-654-3762</string>
 
 
 </resources>

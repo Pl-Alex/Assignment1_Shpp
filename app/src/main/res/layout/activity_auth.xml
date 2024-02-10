@@ -79,7 +79,7 @@
         app:layout_constraintTop_toBottomOf="@id/textView_fill_out_the_profile_tip">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/inputEditText_Email"
+            android:id="@+id/inputEditText_email"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:lines="1"

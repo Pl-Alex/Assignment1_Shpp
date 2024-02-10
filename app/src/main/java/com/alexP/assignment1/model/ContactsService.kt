@@ -24,7 +24,7 @@ class ContactsService {
                 address = faker.address().streetAddress(),
                 dateOfBirth = faker.date().birthday().toString()
             )
-        }.toMutableList()
+        }.sortedWith(compareByDescending { it.id }).toMutableList()
     }
 
     fun getContacts(): MutableList<Contact> {
@@ -34,6 +34,7 @@ class ContactsService {
     fun deleteContact(contact: Contact) {
         val indexToDelete = contacts.indexOfFirst { it.id == contact.id }
         if (indexToDelete != -1) {
+            contacts = ArrayList(contacts).sortedWith(compareByDescending { it.id }).toMutableList()
             contacts.removeAt(indexToDelete)
             notifyChanges()
         }
@@ -41,8 +42,12 @@ class ContactsService {
 
     fun addContact(contact: Contact) {
         contacts.add(0, contact)
-        contacts = contacts.sortedWith(compareBy { it.id }).toMutableList()
+        contacts = ArrayList(contacts).sortedWith(compareByDescending { it.id }).toMutableList()
         notifyChanges()
+    }
+
+    fun getNewId(): Long {
+        return contacts.first().id + 1
     }
 
     fun addListener(listener: ContactsListener) {

@@ -48,4 +48,11 @@
     <dimen name="contacts_back_imageButton_end_margin">16dp</dimen>
     <dimen name="contacts_addContact_button_top_margin">16dp</dimen>
     <dimen name="contacts_recyclerView_horizontal_spacing">16dp</dimen>
+    <dimen name="contacts_addContact_button_start_margin">16dp</dimen>
+    <dimen name="my_profile_add_image_button_size">55dp</dimen>
+    <dimen name="addContact_fragment_imageView_addProfileImage_start_margin">24dp</dimen>
+    <dimen name="addContact_fragment_imageView_profileImage_bottom_margin">28dp</dimen>
+    <dimen name="my_profile_button_save_margin_top">36dp</dimen>
+    <dimen name="addContact_fragment_scrollView_bottom_margin">36dp</dimen>
+    <dimen name="addContact_editText_top_margin">16dp</dimen>
 </resources>

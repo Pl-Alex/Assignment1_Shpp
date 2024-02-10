@@ -56,4 +56,8 @@ class ContactsViewModel(
         }
         deletedContacts.clear()
     }
+
+    fun addContact(contact: Contact) {
+        contactsServices.addContact(contact.copy(id = contactsServices.getNewId()))
+    }
 }

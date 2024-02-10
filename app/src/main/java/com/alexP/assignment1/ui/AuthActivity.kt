@@ -59,21 +59,15 @@ class AuthActivity : BaseActivity<ActivityAuthBinding>() {
         val emailValidationError = viewModel.validateEmail(
             binding?.inputEditTextEmail?.text.toString()
         )
-        if (emailValidationError != null) {
-            binding?.inputLayoutEmail?.error =
-                getString(emailValidationError)
-        } else {
-            binding?.inputLayoutEmail?.error = null
+        binding?.inputLayoutEmail?.error = emailValidationError?.let {
+            getString(it)
         }
 
         val passwordValidationError = viewModel.validatePassword(
             binding?.inputEditTextPassword?.text.toString()
         )
-        if (passwordValidationError != null) {
-            binding?.inputLayoutPassword?.error =
-                getString(passwordValidationError)
-        } else {
-            binding?.inputLayoutPassword?.error = null
+        binding?.inputLayoutPassword?.error = passwordValidationError?.let {
+            getString(passwordValidationError)
         }
 
         if (emailValidationError == null && passwordValidationError == null) {
