@@ -83,4 +83,5 @@ dependencies {
 
     // Fake data generation
     implementation(libs.javaFaker)
+
 }

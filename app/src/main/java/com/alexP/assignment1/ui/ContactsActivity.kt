@@ -43,7 +43,7 @@ class ContactsActivity : AppCompatActivity(), AddContactFragment.OnContactSavedL
         })
 
         viewModel.contacts.observe(this) {
-            adapter.contacts = it
+            adapter.submitList(it.toMutableList())
         }
 
         ItemTouchHelper(object : ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.RIGHT) {
