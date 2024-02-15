@@ -15,7 +15,6 @@ class ContactsService {
     private val listeners = mutableListOf<ContactsListener>()
 
     init {
-
         val faker = Faker.instance()
         contacts = (0..40).map {
             Contact(
@@ -29,10 +28,6 @@ class ContactsService {
                 dateOfBirth = faker.date().birthday().toString()
             )
         }.toMutableList()
-    }
-
-    fun getContacts(): MutableList<Contact> {
-        return contacts
     }
 
     fun deleteContact(contact: Contact) {

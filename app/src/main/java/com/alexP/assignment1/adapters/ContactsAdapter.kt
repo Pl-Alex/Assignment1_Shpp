@@ -20,7 +20,6 @@ interface ContactActionListener {
 
 class ContactsDiffCallback : DiffUtil.ItemCallback<Contact>() {
 
-
     override fun areItemsTheSame(oldItem: Contact, newItem: Contact): Boolean {
         return oldItem.id == newItem.id
     }
@@ -33,7 +32,7 @@ class ContactsDiffCallback : DiffUtil.ItemCallback<Contact>() {
 
 class ContactsAdapter(
     private val userActionListener: ContactActionListener
-) : ListAdapter<Contact, ContactsAdapter.ContactsViewHolder>(ContactsDiffCallback()), View.OnClickListener {
+) : ListAdapter<Contact, ContactsAdapter.ContactsViewHolder>(ContactsDiffCallback()), View.OnClickListener{
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ContactsViewHolder {
         val inflater = LayoutInflater.from(parent.context)
@@ -72,7 +71,6 @@ class ContactsAdapter(
                 userActionListener.onContactDelete(contact)
             }
         }
-
     }
 }
 

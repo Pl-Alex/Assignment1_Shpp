@@ -25,20 +25,38 @@ class ContactsActivity : AppCompatActivity(), AddContactFragment.OnContactSavedL
 
     private lateinit var viewModel: ContactsViewModel
 
-    private var isLargeLayout = false
+    private var isXLargeLayout = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityContactsBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        isLargeLayout = resources.getBoolean(R.bool.large_layout)
+        isXLargeLayout = resources.getBoolean(R.bool.xLarge_layout)
 
         viewModel = ViewModelProvider(this, factory())[ContactsViewModel::class.java]
 
+        setRecyclerView()
+        setListeners()
+    }
+
+    private fun setListeners() {
+        binding.addContactButton.setOnClickListener {
+            showAddContactDialog()
+        }
+    }
+
+    private fun setRecyclerView() {
         adapter = ContactsAdapter(object : ContactActionListener {
             override fun onContactDelete(contact: Contact) {
                 deleteContact(contact)
+            }
+        })
+
+        adapter.registerAdapterDataObserver(object :
+            RecyclerView.AdapterDataObserver() {
+            override fun onItemRangeInserted(positionStart: Int, itemCount: Int) {
+                binding.recyclerView.scrollToPosition(positionStart)
             }
         })
 
@@ -62,6 +80,7 @@ class ContactsActivity : AppCompatActivity(), AddContactFragment.OnContactSavedL
         }).attachToRecyclerView(binding.recyclerView)
 
         val layoutManager = LinearLayoutManager(this)
+
         binding.recyclerView.layoutManager = layoutManager
         binding.recyclerView.adapter = adapter
         binding.recyclerView.addItemDecoration(
@@ -70,32 +89,24 @@ class ContactsActivity : AppCompatActivity(), AddContactFragment.OnContactSavedL
                 resources.getDimensionPixelSize(R.dimen.contacts_recyclerView_vertical_spacing)
             )
         )
-        val itemAnimator = binding.recyclerView.itemAnimator
-        if (itemAnimator is DefaultItemAnimator){
-            itemAnimator.supportsChangeAnimations = false
-        }
 
-        binding.addContactButton.setOnClickListener {
-            showAddContactDialog()
+        val itemAnimator = binding.recyclerView.itemAnimator
+        if (itemAnimator is DefaultItemAnimator) {
+            itemAnimator.supportsChangeAnimations = false
         }
 
     }
 
-    private fun showAddContactDialog(){
+    private fun showAddContactDialog() {
         val fragmentManager = supportFragmentManager
         val fragment = AddContactFragment()
         fragment.setOnContactSavedListener(this)
-        if (isLargeLayout) {
-            // The device is using a large layout, so show the fragment as a
-            // dialog.
+        if (isXLargeLayout) {
             fragment.show(fragmentManager, "dialog")
         } else {
-            // The device is smaller, so show the fragment fullscreen.
             val transaction = fragmentManager.beginTransaction()
-            // For a polished look, specify a transition animation.
+
             transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
-            // To make it fullscreen, use the 'content' root view as the container
-            // for the fragment, which is always the root view for the activity.
             transaction
                 .add(android.R.id.content, fragment)
                 .addToBackStack(null)
@@ -103,16 +114,15 @@ class ContactsActivity : AppCompatActivity(), AddContactFragment.OnContactSavedL
         }
     }
 
-
     private fun deleteContact(contact: Contact) {
         viewModel.deleteContact(contact)
 
         val snackbar = Snackbar.make(
             binding.root,
-            "Contact deleted",
+            getString(R.string.contact_deleted),
             Snackbar.LENGTH_LONG
         )
-        snackbar.setAction("UNDO") {
+        snackbar.setAction(getString(R.string.undo)) {
             viewModel.recoverContacts()
         }
         snackbar.show()

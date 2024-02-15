@@ -12,7 +12,8 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 class ContactsViewModel(
-    private val contactsServices: ContactsService
+    private val contactsServices: ContactsService,
+
 ) : ViewModel() {
 
     private val _contacts = MutableLiveData<List<Contact>>()
@@ -35,7 +36,7 @@ class ContactsViewModel(
         contactsServices.removeListener(listener)
     }
 
-    fun loadContacts() {
+    private fun loadContacts() {
         contactsServices.addListener(listener)
     }
 
@@ -59,5 +60,6 @@ class ContactsViewModel(
 
     fun addContact(contact: Contact) {
         contactsServices.addContact(contact.copy(id = contactsServices.getNewId()))
+
     }
 }

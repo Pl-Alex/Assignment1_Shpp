@@ -40,12 +40,14 @@
     <string name="add_contact_image">add contact image</string>
     <string name="save">save</string>
     <string name="username">Username</string>
-    <string name="email">Email</string>
+    <string name="email" translatable="false">Email</string>
     <string name="phone">Phone</string>
     <string name="address">Address</string>
     <string name="dateOfBirth">Date of birth</string>
-    <string name="email_address_hint">name@gmail.com</string>
-    <string name="phone_hint">(264)-654-3762</string>
+    <string name="email_address_hint" translatable="false">name@gmail.com</string>
+    <string name="phone_hint">(264)–654–3762</string>
+    <string name="undo" translatable="false">UNDO</string>
+    <string name="contact_deleted">Contact deleted</string>
 
 
 </resources>
