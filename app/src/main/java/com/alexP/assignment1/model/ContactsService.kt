@@ -31,10 +31,6 @@ class ContactsService {
         }.toMutableList()
     }
 
-    fun getContacts(): MutableList<Contact> {
-        return contacts
-    }
-
     fun deleteContact(contact: Contact) {
         val indexToDelete = contacts.indexOfFirst { it.id == contact.id }
         if (indexToDelete != -1) {

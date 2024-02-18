@@ -35,7 +35,7 @@ class ContactsViewModel(
         contactsServices.removeListener(listener)
     }
 
-    fun loadContacts() {
+    private fun loadContacts() {
         contactsServices.addListener(listener)
     }
 
