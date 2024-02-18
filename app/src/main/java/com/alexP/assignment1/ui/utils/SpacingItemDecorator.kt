@@ -18,7 +18,7 @@ class SpacingItemDecorator(
         super.getItemOffsets(outRect, view, parent, state)
         outRect.right = horizontalSpacing
         outRect.left = horizontalSpacing
-        if (parent.getChildAdapterPosition(view) == 0) {
+        if (parent.getChildLayoutPosition(view) == 0) {
             outRect.top = verticalSpacing
         }
         outRect.bottom = verticalSpacing

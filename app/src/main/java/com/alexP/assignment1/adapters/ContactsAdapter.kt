@@ -5,7 +5,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.recyclerview.widget.DiffUtil
-import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.alexP.assignment1.R
 import com.alexP.assignment1.databinding.ItemContactBinding
@@ -18,21 +17,37 @@ interface ContactActionListener {
     fun onContactDelete(contact: Contact)
 }
 
-class ContactsDiffCallback : DiffUtil.ItemCallback<Contact>() {
+class ContactsDiffCallback(
+    private val oldList: List<Contact>, private val newList: List<Contact>
+) : DiffUtil.Callback() {
+    override fun getOldListSize(): Int = oldList.size
+    override fun getNewListSize(): Int = newList.size
 
-    override fun areItemsTheSame(oldItem: Contact, newItem: Contact): Boolean {
-        return oldItem.id == newItem.id
+    override fun areItemsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
+        val oldContact = oldList[oldItemPosition]
+        val newContact = newList[newItemPosition]
+        return oldContact.id == newContact.id
     }
 
-    override fun areContentsTheSame(oldItem: Contact, newItem: Contact): Boolean {
-        return oldItem == newItem
+    override fun areContentsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
+        val oldContact = oldList[oldItemPosition]
+        val newContact = newList[newItemPosition]
+        return oldContact == newContact
     }
 
 }
 
 class ContactsAdapter(
     private val userActionListener: ContactActionListener
-) : ListAdapter<Contact, ContactsAdapter.ContactsViewHolder>(ContactsDiffCallback()), View.OnClickListener{
+) : RecyclerView.Adapter<ContactsAdapter.ContactsViewHolder>(), View.OnClickListener {
+
+    var contacts: List<Contact> = emptyList()
+        set(newValue) {
+            val diffCallback = ContactsDiffCallback(field, newValue)
+            val diffResult = DiffUtil.calculateDiff(diffCallback)
+            field = newValue
+            diffResult.dispatchUpdatesTo(this)
+        }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ContactsViewHolder {
         val inflater = LayoutInflater.from(parent.context)
@@ -44,8 +59,10 @@ class ContactsAdapter(
         return ContactsViewHolder(binding)
     }
 
+    override fun getItemCount(): Int = contacts.size
+
     override fun onBindViewHolder(holder: ContactsViewHolder, position: Int) {
-        val contact = getItem(position)
+        val contact = contacts[position]
         with(holder.binding) {
             holder.itemView.tag = contact
             buttonTrash.tag = contact
@@ -71,6 +88,7 @@ class ContactsAdapter(
                 userActionListener.onContactDelete(contact)
             }
         }
+
     }
 }
 
