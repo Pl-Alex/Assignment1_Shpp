@@ -8,10 +8,13 @@ typealias ContactsListener = (contacts: List<Contact>) -> Unit
 class ContactsService {
 
     private var contacts = mutableListOf<Contact>()
+        set(newValue) {
+            field = newValue.sortedWith(compareByDescending { it.id }).toMutableList()
+        }
+
     private val listeners = mutableListOf<ContactsListener>()
 
     init {
-
         val faker = Faker.instance()
         contacts = (0..40).map {
             Contact(
@@ -24,25 +27,22 @@ class ContactsService {
                 address = faker.address().streetAddress(),
                 dateOfBirth = faker.date().birthday().toString()
             )
-        }.sortedWith(compareByDescending { it.id }).toMutableList()
-    }
-
-    fun getContacts(): MutableList<Contact> {
-        return contacts
+        }.toMutableList()
     }
 
     fun deleteContact(contact: Contact) {
         val indexToDelete = contacts.indexOfFirst { it.id == contact.id }
         if (indexToDelete != -1) {
-            contacts = ArrayList(contacts).sortedWith(compareByDescending { it.id }).toMutableList()
+            contacts = ArrayList(contacts)
             contacts.removeAt(indexToDelete)
             notifyChanges()
         }
     }
 
     fun addContact(contact: Contact) {
-        contacts.add(0, contact)
-        contacts = ArrayList(contacts).sortedWith(compareByDescending { it.id }).toMutableList()
+        val newContacts = ArrayList(contacts)
+        newContacts.add(0, contact)
+        contacts = ArrayList(newContacts)
         notifyChanges()
     }
 
@@ -65,12 +65,12 @@ class ContactsService {
 
     companion object {
         private val IMAGES = mutableListOf(
-            "https://s3-alpha-sig.figma.com/img/ddfb/d9cc/d761bf491e6218d83cd570ef902b3e61?Expires=1707091200&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=hAp86lplz0CDSEA65BuwLoBpn-vtZP0QeSY4kY-hVsbRCpnQ~6GA2~j3k~YiNbu-LNZFSrbWYlS7BxzSTu8MJIuK7Og1IBMKyBEXO4Ac5b-h55Jc5ksGd0lr8aVhWx4G0fn1DHBnEDNm46qRwrI0o0x~gfUqWAOrnkxbFJKPxa~nH0sH3lYanALixhjBL2RFlCphr9fk5~nOgXgIBguKBpm7i~mNE6wL5wncgK6FVxhMF3wAhKmGvJPaUD~sdaSJciFUrsfMEIaqu-vqHQwquYUUQhvkle7dsGRf8P~HskEOU2nzm8XS7lRIAj7FSxIedmr1FCHsrsP83ZRGKA1FPQ__",
-            "https://s3-alpha-sig.figma.com/img/56b7/6275/7dbde4af75876f40325a23557d89e229?Expires=1707091200&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=EiauHzlthKnC1X9UecqvhYCIjDZBQondQeZ5V7NyH48ADxsJzY2S5WNgrXaOZjKF2O4GEKq72xZ~eQkhBAXkGOWncMHI1t0jelzETrlTwSw2j9OLJEUEB60OULOwopySdqDdsdIN971F9YCCuVsewOXbhygxsOZ5gH237IH3xT6pRU8T7QiTFnnAmylKm1rvPMnB9D602PDDAg91VNlT68J7PVYHjzJD5PQGXOPt-Jxghu5Q4zTlqPDXnkiBLRXJuG-q5kny2Ue4QroyS9W1RV6sEJQBZju-VUZ93prpULiF7YNWy5sfiRq~~WDBlR-vJ67h4Mab6NYkS8fMTYI58A__",
-            "https://s3-alpha-sig.figma.com/img/9cb3/6565/3f014296587cb4bbbdc01ec61b96df35?Expires=1707091200&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=QchaSm9wBuV~4w9NYafhuRExp~goS4mrpz1KbvTB6yVS74XYUwn7R1RsrZW8I-bv-hERoiCuXXvpUy~NZ0kAVuvk7Efi8hID2LRIUYeaw1U91h8VDzpKbBW6clidxYGOsDn403A9142Q3ZuBquTWGRihQQZ6xfFIAY649cXA~kocRNSAcByz~Es0M7S8lVmFVu-XmvSbO5YuCTA5Ugg7i~9xwyqCMkIPzVXeuJjULMqLXPjqs-AWW5u6CxKrXJaY5fzHjXwVmtKIl9bsLa~EJ7oYpEzG4sI3xe1VXCuseX-WdxNDmlivRgRKc1sDYibeSBnpH4N-e-vwg-~7RP3C2A__",
-            "https://s3-alpha-sig.figma.com/img/7a18/e69e/ca34ee41b570f1948b4e8373ad826041?Expires=1707091200&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=R5y3wJyH5SzRwR4gpMrd6LsIXjI8KZ5VRsR5EdtuB~JgCIvj~TdrFU5gH6Cvgo05Zi2A4sROI3HSJPdcyBdA0hxqQyFg89aohkGFFr4R6ILTJoXYjZu4xEyQ0Yws5hhyYNG1jL-512iikLsk6Y~FWuski9UF2MsfxmEEYuP3rCDP8lyUdKkszayfvvoGWME9ektflM7lzKNhLlRCsN5YmjDCN8SseHH-zzoBFgP9QTgrlxFIpxs5wCD0uhMyNJa6AuHT20SUF3GnwMCzsOqUyzL3xmoQjLTa1NxM9cHr1GOc7RYysHdjx~MNsB5S41vhUknGwilKbjVG-5AKh4Nukw__",
-            "https://s3-alpha-sig.figma.com/img/8e2a/b032/97b0c902250bf8f29057cc70335c63b6?Expires=1707091200&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=VTWgv9Yfdc6XXw5UcrSMZ0ey6Z-s5Tfl~2sQbVp0uBuwivAbDZX~2tBEvCeVcKarLB2DETYBt1Oj7FHmkYbQr8sStLVa2asExamdQ~82gMRSDnTZaRJ9UM41DfYiCCz5-vzkQA2W-~NE09d1FoHXu9X04adVTz2mzzMM5VLJStbNrL0kD8qnOiBkgJuS7QyM4GxgZmsNPYvcOYRDsAjjxnhcOfjmQr5xyElvp8NCcUMOjlloLg-sPEBV~GBPmDcZwtjQlfexs9vyCaDnyko0738fFYJvGtEnfhu~kGq1F9tjwAz1GwSy7n3Wx73KnqJvwB6uCjVm0Ob7HDQimG2iaQ__",
-            "https://s3-alpha-sig.figma.com/img/28f8/2ef8/a69cbd032a9d647f1e70df95cbb3448b?Expires=1707091200&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=Xt7y41V1sIbZP1Z5HgbV5tdyCrPV3~MRD9wTEorZQNbBNBlc8lJDHsB~2vJP8Gr8ly0Nvusu3LuGD4BcwFKv8V7WIIs9yVGvF7wsC7~y5z9pu~e6CNHQlDNHfP3lt2qflTxbczDvBeajeKInCdHJHCVlclss4Z9yr73SD4K9jeVyALqtPSGz40EaTYBy48YbitfY1C~89b-0zAxTeSd7fcuMf1s40YQ0vdA1Hm~w7GfHL1LJi5Z6b3Wd~Ci6CW8Ol4vZ6Czr3IaEFfgCr~~NmjApYj4gYekzw4boIuAe9veVpv2dbZTVmqDhIowEZ-E3GlXxMA7eYaOig7vdor~QHg__"
+            "https://s3-alpha-sig.figma.com/img/ddfb/d9cc/d761bf491e6218d83cd570ef902b3e61?Expires=1708905600&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=WcVy1dd117Y1KaFoeeALs7PL3nTo8r8KtQ0sOgFhFsDmDSgBrQJj-qqygA-5wKBHCl8cNkmv2soVjGgASVzOIqK4N7G-lRkAqPmETL2u-1XoqXqAjW8QetqcrgY52jxXk0207attyrTbiHQkp3CHp9GkM72CFYeEv1SJMo4ft6jL0YPGH5dPdAAv~-jrI0K2Yojp0ltnIJN-eQCP1in-1LR8sI3ZqGytK71ou9utB-PiZgMjtz1gVmBpdKehNLiKF9gJxbsx3m7yTUcP0fj9vb-1OZkKjM4KxtJ1WYecRGXqqyx8GEpA80qrws9kbNM2p8yP0wZdl0bi7to5LqTaPA__",
+            "https://s3-alpha-sig.figma.com/img/56b7/6275/7dbde4af75876f40325a23557d89e229?Expires=1708905600&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=UkYvijXJS3i-vdlM6TmE7GcdGifWoHb29yw3cferOGFXfKEXZdtlaZeXWLzcCk9mp7txFSqUDG8l3gdtm9TCQX05bg4Br9fJE4muoAEMhs2MILHVgq09MNosXB4CLEBJSBP~gKKD3Dm6oBwPYLf11ftxLK-W1-pJUo4ldv3v9alTZqbXDDyt3rpYR-KqWHbuHX9rNlzpCvYSMPAOqPHS852iXY0oNeWWlOqDLl80ZXPzkJrKlrGE1xA2YyGSO62WpEphBrBTDbovvjGpeEHUGLyUJjejr5T1KQHxIBMO~iUuDbrbONIszu7NwBF9GwMZ0ByPjVa4DaUl~a~ptgPrJA__",
+            "https://s3-alpha-sig.figma.com/img/9cb3/6565/3f014296587cb4bbbdc01ec61b96df35?Expires=1708905600&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=nuS0PrZIA0LVT0~M0tVZ7Lf-~6cAY06u3cb-2fuSpRABCpDTG-Pr3DBiXFhjZ-0BkwMlo~hH90W4XHv3dK1ZxzWt2~M3F0hJQykuGaGl5GXwc82cYOEVk0fDjjJY7GJ~ATOti6WfU322t6rgqwwEmSlzBnghPmXU13DlOMEC8D1ijlCDZEOakFQydQ6a-kAZIoFHq0KIh7eWc1ZWQcGD8GyrTCN8onlVPUdlvhZFtKeIVeA72NT4zwuRLwtaejr5D0r-IwyQmnDjXh~acP2pgUBlmv-bCwyPqHtpBjKJO9bKvw2f8y~RT~GsMDcafeTWXy8STk8E6Iy-DOMQngY3ZA__",
+            "https://s3-alpha-sig.figma.com/img/7a18/e69e/ca34ee41b570f1948b4e8373ad826041?Expires=1708905600&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=G1Q0QBFTnVbZ9b7ObmK6~PfIkg~SzJ0gQAQfR2UQje6OaL6Lbvb4fWvUTI6gQgbxnxwCSZxEa3lkxOBuU7gBy9pIvvMx8IREsw68Ij-Tnss4Hqw4g6HFRkcOpbjUt~O9zPUnnZpQbCbEqJkNWsBGyaiys4T5S2yPeu68HUZu9N-GA9TxsLTzVW6RNt5QC7t3L-nfDyjJGSDFIMIHp0nhfRj8FQgOlqUV9nw82cYxel0eSDSWDlx-XVyG2r9HxMrig~oi9WzNwT8qvB~NtYTGW16TOpFqC1fgdsPmwDx989BhqmnB1-mtZsWOFebkB7kH4efR5i2dCg6Lhi6KSKf5jA__",
+            "https://s3-alpha-sig.figma.com/img/8e2a/b032/97b0c902250bf8f29057cc70335c63b6?Expires=1708905600&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=iYVJogVfBGYRa4DSWeMaUs3mmz~aFPldUtGz1UjphVxkmHWKcJ2b7ul3yYOjjDnGsVYzkrWCPN6n~Y9SV67GPQIrxI8Nis4b7nSsDIA7Qk5UVs~OjkssxsIc1aeDgCE5OAyahW8UrziYvz7CTwIgK0iMh5YChDuSIXZlxnCfufF3W5V-7imYgyNbrg39hZAowjBplMj66VYDYihl5oXbspQJAAL2yeEPSFFGztEv~AZ~yn0CPxGAq8oYfWnEAAgC8Sf5uZU~BL7KbyNvgyENe4CUQI0SsOJYG2ne2PIWKKDRpNXJpXkLHwNIcaSpdH1PLaLrbGX5jNqYXYUnfoZpAA__",
+            "https://s3-alpha-sig.figma.com/img/28f8/2ef8/a69cbd032a9d647f1e70df95cbb3448b?Expires=1708905600&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=e2n52-D-XxFx6RpAU~EqdUE7e-RhRzVcFRthhpBc9NQ7kKlVBVoEFu4wcIfvrSt5Onj~MSPnRk17ncP4FHzNW4NF4Rk0nOJDEIFBU5gFBt8UmlOIqbUYh~~9U-n~yHIr5oxD-gP5ABlaWmomhXMXBVNMEzgsoHcxzuFFawwlxhkNBQiiIsOWtG~QXbGX~XCciZwdfhgoOIv5kYJs8HR4J2sIwWBlZk2w-HvoUds0MNilvNLP0ZFE1oWAYW8zoOfvKlTkqbskRvVKV8XF6kXdpVcPVGyQgcZSPDrC6xFbmxdw9Y8u0T-45M7hHeOQsaDJVaOOSBDavP4szearjiRaeA__"
         )
     }
 }
