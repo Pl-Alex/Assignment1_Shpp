@@ -1,5 +1,5 @@
-<resources>
-    <string name="my_profile_activity_app_name">Assignment1</string>
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <string name="my_profile_activity_app_name" tools:ignore="Typos">Assignment1</string>
     <string name="my_profile_activity_log_out">Log out</string>
     <string name="my_profile_activity_settings">Settings</string>
     <string name="my_profile_activity_go_settings_tip">Go to settings and fill out the profile</string>
@@ -48,6 +48,7 @@
     <string name="phone_hint">(264)–654–3762</string>
     <string name="undo" translatable="false">UNDO</string>
     <string name="contact_deleted">Contact deleted</string>
+    <string name="permission_not_granted">Permission Not Granted</string>
 
 
 </resources>

@@ -48,7 +48,6 @@ class AddContactFragment : DialogFragment() {
     ): View {
 
         binding = FragmentDialogAddContactBinding.inflate(inflater, container, false)
-        val view = binding.root
 
         val toolbar = binding.topBar
         toolbar.setNavigationOnClickListener {
@@ -57,7 +56,7 @@ class AddContactFragment : DialogFragment() {
 
         setListeners()
 
-        return view
+        return binding.root
     }
 
 

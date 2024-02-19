@@ -1,5 +1,7 @@
 package com.alexP.assignment1.ui
 
+import android.content.pm.PackageManager
+import com.alexP.assignment1.dataProviders.ContactsLoader
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.FragmentTransaction
@@ -20,6 +22,10 @@ import com.google.android.material.snackbar.Snackbar
 
 class ContactsActivity : AppCompatActivity(), AddContactFragment.OnContactSavedListener {
 
+    companion object {
+        const val PERMISSION_REQ_READ_CONTACTS = 100
+    }
+
     private lateinit var binding: ActivityContactsBinding
     private lateinit var adapter: ContactsAdapter
 
@@ -38,6 +44,8 @@ class ContactsActivity : AppCompatActivity(), AddContactFragment.OnContactSavedL
 
         setRecyclerView()
         setListeners()
+
+        ContactsLoader(this, viewModel).loadContacts()
     }
 
     private fun setListeners() {
@@ -63,6 +71,7 @@ class ContactsActivity : AppCompatActivity(), AddContactFragment.OnContactSavedL
         viewModel.contacts.observe(this) {
             adapter.submitList(it.toMutableList())
         }
+
         ItemTouchHelper(object : ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.RIGHT) {
             override fun onMove(
                 recyclerView: RecyclerView,
@@ -99,16 +108,10 @@ class ContactsActivity : AppCompatActivity(), AddContactFragment.OnContactSavedL
         val fragment = AddContactFragment()
         fragment.setOnContactSavedListener(this)
         if (isXLargeLayout) {
-            // The device is using a large layout, so show the fragment as a
-            // dialog.
             fragment.show(fragmentManager, "dialog")
         } else {
-            // The device is smaller, so show the fragment fullscreen.
             val transaction = fragmentManager.beginTransaction()
-            // For a polished look, specify a transition animation.
             transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
-            // To make it fullscreen, use the 'content' root view as the container
-            // for the fragment, which is always the root view for the activity.
             transaction
                 .add(android.R.id.content, fragment)
                 .addToBackStack(null)
@@ -134,4 +137,23 @@ class ContactsActivity : AppCompatActivity(), AddContactFragment.OnContactSavedL
         viewModel.addContact(contact)
     }
 
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<out String>,
+        grantResults: IntArray
+    ) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        if (requestCode == PERMISSION_REQ_READ_CONTACTS) {
+            if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                ContactsLoader(this, viewModel).loadContacts()
+            } else {
+                Snackbar.make(
+                    this,
+                    binding.root,
+                    getString(R.string.permission_not_granted),
+                    Snackbar.LENGTH_SHORT
+                ).show()
+            }
+        }
+    }
 }

@@ -23,5 +23,4 @@ class SpacingItemDecorator(
         }
         outRect.bottom = verticalSpacing
     }
-
 }
