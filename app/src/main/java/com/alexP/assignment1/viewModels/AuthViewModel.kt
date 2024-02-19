@@ -41,20 +41,19 @@ class AuthViewModel : ViewModel() {
         return preferences[dataStoreKey]
     }
 
-    fun validateEmail(email: String) : Int?{
+    fun validateEmail(email: String): Int? {
         val emailValidations = BaseValidator.validate(
             EmptyValidator(email), EmailValidator(email)
         )
         return if (!emailValidations.isSuccess) emailValidations.message else null
     }
 
-    fun validatePassword(password: String) : Int?{
+    fun validatePassword(password: String): Int? {
         val passwordValidations = BaseValidator.validate(
             EmptyValidator(password), PasswordValidator(password)
         )
         return if (!passwordValidations.isSuccess) passwordValidations.message else null
     }
-
 
 
     fun parseEmail(email: String): String {
@@ -67,5 +66,4 @@ class AuthViewModel : ViewModel() {
                 }
             }
     }
-
 }

@@ -64,7 +64,8 @@ class ContactsActivity : AppCompatActivity(), AddContactFragment.OnContactSavedL
         adapter.registerAdapterDataObserver(object :
             RecyclerView.AdapterDataObserver() {
             override fun onItemRangeInserted(positionStart: Int, itemCount: Int) {
-                binding.recyclerView.scrollToPosition(positionStart)
+                if(positionStart == 0)
+                    binding.recyclerView.scrollToPosition(positionStart)
             }
         })
 

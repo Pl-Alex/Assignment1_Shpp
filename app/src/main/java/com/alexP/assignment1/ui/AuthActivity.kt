@@ -56,29 +56,27 @@ class AuthActivity : BaseActivity<ActivityAuthBinding>() {
     }
 
     private fun onRegisterButtonPressed() {
-        val emailValidationError = viewModel.validateEmail(
-            binding?.inputEditTextEmail?.text.toString()
-        )
-        binding?.inputLayoutEmail?.error = emailValidationError?.let {
-            getString(it)
-        }
 
-        val passwordValidationError = viewModel.validatePassword(
-            binding?.inputEditTextPassword?.text.toString()
-        )
-        binding?.inputLayoutPassword?.error = passwordValidationError?.let {
-            getString(passwordValidationError)
-        }
+        val email = binding?.inputEditTextEmail?.text.toString()
+        val password = binding?.inputEditTextPassword?.text.toString()
+
+        val emailValidationError = viewModel.validateEmail(email)
+        val passwordValidationError = viewModel.validatePassword(password)
+
+        if (emailValidationError != null)
+            binding?.inputLayoutEmail?.error = getString(emailValidationError)
+
+        if (passwordValidationError != null)
+            binding?.inputLayoutPassword?.error = getString(passwordValidationError)
 
         if (emailValidationError == null && passwordValidationError == null) {
             lifecycleScope.launch {
+
                 viewModel.saveString(
-                    dataStore, EMAIL,
-                    binding?.inputEditTextEmail?.text.toString()
+                    dataStore, EMAIL, email
                 )
                 viewModel.saveString(
-                    dataStore, PASSWORD,
-                    binding?.inputEditTextPassword?.text.toString()
+                    dataStore, PASSWORD, password
                 )
                 binding?.checkBoxRemember?.let {
                     viewModel.saveBoolean(
@@ -90,9 +88,7 @@ class AuthActivity : BaseActivity<ActivityAuthBinding>() {
 
             val intent = Intent(this, MyProfileActivity::class.java)
             intent.putExtra(
-                EMAIL, viewModel.parseEmail(
-                    binding?.inputEditTextEmail?.text.toString()
-                )
+                EMAIL, viewModel.parseEmail(email)
             )
             startActivity(intent, ActivityOptions.makeSceneTransitionAnimation(this).toBundle())
             finish()

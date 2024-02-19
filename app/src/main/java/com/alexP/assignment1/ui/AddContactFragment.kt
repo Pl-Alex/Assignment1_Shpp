@@ -71,113 +71,58 @@ class AddContactFragment : DialogFragment() {
 
     private fun onButtonSavePressed() {
 
-        val fullname = binding.inputEditTextUsername.text.toString()
-        val career = binding.inputEditTextCareer.text.toString()
-        val email = binding.inputEditTextEmail.text.toString()
-        val phone = binding.inputEditTextPhone.text.toString()
-        val address = binding.inputEditTextAddress.text.toString()
-        val dateOfBirth = binding.inputEditTextDateOfBirth.text.toString()
-
-        if (enteredDataIsInvalid(
-                fullname,
-                career,
-                email,
-                phone,
-                address,
-                dateOfBirth
-            )
-        ) return
+        if (enteredDataIsInvalid()) return
 
         val contact = Contact(
             id = -1,
             photo = galleryUri.toString(),
-            fullName = fullname,
-            career = career,
-            email = email,
-            phone = phone,
-            address = address,
-            dateOfBirth = dateOfBirth
+            fullName = binding.inputEditTextUsername.text.toString(),
+            career = binding.inputEditTextCareer.text.toString(),
+            email = binding.inputEditTextEmail.text.toString(),
+            phone = binding.inputEditTextPhone.text.toString(),
+            address = binding.inputEditTextAddress.text.toString(),
+            dateOfBirth = binding.inputEditTextDateOfBirth.text.toString()
         )
 
         listener?.onContactSaved(contact)
         dismiss()
     }
 
-    private fun enteredDataIsInvalid(
-        fullname: String,
-        career: String,
-        email: String,
-        phone: String,
-        address: String,
-        dateOfBirth: String
-    ): Boolean {
-        val emailValidations = BaseValidator.validate(
-            EmptyValidator(email), EmailValidator(email)
-        )
-        val careerValidations = BaseValidator.validate(
-            EmptyValidator(career)
-        )
-        val fullnameValidations = BaseValidator.validate(
-            EmptyValidator(fullname)
-        )
-        val phoneValidations = BaseValidator.validate(
-            EmptyValidator(phone)
-        )
-        val addressValidations = BaseValidator.validate(
-            EmptyValidator(address)
-        )
-        val dateOfBirthValidations = BaseValidator.validate(
-            EmptyValidator(dateOfBirth)
+    private fun enteredDataIsInvalid(): Boolean {
+        val editTexts = listOf(
+            Pair(binding.inputEditTextEmail, binding.inputLayoutEmail),
+            Pair(binding.inputEditTextCareer, binding.inputLayoutCareer),
+            Pair(binding.inputEditTextUsername, binding.inputLayoutUsername),
+            Pair(binding.inputEditTextPhone, binding.inputLayoutPhone),
+            Pair(binding.inputEditTextAddress, binding.inputLayoutAddress),
+            Pair(binding.inputEditTextDateOfBirth, binding.inputLayoutDateOfBirth)
         )
 
-        binding.inputLayoutEmail.error = (if (!emailValidations.isSuccess) {
-            getString(emailValidations.message)
-        } else {
-            ""
-        }).toString()
-        binding.inputLayoutCareer.error = (
-                if (!careerValidations.isSuccess) {
-                    getString(careerValidations.message)
-                } else {
-                    ""
-                }
-                ).toString()
-        binding.inputLayoutUsername.error = (
-                if (!fullnameValidations.isSuccess) {
-                    getString(fullnameValidations.message)
-                } else {
-                    ""
-                }
-                ).toString()
-        binding.inputLayoutPhone.error = (
-                if (!phoneValidations.isSuccess) {
-                    getString(phoneValidations.message)
-                } else {
-                    ""
-                }
-                ).toString()
-        binding.inputLayoutAddress.error = (
-                if (!addressValidations.isSuccess) {
-                    getString(addressValidations.message)
-                } else {
-                    ""
-                }
-                ).toString()
-        binding.inputLayoutDateOfBirth.error = (
-                if (!dateOfBirthValidations.isSuccess) {
-                    getString(dateOfBirthValidations.message)
-                } else {
-                    ""
-                }
-                ).toString()
+        var hasError = false
 
-        return !(emailValidations.isSuccess
-                && careerValidations.isSuccess
-                && fullnameValidations.isSuccess
-                && phoneValidations.isSuccess
-                && addressValidations.isSuccess
-                && dateOfBirthValidations.isSuccess)
+        editTexts.forEach { (editText, inputLayout) ->
+            val text = editText.text.toString()
+            val validations = when (editText) {
+                binding.inputEditTextEmail -> {
+                    BaseValidator.validate(EmptyValidator(text), EmailValidator(text))
+                }
+                else -> {
+                    BaseValidator.validate(EmptyValidator(text))
+                }
+            }
 
+            inputLayout.error = if (!validations.isSuccess) {
+                getString(validations.message)
+            } else {
+                null
+            }
+
+            if (!validations.isSuccess) {
+                hasError = true
+            }
+        }
+
+        return hasError
     }
 
     fun setOnContactSavedListener(listener: OnContactSavedListener) {
