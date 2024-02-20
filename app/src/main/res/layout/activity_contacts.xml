@@ -9,7 +9,7 @@
         android:id="@+id/contacts_topbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="?attr/colorPrimary"
+        android:background="?attr/colorSurfaceVariant"
         app:layout_constraintTop_toTopOf="parent">
 
         <com.google.android.material.appbar.MaterialToolbar
@@ -22,7 +22,7 @@
             app:title="@string/contacts_activity_contacts"
             app:titleCentered="true"
             app:titleTextAppearance="?attr/textAppearanceHeadlineMedium"
-            app:titleTextColor="?attr/colorOnPrimary" />
+            app:titleTextColor="?attr/colorOnSurfaceVariant" />
 
     </com.google.android.material.appbar.AppBarLayout>
 
@@ -30,26 +30,23 @@
         android:id="@+id/topbar_bg"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:background="@color/blue"
+        android:background="?attr/colorSurfaceVariant"
         app:layout_constraintHeight_percent="0.07"
         app:layout_constraintTop_toBottomOf="@id/contacts_topbar"
         tools:layout_editor_absoluteX="31dp" />
 
-
-    <Button
+    <TextView
         android:id="@+id/addContact_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/contacts_addContact_button_start_margin"
         android:background="@null"
-        android:padding="0dp"
         android:text="@string/contacts_activity_add_contacts"
         android:textAppearance="?attr/textAppearanceLabelSmall"
-        android:textColor="?attr/colorOnPrimary"
+        android:textColor="?attr/colorOnSurfaceVariant"
         app:layout_constraintBottom_toBottomOf="@id/topbar_bg"
         app:layout_constraintStart_toStartOf="@id/topbar_bg"
         app:layout_constraintTop_toTopOf="@id/topbar_bg" />
-
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"
@@ -57,7 +54,9 @@
         android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@id/topbar_bg"
+        app:layout_constraintVertical_bias="0.0"
         tools:itemCount="20"
+        tools:layout_editor_absoluteX="0dp"
         tools:listitem="@layout/item_contact" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

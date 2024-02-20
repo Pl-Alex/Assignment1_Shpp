@@ -30,6 +30,7 @@ class AddContactFragment : DialogFragment() {
 
     val galleryLauncher = registerForActivityResult(ActivityResultContracts.GetContent()) {
         galleryUri = it
+        if(galleryUri == null) return@registerForActivityResult
         try {
             Glide.with(this).load(galleryUri).apply(RequestOptions.circleCropTransform())
                 .placeholder(R.drawable.default_contact_image)

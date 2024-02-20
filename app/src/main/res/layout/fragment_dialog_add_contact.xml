@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="?attr/colorOnSecondary">
+    android:background="?attr/colorSurface">
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/topGuideline"
@@ -37,7 +38,7 @@
         android:id="@+id/topbar_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="?attr/colorPrimary"
+        android:background="?attr/colorSurfaceVariant"
         app:layout_constraintTop_toTopOf="parent">
 
         <com.google.android.material.appbar.MaterialToolbar
@@ -49,7 +50,7 @@
             app:title="@string/contacts_activity_add_contacts"
             app:titleCentered="true"
             app:titleTextAppearance="?attr/textAppearanceHeadlineSmall"
-            app:titleTextColor="?attr/colorOnPrimary" />
+            app:titleTextColor="?attr/colorOnSurfaceVariant" />
 
     </com.google.android.material.appbar.AppBarLayout>
 
@@ -57,9 +58,10 @@
         android:id="@+id/topbar_bg"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:background="?attr/colorPrimary"
+        android:background="?attr/colorSurfaceVariant"
         app:layout_constraintBottom_toBottomOf="@id/imageView_profileImage"
-        app:layout_constraintTop_toBottomOf="@id/topbar_layout" />
+        app:layout_constraintTop_toBottomOf="@id/topbar_layout"
+        tools:layout_editor_absoluteX="0dp" />
 
     <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/imageView_profileImage"
@@ -94,7 +96,7 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginBottom="@dimen/addContact_fragment_scrollView_bottom_margin"
-        android:background="?attr/colorBackgroundFloating"
+        android:background="?attr/colorSurface"
         android:orientation="vertical"
         app:layout_constraintBottom_toTopOf="@id/button_save"
         app:layout_constraintEnd_toEndOf="@id/rightGuideline"
@@ -109,15 +111,13 @@
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/inputLayout_username"
-                style="?attr/textInputFilledStyle"
+                style="@style/CustomTextInputLayoutStyle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/auth_inputLayout_email_top_margin"
                 android:hint="@string/username"
                 android:textColorHint="?attr/colorOutline"
-                app:boxBackgroundColor="?attr/colorBackgroundFloating"
-                app:boxStrokeColor="?attr/colorOutline"
-                app:boxStrokeWidthFocused="@dimen/auth_activity_boxStrokeWidth"
+                app:boxBackgroundColor="?attr/colorSurface"
                 app:errorIconDrawable="@null"
                 app:expandedHintEnabled="false"
                 app:hintAnimationEnabled="false"
@@ -132,20 +132,18 @@
                     android:lines="1"
                     android:paddingTop="@dimen/auth_editText_padding"
                     android:textAppearance="?attr/textAppearanceLabelLarge"
-                    android:textColor="@color/black" />
+                    android:textColor="?attr/colorOnSurface" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/inputLayout_career"
-                style="?attr/textInputFilledStyle"
+                style="@style/CustomTextInputLayoutStyle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/addContact_editText_top_margin"
                 android:hint="@string/career"
                 android:textColorHint="?attr/colorOutline"
-                app:boxBackgroundColor="?attr/colorBackgroundFloating"
-                app:boxStrokeColor="?attr/colorOutline"
-                app:boxStrokeWidthFocused="@dimen/auth_activity_boxStrokeWidth"
+                app:boxBackgroundColor="?attr/colorSurface"
+
                 app:errorIconDrawable="@null"
                 app:expandedHintEnabled="false"
                 app:hintAnimationEnabled="false"
@@ -160,20 +158,18 @@
                     android:lines="1"
                     android:paddingTop="@dimen/auth_editText_padding"
                     android:textAppearance="?attr/textAppearanceLabelLarge"
-                    android:textColor="@color/black" />
+                    android:textColor="?attr/colorOnSurface" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/inputLayout_email"
-                style="?attr/textInputFilledStyle"
+                style="@style/CustomTextInputLayoutStyle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/addContact_editText_top_margin"
                 android:hint="@string/email"
                 android:textColorHint="?attr/colorOutline"
-                app:boxBackgroundColor="?attr/colorBackgroundFloating"
-                app:boxStrokeColor="?attr/colorOutline"
-                app:boxStrokeWidthFocused="@dimen/auth_activity_boxStrokeWidth"
+                app:boxBackgroundColor="?attr/colorSurface"
+
                 app:errorIconDrawable="@null"
                 app:expandedHintEnabled="false"
                 app:hintAnimationEnabled="false"
@@ -183,28 +179,24 @@
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/inputEditText_email"
                     android:layout_width="match_parent"
-
                     android:layout_height="match_parent"
                     android:hint="@string/email_address_hint"
                     android:inputType="textWebEmailAddress"
                     android:lines="1"
                     android:paddingTop="@dimen/auth_editText_padding"
                     android:textAppearance="?attr/textAppearanceLabelLarge"
-                    android:textColor="@color/black"
-                    android:textColorHint="?attr/colorOutline" />
+                    android:textColor="?attr/colorOnSurface"
+                    android:textColorHint="?attr/colorOutlineVariant" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/inputLayout_phone"
-                style="?attr/textInputFilledStyle"
+                style="@style/CustomTextInputLayoutStyle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/addContact_editText_top_margin"
                 android:hint="@string/phone"
                 android:textColorHint="?attr/colorOutline"
-                app:boxBackgroundColor="?attr/colorBackgroundFloating"
-                app:boxStrokeColor="?attr/colorOutline"
-                app:boxStrokeWidthFocused="@dimen/auth_activity_boxStrokeWidth"
+                app:boxBackgroundColor="?attr/colorSurface"
                 app:errorIconDrawable="@null"
                 app:expandedHintEnabled="false"
                 app:hintAnimationEnabled="false"
@@ -220,21 +212,18 @@
                     android:lines="1"
                     android:paddingTop="@dimen/auth_editText_padding"
                     android:textAppearance="?attr/textAppearanceLabelLarge"
-                    android:textColor="@color/black"
-                    android:textColorHint="?attr/colorOutline" />
+                    android:textColor="?attr/colorOnSurface"
+                    android:textColorHint="?attr/colorOutlineVariant" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/inputLayout_address"
-                style="?attr/textInputFilledStyle"
+                style="@style/CustomTextInputLayoutStyle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/addContact_editText_top_margin"
                 android:hint="@string/address"
                 android:textColorHint="?attr/colorOutline"
-                app:boxBackgroundColor="?attr/colorBackgroundFloating"
-                app:boxStrokeColor="?attr/colorOutline"
-                app:boxStrokeWidthFocused="@dimen/auth_activity_boxStrokeWidth"
+                app:boxBackgroundColor="?attr/colorSurface"
                 app:errorIconDrawable="@null"
                 app:expandedHintEnabled="false"
                 app:hintAnimationEnabled="false"
@@ -249,20 +238,17 @@
                     android:lines="1"
                     android:paddingTop="@dimen/auth_editText_padding"
                     android:textAppearance="?attr/textAppearanceLabelLarge"
-                    android:textColor="@color/black" />
+                    android:textColor="?attr/colorOnSurface" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/inputLayout_dateOfBirth"
-                style="?attr/textInputFilledStyle"
+                style="@style/CustomTextInputLayoutStyle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/addContact_editText_top_margin"
                 android:hint="@string/dateOfBirth"
                 android:textColorHint="?attr/colorOutline"
-                app:boxBackgroundColor="?attr/colorBackgroundFloating"
-                app:boxStrokeColor="?attr/colorOutline"
-                app:boxStrokeWidthFocused="@dimen/auth_activity_boxStrokeWidth"
+                app:boxBackgroundColor="?attr/colorSurface"
                 app:errorIconDrawable="@null"
                 app:expandedHintEnabled="false"
                 app:hintAnimationEnabled="false"
@@ -277,9 +263,8 @@
                     android:lines="1"
                     android:paddingTop="@dimen/auth_editText_padding"
                     android:textAppearance="?attr/textAppearanceLabelLarge"
-                    android:textColor="@color/black" />
+                    android:textColor="?attr/colorOnSurface" />
             </com.google.android.material.textfield.TextInputLayout>
-
 
         </LinearLayout>
     </ScrollView>
@@ -294,7 +279,7 @@
         android:text="@string/save"
         android:textAllCaps="true"
         android:textAppearance="?attr/textAppearanceLabelMedium"
-        android:textColor="?attr/colorOnTertiary"
+        android:textColor="?attr/colorSurface"
         app:layout_constraintBottom_toBottomOf="@id/bottomGuideline"
         app:layout_constraintEnd_toEndOf="@id/rightGuideline"
         app:layout_constraintStart_toStartOf="@id/leftGuideline" />

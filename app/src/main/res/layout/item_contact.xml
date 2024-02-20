@@ -16,7 +16,6 @@
             android:id="@+id/imageView_contactImage"
             android:layout_width="@dimen/item_contact_contact_image_size"
             android:layout_height="@dimen/item_contact_contact_image_size"
-            android:contentDescription=""
             android:scaleType="centerCrop"
             android:src="@drawable/default_contact_image"
             app:layout_constraintStart_toStartOf="parent"
@@ -31,7 +30,7 @@
             android:lines="1"
             android:text="@string/item_contact_name_surname"
             android:textAppearance="@style/TextAppearance.Assignment1.LabelLarge"
-            android:textColor="@color/dark_gray"
+            android:textColor="?attr/colorOnSurface"
             app:layout_constraintBottom_toTopOf="@id/textView_contact_career"
             app:layout_constraintEnd_toStartOf="@id/button_trash"
             app:layout_constraintStart_toEndOf="@id/imageView_contactImage"
@@ -45,9 +44,10 @@
             android:lines="1"
             android:text="@string/item_contact_career"
             android:textAppearance="@style/TextAppearance.Assignment1.BodyMedium"
-            android:textColor="@color/text_gray"
+            android:textColor="?attr/colorOutlineVariant"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@id/button_trash"
+            app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="@id/textView_contact_full_name"
             app:layout_constraintTop_toBottomOf="@id/textView_contact_full_name" />
 
@@ -56,16 +56,15 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@null"
+            android:clickable="true"
             android:contentDescription="@string/item_contact_delete_contact"
+            android:focusable="true"
             android:minWidth="48dp"
             android:minHeight="48dp"
             android:src="@drawable/ic_trash"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:clickable="true"
-            android:focusable="true" />
-
+            app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.cardview.widget.CardView>

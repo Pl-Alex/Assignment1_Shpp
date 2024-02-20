@@ -67,7 +67,7 @@
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/inputLayout_email"
-        style="?attr/textInputFilledStyle"
+        style="@style/CustomTextInputLayoutStyle"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/auth_inputLayout_email_top_margin"
@@ -75,8 +75,6 @@
         android:inputType="textEmailAddress"
         android:textColorHint="?attr/colorOutline"
         app:boxBackgroundColor="?attr/colorPrimary"
-        app:boxStrokeColor="?attr/colorOutline"
-        app:boxStrokeWidthFocused="@dimen/auth_activity_boxStrokeWidth"
         app:errorIconDrawable="@null"
         app:expandedHintEnabled="false"
         app:hintAnimationEnabled="false"
@@ -98,7 +96,7 @@
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/inputLayout_password"
-        style="?attr/textInputFilledStyle"
+        style="@style/CustomTextInputLayoutStyle"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/auth_inputLayout_password_top_margin"
@@ -106,8 +104,6 @@
         android:inputType="textPassword"
         android:textColorHint="?attr/colorOutline"
         app:boxBackgroundColor="?attr/colorPrimary"
-        app:boxStrokeColor="?attr/colorOutline"
-        app:boxStrokeWidthFocused="1dp"
         app:errorIconDrawable="@null"
         app:expandedHintEnabled="false"
         app:hintAnimationEnabled="false"
