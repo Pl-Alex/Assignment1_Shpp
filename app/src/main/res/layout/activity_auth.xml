@@ -77,7 +77,7 @@
         app:layout_constraintTop_toBottomOf="@id/textView_fill_out_the_profile_tip">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/inputEditText_email"
+            android:id="@+id/inputEditTextEmail"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:lines="1"
@@ -106,7 +106,7 @@
         app:layout_constraintTop_toBottomOf="@id/inputLayout_email">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/inputEditText_Password"
+            android:id="@+id/inputEditTextPassword"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:inputType="textPassword"
@@ -117,7 +117,7 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <CheckBox
-        android:id="@+id/checkBox_Remember"
+        android:id="@+id/checkBoxRemember"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/auth_checkBox_remember_top_margin"
@@ -129,20 +129,11 @@
         app:layout_constraintStart_toStartOf="@id/leftGuideline"
         app:layout_constraintTop_toBottomOf="@id/inputLayout_password" />
 
-    <Button
+    <com.alexP.assignment1.ui.utils.customViews.GoogleCustomButton
         android:id="@+id/button_singInGoogle"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/auth_button_google_bottom_margin"
-        android:backgroundTint="@color/white"
-        android:text="@string/auth_activity_google"
-        android:textAllCaps="true"
-        android:textAppearance="?attr/textAppearanceLabelMedium"
-        android:textColor="@color/black"
-        app:cornerRadius="@dimen/auth_activity_button_signInGoogle_cornerRadius"
-        app:icon="@drawable/google_logo"
-        app:iconGravity="textStart"
-        app:iconTint="@null"
+        android:layout_marginBottom="@dimen/auth_layout_button_singInGoogle_margin_bottom"
         app:layout_constraintBottom_toTopOf="@id/textView_orLabel"
         app:layout_constraintEnd_toEndOf="@id/rightGuideline"
         app:layout_constraintStart_toStartOf="@id/leftGuideline" />
@@ -152,7 +143,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="@dimen/auth_orLabel_top_margin"
         android:layout_marginBottom="@dimen/auth_textView_orLabel_bottom_margin"
         android:text="@string/auth_activity_or"
         android:textAppearance="?attr/textAppearanceLabelLarge"

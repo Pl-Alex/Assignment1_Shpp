@@ -33,22 +33,20 @@
     <string name="item_contact_name_surname">Name Surname</string>
     <string name="item_contact_career">Career</string>
     <string name="contacts_activity_contacts">Contacts</string>
-    <string name="contacts_activity_back">back</string>
-    <string name="contacts_activity_search">search\n</string>
-    <string name="contacts_activity_add_contacts">Add contacts</string>
-    <string name="search">search</string>
     <string name="add_contact_image">add contact image</string>
     <string name="save">save</string>
-    <string name="username">Username</string>
+    <string name="username" translatable="false">Username</string>
     <string name="email" translatable="false">Email</string>
     <string name="phone">Phone</string>
     <string name="address">Address</string>
     <string name="dateOfBirth">Date of birth</string>
     <string name="email_address_hint" translatable="false">name@gmail.com</string>
-    <string name="phone_hint">(264)–654–3762</string>
+    <string name="phone_hint" translatable="false">(264)–654–3762</string>
     <string name="undo" translatable="false">UNDO</string>
     <string name="contact_deleted">Contact deleted</string>
-    <string name="permission_not_granted">Permission Not Granted</string>
+    <string name="permission_not_granted" translatable="false">Permission Not Granted</string>
+    <string name="contacts_activity_add_contacts">Add contact</string>
+    <string name="search">search</string>
 
 
 </resources>

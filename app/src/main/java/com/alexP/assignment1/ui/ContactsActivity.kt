@@ -1,7 +1,8 @@
 package com.alexP.assignment1.ui
 
+import android.app.ActivityOptions
+import android.content.Intent
 import android.content.pm.PackageManager
-import com.alexP.assignment1.dataProviders.ContactsLoader
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.FragmentTransaction
@@ -13,12 +14,14 @@ import androidx.recyclerview.widget.RecyclerView
 import com.alexP.assignment1.R
 import com.alexP.assignment1.adapters.ContactActionListener
 import com.alexP.assignment1.adapters.ContactsAdapter
+import com.alexP.assignment1.dataProviders.ContactsLoader
 import com.alexP.assignment1.databinding.ActivityContactsBinding
 import com.alexP.assignment1.model.Contact
 import com.alexP.assignment1.ui.utils.SpacingItemDecorator
 import com.alexP.assignment1.ui.utils.factory
 import com.alexP.assignment1.viewModels.ContactsViewModel
 import com.google.android.material.snackbar.Snackbar
+
 
 class ContactsActivity : AppCompatActivity(), AddContactFragment.OnContactSavedListener {
 
@@ -52,6 +55,13 @@ class ContactsActivity : AppCompatActivity(), AddContactFragment.OnContactSavedL
         binding.addContactButton.setOnClickListener {
             showAddContactDialog()
         }
+        binding.topAppBar.setNavigationOnClickListener {
+            startActivity(
+                Intent(this, AuthActivity::class.java),
+                ActivityOptions.makeSceneTransitionAnimation(this).toBundle()
+            )
+            finish()
+        }
     }
 
     private fun setRecyclerView() {
@@ -64,7 +74,7 @@ class ContactsActivity : AppCompatActivity(), AddContactFragment.OnContactSavedL
         adapter.registerAdapterDataObserver(object :
             RecyclerView.AdapterDataObserver() {
             override fun onItemRangeInserted(positionStart: Int, itemCount: Int) {
-                if(positionStart == 0)
+                if (positionStart == 0)
                     binding.recyclerView.scrollToPosition(positionStart)
             }
         })

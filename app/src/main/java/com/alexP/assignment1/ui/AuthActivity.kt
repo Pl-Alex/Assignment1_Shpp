@@ -4,6 +4,7 @@ import android.app.ActivityOptions
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
+import android.widget.Toast
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.preferencesDataStore
@@ -52,6 +53,10 @@ class AuthActivity : BaseActivity<ActivityAuthBinding>() {
     private fun setListeners() {
         binding?.buttonRegister?.setOnClickListener {
             onRegisterButtonPressed()
+        }
+
+        binding?.buttonSingInGoogle?.setOnClickListener{
+            Toast.makeText(this, "Sing in Google button pressed", Toast.LENGTH_SHORT).show()
         }
     }
 

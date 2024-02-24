@@ -25,7 +25,12 @@
     <string name="item_contact_name_surname">Повне ім\'я</string>
     <string name="item_contact_career">Діяльність</string>
     <string name="contacts_activity_contacts">Контакти</string>
-    <string name="contacts_activity_back">back</string>
-    <string name="contacts_activity_search">search\n</string>
-    <string name="contacts_activity_add_contacts">Додати контакти</string>
+    <string name="add_contact_image">додати фото</string>
+    <string name="save">зберегти</string>
+    <string name="phone">Телефон</string>
+    <string name="address">Адреса</string>
+    <string name="dateOfBirth">Дата народження</string>
+    <string name="contact_deleted">Контакт видалено</string>
+    <string name="contacts_activity_add_contacts">Додати контакт</string>
+    <string name="search">Пошук</string>
 </resources>
