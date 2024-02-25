@@ -44,4 +44,5 @@
     <dimen name="google_custom_view_icon_end_margin">8dp</dimen>
     <dimen name="auth_activity_button_signInGoogle_cornerRadius">6dp</dimen>
     <dimen name="auth_layout_button_singInGoogle_margin_bottom">8dp</dimen>
+    <dimen name="auth_inputLayout_email_end_margin">16dp</dimen>
 </resources>
