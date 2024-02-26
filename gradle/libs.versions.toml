@@ -1,0 +1,27 @@
+[versions]
+ktx = "1.12.0"
+appcompat = "1.6.1"
+coroutine = "1.7.3"
+material = "1.11.0"
+constraintLayout = "2.1.4"
+lifecycle = "2.6.2"
+glide = "4.12.0"
+junit = "4.13.2"
+testExtJUnit = "1.1.5"
+espresso = "3.5.1"
+datastore = "1.0.0"
+[libraries]
+androidx-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "ktx" }
+androidx-appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "appcompat" }
+kotlinx-coroutines-android = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-android", version.ref = "coroutine" }
+kotlinx-coroutines-core = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-core", version.ref = "coroutine" }
+material = { group = "com.google.android.material", name = "material", version.ref = "material" }
+constraintLayout = { group = "androidx.constraintlayout", name = "constraintlayout", version.ref = "constraintLayout" }
+lifecycleRuntime = { group = "androidx.lifecycle", name = "lifecycle-runtime-ktx", version.ref = "lifecycle" }
+lifecycleViewmodel = { group = "androidx.lifecycle", name = "lifecycle-viewmodel-ktx", version.ref = "lifecycle" }
+glide = { group = "com.github.bumptech.glide", name = "glide", version.ref = "glide" }
+junit = { group = "junit", name = "junit", version.ref = "junit" }
+testExtJUnit = { group = "androidx.test.ext", name = "junit", version.ref = "testExtJUnit" }
+espressoCore = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espresso" }
+datastorePreferences = { group = "androidx.datastore", name = "datastore-preferences", version.ref = "datastore" }
+[plugins]

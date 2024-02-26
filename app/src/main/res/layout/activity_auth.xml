@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="?attr/colorPrimary">
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/topGuideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_begin="@dimen/auth_layout_margin" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/bottomGuideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_end="@dimen/auth_layout_margin" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/leftGuideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="@dimen/auth_layout_margin" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/rightGuideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_end="@dimen/auth_layout_margin" />
+
+    <TextView
+        android:id="@+id/textView_lets_get_acquainted"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/auth_label1_top_margin"
+        android:text="@string/auth_activity_lets_get_acquainted"
+        android:textAppearance="?attr/textAppearanceHeadlineMedium"
+        android:textColor="?attr/colorOnPrimary"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textView_fill_out_the_profile_tip"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/auth_label2_top_margin"
+        android:text="@string/auth_activity_fill_out_the_profile_tip"
+        android:textAppearance="?attr/textAppearanceBodyMedium"
+        android:textColor="?attr/colorOnPrimary"
+        app:layout_constraintEnd_toEndOf="@id/textView_lets_get_acquainted"
+        app:layout_constraintStart_toStartOf="@id/textView_lets_get_acquainted"
+        app:layout_constraintTop_toBottomOf="@id/textView_lets_get_acquainted" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/inputLayout_email"
+        style="?attr/textInputFilledStyle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/auth_inputLayout_email_top_margin"
+        android:hint="@string/auth_activity_email"
+        android:inputType="textEmailAddress"
+        android:textColorHint="?attr/colorOutline"
+        app:boxBackgroundColor="?attr/colorPrimary"
+        app:boxStrokeColor="?attr/colorOutline"
+        app:boxStrokeWidthFocused="@dimen/auth_activity_boxStrokeWidth"
+        app:errorIconDrawable="@null"
+        app:expandedHintEnabled="false"
+        app:hintAnimationEnabled="false"
+        app:hintTextAppearance="?attr/textAppearanceLabelSmall"
+        app:hintTextColor="?attr/colorOutline"
+        app:layout_constraintEnd_toEndOf="@id/rightGuideline"
+        app:layout_constraintStart_toStartOf="@id/leftGuideline"
+        app:layout_constraintTop_toBottomOf="@id/textView_fill_out_the_profile_tip">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/inputEditText_Email"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:lines="1"
+            android:paddingTop="@dimen/auth_editText_padding"
+            android:textAppearance="?attr/textAppearanceLabelLarge"
+            android:textColor="?attr/colorOnPrimary"
+            android:textCursorDrawable="@null" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/inputLayout_password"
+        style="?attr/textInputFilledStyle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/auth_inputLayout_password_top_margin"
+        android:hint="@string/auth_activity_password"
+        android:inputType="textPassword"
+        android:textColorHint="?attr/colorOutline"
+        app:boxBackgroundColor="?attr/colorPrimary"
+        app:boxStrokeColor="?attr/colorOutline"
+        app:boxStrokeWidthFocused="1dp"
+        app:errorIconDrawable="@null"
+        app:expandedHintEnabled="false"
+        app:hintAnimationEnabled="false"
+        app:hintTextAppearance="?attr/textAppearanceLabelSmall"
+        app:hintTextColor="?attr/colorOutline"
+        app:layout_constraintEnd_toEndOf="@id/rightGuideline"
+        app:layout_constraintStart_toStartOf="@id/leftGuideline"
+        app:layout_constraintTop_toBottomOf="@id/inputLayout_email">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/inputEditText_Password"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:inputType="textPassword"
+            android:lines="1"
+            android:paddingTop="@dimen/auth_editText_padding"
+            android:textAppearance="?attr/textAppearanceLabelLarge"
+            android:textColor="?attr/colorOnPrimary"
+            android:textCursorDrawable="@null" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <CheckBox
+        android:id="@+id/checkBox_Remember"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/auth_checkBox_remember_top_margin"
+        android:includeFontPadding="false"
+        android:text="@string/auth_activity_remember_me"
+        android:textAppearance="?attr/textAppearanceLabelSmall"
+        android:textColor="?attr/colorOutline"
+        app:buttonIcon="@drawable/checkbox_remember_me"
+        app:layout_constraintStart_toStartOf="@id/leftGuideline"
+        app:layout_constraintTop_toBottomOf="@id/inputLayout_password" />
+
+    <Button
+        android:id="@+id/button_singInGoogle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/auth_button_google_bottom_margin"
+        android:backgroundTint="@color/white"
+        android:text="@string/auth_activity_google"
+        android:textAllCaps="true"
+        android:textAppearance="?attr/textAppearanceLabelMedium"
+        android:textColor="@color/black"
+        app:cornerRadius="@dimen/auth_activity_button_signInGoogle_cornerRadius"
+        app:icon="@drawable/google_logo"
+        app:iconGravity="textStart"
+        app:iconTint="@null"
+        app:layout_constraintBottom_toTopOf="@id/textView_orLabel"
+        app:layout_constraintEnd_toEndOf="@id/rightGuideline"
+        app:layout_constraintStart_toStartOf="@id/leftGuideline" />
+
+    <TextView
+        android:id="@+id/textView_orLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="@dimen/auth_orLabel_top_margin"
+        android:layout_marginBottom="@dimen/auth_textView_orLabel_bottom_margin"
+        android:text="@string/auth_activity_or"
+        android:textAppearance="?attr/textAppearanceLabelLarge"
+        android:textColor="?attr/colorOnPrimary"
+        app:layout_constraintBottom_toTopOf="@id/button_register"
+        app:layout_constraintEnd_toEndOf="@id/inputLayout_email"
+        app:layout_constraintStart_toStartOf="@id/inputLayout_email" />
+
+    <Button
+        android:id="@+id/button_register"
+        style="@style/Assignment1.BorderedButton"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/auth_button_register_bottom_margin"
+        android:paddingVertical="@dimen/auth_activity_button_register_paddingVertical"
+        android:text="@string/auth_activity_register"
+        android:textAllCaps="true"
+        android:textColor="?attr/colorOnPrimary"
+        app:layout_constraintBottom_toTopOf="@id/textView_termsAndConditions"
+        app:layout_constraintEnd_toEndOf="@id/rightGuideline"
+        app:layout_constraintStart_toStartOf="@id/leftGuideline"
+        app:strokeColor="?attr/colorSecondary" />
+
+    <TextView
+        android:id="@+id/textView_termsAndConditions"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="@dimen/auth_textView_termsAndConditions_bottom_margin"
+        android:gravity="center_horizontal"
+        android:text="@string/auth_activity_terms_and_conditions"
+        android:textAppearance="?attr/textAppearanceBodyMedium"
+        android:textColor="?attr/colorOnPrimary"
+        app:layout_constraintBottom_toTopOf="@id/textView_haveAccount"
+        app:layout_constraintEnd_toEndOf="@id/button_singInGoogle"
+        app:layout_constraintStart_toStartOf="@id/button_singInGoogle" />
+
+    <TextView
+        android:id="@+id/textView_haveAccount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/auth_activity_already_have_an_account"
+        android:textAppearance="?attr/textAppearanceLabelSmall"
+        android:textColor="?attr/colorOutline"
+        app:layout_constraintBottom_toBottomOf="@id/bottomGuideline"
+        app:layout_constraintEnd_toStartOf="@id/textView_SingIn"
+        app:layout_constraintHorizontal_chainStyle="packed"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/textView_SingIn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/auth_textView_SingIn_start_margin"
+        android:text="@string/auth_activity_sing_in"
+        android:textAppearance="?attr/textAppearanceLabelSmall"
+        android:textColor="?attr/colorOnPrimary"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/textView_haveAccount"
+        app:layout_constraintTop_toTopOf="@id/textView_haveAccount" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

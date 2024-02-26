@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="my_profile_activity_app_name">Assignment1</string>
+    <string name="my_profile_activity_log_out">Вийти</string>
+    <string name="my_profile_activity_settings">Налаштування</string>
+    <string name="my_profile_activity_go_settings_tip">Зайдіть в налаштування і заповніть профіль</string>
+    <string name="my_profile_activity_edit_profile">Налаштувати профіль</string>
+    <string name="my_profile_activity_view_my_contacts">Переглянути мої контакти</string>
+    <string name="auth_activity_fill_out_the_profile_tip">Заповни профіль та перейди до користування!</string>
+    <string name="auth_activity_password">Пароль</string>
+    <string name="auth_activity_remember_me">Запам\'ятати мене</string>
+    <string name="auth_activity_register">Зареєструватись</string>
+    <string name="auth_activity_terms_and_conditions">Натискаючи Зареєструватись ви погоджуєтесь з нашими</string>
+    <string name="auth_activity_already_have_an_account">Вже маєте акаунт?</string>
+    <string name="auth_activity_sing_in">Увійти</string>
+    <string name="auth_activity_or">або</string>
+    <string name="auth_activity_lets_get_acquainted">Давай знайомитись</string>
+    <string name="text_validation_error_empty_field">Заповніть пусте поле!</string>
+    <string name="text_validation_error_email">Введіть існуючий email!</string>
+    <string name="text_validation_error_min_pass_length">Пароль повинен містити щонайменше 8 знаків</string>
+    <string name="text_validation_error_max_pass_length">Пароль повинен бути меншим за 24 знаки</string>
+    <string name="text_validation_error_contain_invalid_characters">Пароль мусить містити тільки A-Z,  a-z, числа або спеціальні символи</string>
+    <string name="text_validation_error_needs_specified_characters">Пароль мусить містити як мінімум один знак кожного типу: A-Z,  a-z, числа або спеціальні символи</string>
+</resources>

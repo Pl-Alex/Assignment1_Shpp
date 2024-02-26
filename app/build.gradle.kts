@@ -3,9 +3,10 @@ plugins {
     id("org.jetbrains.kotlin.android")
 }
 
+
 android {
     namespace = "com.alexP.assignment1"
-    compileSdk = 33
+    compileSdk = 34
 
     defaultConfig {
         applicationId = "com.alexP.assignment1"
@@ -33,16 +34,47 @@ android {
     kotlinOptions {
         jvmTarget = "1.8"
     }
+    buildFeatures {
+        viewBinding = true
+    }
 }
 
 dependencies {
 
-    implementation("androidx.core:core-ktx:1.9.0")
-    implementation("androidx.appcompat:appcompat:1.6.1")
-    implementation("com.google.android.material:material:1.8.0")
-    implementation("androidx.constraintlayout:constraintlayout:2.1.4")
+    // AndroidX Core KTX for Kotlin extensions
+    implementation(libs.androidx.ktx)
 
-    testImplementation("junit:junit:4.13.2")
-    androidTestImplementation("androidx.test.ext:junit:1.1.5")
-    androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
+    // AndroidX AppCompat for backward-compatible UI features
+    implementation(libs.androidx.appcompat)
+
+    // Material Design components for modern UI
+    implementation(libs.material)
+
+    // ConstraintLayout for flexible and responsive UI
+    implementation(libs.constraintLayout)
+
+    // Glide for efficient image loading and caching
+    implementation(libs.glide)
+
+    // Testing dependencies
+
+    // JUnit for unit testing
+    testImplementation(libs.junit)
+
+    // AndroidX Test extensions for JUnit
+    androidTestImplementation(libs.testExtJUnit)
+
+    // Espresso for UI testing
+    androidTestImplementation(libs.espressoCore)
+
+    // Kotlin Coroutines for asynchronous programming
+    implementation(libs.kotlinx.coroutines.android)
+    implementation(libs.kotlinx.coroutines.core)
+
+    // DataStore for data storage using Kotlin Coroutines
+    implementation(libs.datastorePreferences)
+
+    // AndroidX Lifecycle components for managing UI-related data
+    implementation(libs.lifecycleRuntime)
+    implementation(libs.lifecycleViewmodel)
 }
