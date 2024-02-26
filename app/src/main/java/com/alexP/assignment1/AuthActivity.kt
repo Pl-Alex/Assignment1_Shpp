@@ -56,37 +56,35 @@ class AuthActivity : BaseActivity<ActivityAuthBinding>() {
     }
 
     private suspend fun saveUserData() {
-        saveEmail(
-            dataStore,
-            binding?.inputEditTextEmail?.text.toString()
-        )
-        savePassword(
-            dataStore,
-            binding?.inputEditTextPassword?.text.toString()
-        )
+        binding?.inputEditTextEmail?.let {
+            saveEmail(dataStore, it.text.toString())
+        }
+        binding?.inputEditTextPassword?.let {
+            savePassword(dataStore, it.text.toString())
+        }
         binding?.checkBoxRemember?.let {
-            saveRememberState(
-                dataStore,
-                it.isChecked
-            )
+            saveRememberState(dataStore, it.isChecked)
         }
     }
 
     private fun onRegisterButtonPressed() {
+        var isDataValid = true
+        with(viewModel) {
+            val emailText = binding?.inputEditTextEmail?.text.toString()
+            binding?.inputLayoutEmail?.error =
+                if (!isEmailValid(emailText)) {
+                    isDataValid = false
+                    getString(getEmailErrorText()!!)
+                } else null
 
-        val emailText = binding?.inputEditTextEmail?.text.toString()
-        val emailValidationError = viewModel.validateEmail(emailText)
-        binding?.inputLayoutEmail?.error =
-            if (emailValidationError != null) getString(emailValidationError)
-            else null
-
-        val passwordText = binding?.inputEditTextPassword?.text.toString()
-        val passwordValidationError = viewModel.validatePassword(passwordText)
-        binding?.inputLayoutPassword?.error =
-            if (passwordValidationError != null) getString(passwordValidationError)
-            else null
-
-        if (emailValidationError == null && passwordValidationError == null) {
+            val passwordText = binding?.inputEditTextPassword?.text.toString()
+            binding?.inputLayoutPassword?.error =
+                if (!isPasswordValid(passwordText)) {
+                    isDataValid = false
+                    getString(getPasswordErrorText()!!)
+                } else null
+        }
+        if (isDataValid) {
             lifecycleScope.launch {
                 saveUserData()
             }

@@ -8,19 +8,25 @@ import com.alexP.assignment1.validator.base.BaseValidator
 
 class AuthViewModel : ViewModel() {
 
-    fun validateEmail(email: String): Int? {
+    private var emailErrorText: Int? = null
+    fun getEmailErrorText() = emailErrorText
+
+    private var passwordErrorText: Int? = null
+    fun getPasswordErrorText() = passwordErrorText
+
+    fun isEmailValid(email: String): Boolean {
         val emailValidations = BaseValidator.validate(
             EmptyValidator(email), EmailValidator(email)
         )
-        return if (!emailValidations.isSuccess) emailValidations.message else null
+        emailErrorText = emailValidations.message
+        return emailValidations.isSuccess
     }
 
-    fun validatePassword(password: String): Int? {
+    fun isPasswordValid(password: String): Boolean {
         val passwordValidations = BaseValidator.validate(
             EmptyValidator(password), PasswordValidator(password)
         )
-        return if (!passwordValidations.isSuccess) passwordValidations.message else null
+        passwordErrorText = passwordValidations.message
+        return passwordValidations.isSuccess
     }
-
-
 }

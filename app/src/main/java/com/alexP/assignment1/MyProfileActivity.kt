@@ -51,14 +51,14 @@ class MyProfileActivity : BaseActivity<ActivityMyProfileBinding>() {
 
     private fun onLogOutButtonPressed() {
         lifecycleScope.launch {
-            cleanStorage()
+            disableAutoSignIn()
         }
         val intent = Intent(this, AuthActivity::class.java)
         startActivity(intent, ActivityOptions.makeSceneTransitionAnimation(this).toBundle())
         finish()
     }
 
-    private suspend fun cleanStorage() {
+    private suspend fun disableAutoSignIn() {
         dataStore.edit { pref ->
             pref[booleanPreferencesKey(REMEMBER_STATE)] = false
         }
