@@ -1,10 +1,10 @@
-package com.alexP.assignment1.validator
+package com.alexP.assignment1.utils.validator
 
 import android.text.TextUtils
 import android.util.Patterns
 import com.alexP.assignment1.R
-import com.alexP.assignment1.validator.base.BaseValidator
-import com.alexP.assignment1.validator.base.ValidateResult
+import com.alexP.assignment1.utils.validator.base.BaseValidator
+import com.alexP.assignment1.utils.validator.base.ValidateResult
 
 class EmailValidator(private val email: String) : BaseValidator() {
     override fun validate(): ValidateResult {

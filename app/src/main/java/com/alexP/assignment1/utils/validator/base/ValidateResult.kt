@@ -1,4 +1,4 @@
-package com.alexP.assignment1.validator.base
+package com.alexP.assignment1.utils.validator.base
 
 import androidx.annotation.StringRes
 

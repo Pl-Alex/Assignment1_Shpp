@@ -4,12 +4,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="?attr/colorBackgroundFloating">
+    android:background="?attr/colorSurface">
 
     <View
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:background="?attr/colorPrimary"
+        android:background="?attr/colorSurfaceVariant"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHeight_percent="0.5"
         app:layout_constraintStart_toStartOf="parent"
@@ -49,7 +49,7 @@
         android:layout_height="wrap_content"
         android:text="@string/my_profile_activity_settings"
         android:textAppearance="?attr/textAppearanceHeadlineMedium"
-        android:textColor="?attr/colorOnPrimary"
+        android:textColor="?attr/colorOnSurfaceVariant"
         app:layout_constraintBottom_toBottomOf="@id/button_log_out"
         app:layout_constraintStart_toStartOf="@id/leftGuideline"
         app:layout_constraintTop_toTopOf="@id/button_log_out" />
@@ -86,7 +86,7 @@
         android:layout_marginTop="@dimen/my_profile_textView_nameSurname_top_margin"
         android:text="Name Surname"
         android:textAppearance="?attr/textAppearanceLabelLarge"
-        android:textColor="?attr/colorOnPrimary"
+        android:textColor="?attr/colorOnSurfaceVariant"
         app:layout_constraintEnd_toEndOf="@id/imageView_profileImage"
         app:layout_constraintStart_toStartOf="@id/imageView_profileImage"
         app:layout_constraintTop_toBottomOf="@id/imageView_profileImage"
@@ -123,7 +123,7 @@
         android:layout_marginBottom="@dimen/my_profile_textView_settingsTip_bottom_margin"
         android:text="@string/my_profile_activity_go_settings_tip"
         android:textAppearance="?attr/textAppearanceLabelSmall"
-        android:textColor="?attr/colorOnBackground"
+        android:textColor="?attr/colorSecondary"
         app:layout_constraintBottom_toTopOf="@id/button_editProfile"
         app:layout_constraintEnd_toEndOf="@id/button_editProfile"
         app:layout_constraintStart_toStartOf="@id/button_editProfile" />
@@ -136,11 +136,11 @@
         android:layout_marginBottom="@dimen/my_profile_button_editProfile_bottom_margin16dp"
         android:text="@string/my_profile_activity_edit_profile"
         android:textAppearance="?attr/textAppearanceLabelSmall"
-        android:textColor="?attr/colorOnBackground"
+        android:textColor="?attr/colorSecondary"
         app:layout_constraintBottom_toTopOf="@id/button_viewMyContacts"
         app:layout_constraintEnd_toEndOf="@id/button_viewMyContacts"
         app:layout_constraintStart_toStartOf="@id/button_viewMyContacts"
-        app:strokeColor="?attr/colorOnBackground" />
+        app:strokeColor="?attr/colorSecondary" />
 
     <Button
         android:id="@+id/button_viewMyContacts"
@@ -152,9 +152,10 @@
         android:text="@string/my_profile_activity_view_my_contacts"
         android:textAllCaps="true"
         android:textAppearance="?attr/textAppearanceLabelMedium"
-        android:textColor="?attr/colorOnTertiary"
+        android:textColor="?attr/colorSurface"
         app:layout_constraintBottom_toBottomOf="@id/bottomGuideline"
         app:layout_constraintEnd_toEndOf="@id/rightGuideline"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@id/leftGuideline" />
 
     <androidx.constraintlayout.helper.widget.Flow

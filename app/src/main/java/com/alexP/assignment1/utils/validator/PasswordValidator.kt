@@ -1,8 +1,8 @@
-package com.alexP.assignment1.validator
+package com.alexP.assignment1.utils.validator
 
 import com.alexP.assignment1.R
-import com.alexP.assignment1.validator.base.BaseValidator
-import com.alexP.assignment1.validator.base.ValidateResult
+import com.alexP.assignment1.utils.validator.base.BaseValidator
+import com.alexP.assignment1.utils.validator.base.ValidateResult
 
 
 class PasswordValidator(private val password: String) : BaseValidator() {
