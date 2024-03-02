@@ -1,4 +1,4 @@
-package com.alexP.assignment1.ui
+package com.alexP.assignment1.ui.addContactFragment
 
 import android.net.Uri
 import android.os.Bundle
@@ -17,20 +17,17 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 
 
-class AddContactFragment : DialogFragment() {
-
-    interface OnContactSavedListener {
-        fun onContactSaved(contact: Contact)
-    }
+class AddContactFragment(
+    private val iOnContactSavedListener: IOnContactSavedListener
+) : DialogFragment() {
 
     private lateinit var binding: FragmentDialogAddContactBinding
-    private var listener: OnContactSavedListener? = null
 
     private var galleryUri: Uri? = null
 
-    val galleryLauncher = registerForActivityResult(ActivityResultContracts.GetContent()) {
+    private val galleryLauncher = registerForActivityResult(ActivityResultContracts.GetContent()) {
         galleryUri = it
-        if(galleryUri == null) return@registerForActivityResult
+        if (galleryUri == null) return@registerForActivityResult
         try {
             Glide.with(this).load(galleryUri).apply(RequestOptions.circleCropTransform())
                 .placeholder(R.drawable.default_contact_image)
@@ -85,7 +82,7 @@ class AddContactFragment : DialogFragment() {
             dateOfBirth = binding.inputEditTextDateOfBirth.text.toString()
         )
 
-        listener?.onContactSaved(contact)
+        iOnContactSavedListener.setOnContactSavedListener(contact)
         dismiss()
     }
 
@@ -107,6 +104,7 @@ class AddContactFragment : DialogFragment() {
                 binding.inputEditTextEmail -> {
                     BaseValidator.validate(EmptyValidator(text), EmailValidator(text))
                 }
+
                 else -> {
                     BaseValidator.validate(EmptyValidator(text))
                 }
@@ -124,9 +122,5 @@ class AddContactFragment : DialogFragment() {
         }
 
         return hasError
-    }
-
-    fun setOnContactSavedListener(listener: OnContactSavedListener) {
-        this.listener = listener
     }
 }

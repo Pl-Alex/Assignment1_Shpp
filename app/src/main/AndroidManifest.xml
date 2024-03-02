@@ -19,7 +19,7 @@
         tools:targetApi="33">
 
         <activity
-            android:name=".ui.ContactsActivity"
+            android:name=".ui.contactsActivity.ContactsActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -28,8 +28,8 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".ui.AuthActivity" />
-        <activity android:name=".ui.MyProfileActivity" />
+        <activity android:name=".ui.authActivity.AuthActivity" />
+        <activity android:name=".ui.myProfileActivity.MyProfileActivity" />
 
     </application>
 </manifest>

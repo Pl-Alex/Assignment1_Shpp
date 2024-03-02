@@ -4,7 +4,7 @@ import android.app.Activity
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.alexP.assignment1.App
-import com.alexP.assignment1.viewModels.ContactsViewModel
+import com.alexP.assignment1.ui.contactsActivity.ContactsViewModel
 
 class ViewModelFactory(
     private val app: App

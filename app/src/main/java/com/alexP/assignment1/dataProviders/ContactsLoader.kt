@@ -1,40 +1,13 @@
 package com.alexP.assignment1.dataProviders
 
-import android.Manifest
 import android.content.ContentResolver
-import android.content.Context
-import android.content.pm.PackageManager
 import android.provider.ContactsContract
-import androidx.appcompat.app.AppCompatActivity
-import androidx.core.app.ActivityCompat
-import androidx.core.content.ContextCompat
 import com.alexP.assignment1.model.Contact
-import com.alexP.assignment1.viewModels.ContactsViewModel
 
-class ContactsLoader(private val context: Context, private val viewModel: ContactsViewModel) {
+class ContactsLoader {
 
-    companion object {
-        private const val PERMISSIONS_REQUEST_READ_CONTACTS = 100
-    }
-
-    fun loadContacts() {
-        if (ContextCompat.checkSelfPermission(
-                context,
-                Manifest.permission.READ_CONTACTS
-            ) != PackageManager.PERMISSION_GRANTED
-        ) {
-            ActivityCompat.requestPermissions(
-                context as AppCompatActivity,
-                arrayOf(Manifest.permission.READ_CONTACTS),
-                PERMISSIONS_REQUEST_READ_CONTACTS
-            )
-        } else {
-            fetchContacts()
-        }
-    }
-
-    private fun fetchContacts() {
-        val resolver: ContentResolver = context.contentResolver
+    fun fetchContacts(resolver: ContentResolver): MutableList<Contact> {
+        val contacts = mutableListOf<Contact>()
         val cursor = resolver.query(
             ContactsContract.CommonDataKinds.Phone.CONTENT_URI,
             null,
@@ -69,8 +42,9 @@ class ContactsLoader(private val context: Context, private val viewModel: Contac
                     address = address,
                     dateOfBirth = dateOfBirth
                 )
-                viewModel.addContact(contact)
+                contacts.add(contact)
             }
         }
+        return contacts
     }
 }

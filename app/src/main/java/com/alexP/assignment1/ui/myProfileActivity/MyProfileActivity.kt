@@ -1,4 +1,4 @@
-package com.alexP.assignment1.ui
+package com.alexP.assignment1.ui.myProfileActivity
 
 import android.app.ActivityOptions
 import android.content.Intent
@@ -10,6 +10,8 @@ import androidx.lifecycle.lifecycleScope
 import com.alexP.assignment1.data.dataStore
 import com.alexP.assignment1.data.readEmail
 import com.alexP.assignment1.databinding.ActivityMyProfileBinding
+import com.alexP.assignment1.ui.authActivity.AuthActivity
+import com.alexP.assignment1.ui.BaseActivity
 import com.bumptech.glide.Glide
 import kotlinx.coroutines.launch
 import java.util.Locale

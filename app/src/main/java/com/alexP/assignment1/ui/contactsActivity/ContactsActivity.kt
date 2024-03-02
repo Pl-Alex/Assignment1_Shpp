@@ -1,10 +1,13 @@
-package com.alexP.assignment1.ui
+package com.alexP.assignment1.ui.contactsActivity
 
+import android.Manifest
 import android.app.ActivityOptions
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Bundle
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.FragmentTransaction
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DefaultItemAnimator
@@ -12,27 +15,41 @@ import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.alexP.assignment1.R
-import com.alexP.assignment1.adapters.ContactActionListener
 import com.alexP.assignment1.adapters.ContactsAdapter
+import com.alexP.assignment1.adapters.IContactActionListener
 import com.alexP.assignment1.dataProviders.ContactsLoader
 import com.alexP.assignment1.databinding.ActivityContactsBinding
 import com.alexP.assignment1.model.Contact
+import com.alexP.assignment1.ui.addContactFragment.AddContactFragment
+import com.alexP.assignment1.ui.addContactFragment.IOnContactSavedListener
+import com.alexP.assignment1.ui.authActivity.AuthActivity
 import com.alexP.assignment1.ui.utils.SpacingItemDecorator
 import com.alexP.assignment1.ui.utils.factory
-import com.alexP.assignment1.viewModels.ContactsViewModel
 import com.google.android.material.snackbar.Snackbar
 
 
-class ContactsActivity : AppCompatActivity(), AddContactFragment.OnContactSavedListener {
-
-    companion object {
-        const val PERMISSION_REQ_READ_CONTACTS = 100
-    }
+class ContactsActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityContactsBinding
     private lateinit var adapter: ContactsAdapter
 
     private lateinit var viewModel: ContactsViewModel
+
+    private val requestPermissionLauncher =
+        registerForActivityResult(
+            ActivityResultContracts.RequestPermission()
+        ) { isGranted: Boolean ->
+            if (isGranted) {
+                loadContactsFromDevice()
+            } else {
+                Snackbar.make(
+                    this,
+                    binding.root,
+                    getString(R.string.permission_not_granted),
+                    Snackbar.LENGTH_SHORT
+                ).show()
+            }
+        }
 
     private var isXLargeLayout = false
 
@@ -47,8 +64,7 @@ class ContactsActivity : AppCompatActivity(), AddContactFragment.OnContactSavedL
 
         setRecyclerView()
         setListeners()
-
-        ContactsLoader(this, viewModel).loadContacts()
+        tryToLoadContactsFromDevice()
     }
 
     private fun setListeners() {
@@ -65,7 +81,7 @@ class ContactsActivity : AppCompatActivity(), AddContactFragment.OnContactSavedL
     }
 
     private fun setRecyclerView() {
-        adapter = ContactsAdapter(object : ContactActionListener {
+        adapter = ContactsAdapter(object : IContactActionListener {
             override fun onContactDelete(contact: Contact) {
                 deleteContact(contact)
             }
@@ -116,8 +132,11 @@ class ContactsActivity : AppCompatActivity(), AddContactFragment.OnContactSavedL
 
     private fun showAddContactDialog() {
         val fragmentManager = supportFragmentManager
-        val fragment = AddContactFragment()
-        fragment.setOnContactSavedListener(this)
+        val fragment = AddContactFragment(object : IOnContactSavedListener{
+            override fun setOnContactSavedListener(contact: Contact) {
+                viewModel.addContact(contact)
+            }
+        })
         if (isXLargeLayout) {
             fragment.show(fragmentManager, "dialog")
         } else {
@@ -144,26 +163,23 @@ class ContactsActivity : AppCompatActivity(), AddContactFragment.OnContactSavedL
         snackbar.show()
     }
 
-    override fun onContactSaved(contact: Contact) {
-        viewModel.addContact(contact)
+    private fun loadContactsFromDevice() {
+        viewModel.addContacts(ContactsLoader().fetchContacts(contentResolver))
     }
 
-    override fun onRequestPermissionsResult(
-        requestCode: Int,
-        permissions: Array<out String>,
-        grantResults: IntArray
-    ) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-        if (requestCode == PERMISSION_REQ_READ_CONTACTS) {
-            if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                ContactsLoader(this, viewModel).loadContacts()
-            } else {
-                Snackbar.make(
-                    this,
-                    binding.root,
-                    getString(R.string.permission_not_granted),
-                    Snackbar.LENGTH_SHORT
-                ).show()
+    private fun tryToLoadContactsFromDevice() {
+        when (PackageManager.PERMISSION_GRANTED) {
+            ContextCompat.checkSelfPermission(
+                this,
+                Manifest.permission.READ_CONTACTS
+            ) -> {
+                loadContactsFromDevice()
+            }
+
+            else -> {
+                requestPermissionLauncher.launch(
+                    Manifest.permission.READ_CONTACTS
+                )
             }
         }
     }

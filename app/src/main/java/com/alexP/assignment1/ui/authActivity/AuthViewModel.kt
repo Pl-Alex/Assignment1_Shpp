@@ -1,4 +1,4 @@
-package com.alexP.assignment1.viewModels
+package com.alexP.assignment1.ui.authActivity
 
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences

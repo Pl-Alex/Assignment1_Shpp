@@ -1,4 +1,4 @@
-package com.alexP.assignment1.viewModels
+package com.alexP.assignment1.ui.contactsActivity
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -40,10 +40,10 @@ class ContactsViewModel(
     }
 
     fun deleteContact(contact: Contact) {
+        if (deletedContacts.contains(contact)) return
         deletedContacts.add(contact)
         contactsServices.deleteContact(contact)
 
-        cleanDeletedContactsJob?.cancel()
         cleanDeletedContactsJob = viewModelScope.launch {
             delay(5000)
             deletedContacts.remove(contact)
@@ -59,5 +59,11 @@ class ContactsViewModel(
 
     fun addContact(contact: Contact) {
         contactsServices.addContact(contact.copy(id = contactsServices.getNewId()))
+    }
+
+    fun addContacts(contacts: MutableList<Contact>){
+        for (contact in contacts){
+            contactsServices.addContact(contact.copy(id = contactsServices.getNewId()))
+        }
     }
 }
