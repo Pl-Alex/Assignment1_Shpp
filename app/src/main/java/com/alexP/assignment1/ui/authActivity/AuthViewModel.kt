@@ -1,60 +1,66 @@
 package com.alexP.assignment1.ui.authActivity
 
-import androidx.datastore.core.DataStore
-import androidx.datastore.preferences.core.Preferences
-import androidx.datastore.preferences.core.booleanPreferencesKey
-import androidx.datastore.preferences.core.edit
-import androidx.datastore.preferences.core.stringPreferencesKey
+import android.content.Context
+import androidx.annotation.StringRes
 import androidx.lifecycle.ViewModel
-import com.alexP.assignment1.utils.validator.EmailValidator
-import com.alexP.assignment1.utils.validator.EmptyValidator
-import com.alexP.assignment1.utils.validator.PasswordValidator
-import com.alexP.assignment1.utils.validator.base.BaseValidator
-import kotlinx.coroutines.flow.first
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.viewModelScope
+import com.alexP.assignment1.utils.getValidationResultMessage
+import com.alexp.datastore.data.DataStoreProvider
+import com.alexp.textvalidation.data.TextValidation
+import com.alexp.textvalidation.data.validator.base.ValidationResult
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.update
+import kotlinx.coroutines.launch
 import java.util.Locale
 
-class AuthViewModel : ViewModel() {
+data class TextValidationResult(
+    val isSuccess: Boolean,
+    @StringRes val message: Int
+)
 
-    suspend fun saveString(dataStore: DataStore<Preferences>, key: String, value: String) {
-        val dataStoreKey = stringPreferencesKey(key)
-        dataStore.edit { pref ->
-            pref[dataStoreKey] = value
+class AuthViewModel(
+    private val dataStore: DataStoreProvider
+) : ViewModel() {
+
+    private val _authState = MutableStateFlow(AuthState())
+    val authState get() = _authState.asStateFlow()
+
+    init {
+        viewModelScope.launch {
+            _authState.update {
+                it.copy(
+                    navEmail = dataStore.readEmail(),
+                    isAutologin = dataStore.readRememberMeState()
+                )
+            }
         }
     }
 
-    suspend fun saveBoolean(dataStore: DataStore<Preferences>, key: String, value: Boolean) {
-        val dataStoreKey = booleanPreferencesKey(key)
-        dataStore.edit { pref ->
-            pref[dataStoreKey] = value
+    fun saveAutologin(email: String, password: String, isRememberMeChecked: Boolean?) {
+        if (isRememberMeChecked == true) {
+            viewModelScope.launch {
+                dataStore.saveCredentials(email, password)
+            }
         }
     }
 
-    suspend fun readString(dataStore: DataStore<Preferences>, key: String): String? {
-        val dataStoreKey = stringPreferencesKey(key)
-        val preferences = dataStore.data.first()
-        return preferences[dataStoreKey]
-    }
-
-    suspend fun readBoolean(dataStore: DataStore<Preferences>, key: String): Boolean? {
-        val dataStoreKey = booleanPreferencesKey(key)
-        val preferences = dataStore.data.first()
-        return preferences[dataStoreKey]
-    }
-
-    fun validateEmail(email: String): Int? {
-        val emailValidations = BaseValidator.validate(
-            EmptyValidator(email), EmailValidator(email)
+    fun validateEmail(email: String): TextValidationResult {
+        val validationResult = TextValidation().validateEmail(email)
+        return TextValidationResult(
+            validationResult == ValidationResult.SUCCESS,
+            getValidationResultMessage(validationResult)
         )
-        return if (!emailValidations.isSuccess) emailValidations.message else null
     }
 
-    fun validatePassword(password: String): Int? {
-        val passwordValidations = BaseValidator.validate(
-            EmptyValidator(password), PasswordValidator(password)
+    fun validatePassword(password: String): TextValidationResult {
+        val validationResult = TextValidation().validatePassword(password)
+        return TextValidationResult(
+            validationResult == ValidationResult.SUCCESS,
+            getValidationResultMessage(validationResult)
         )
-        return if (!passwordValidations.isSuccess) passwordValidations.message else null
     }
-
 
     fun parseEmail(email: String): String {
         val namePart = email.substringBefore('@')
@@ -65,5 +71,24 @@ class AuthViewModel : ViewModel() {
                     if (it.isLowerCase()) it.titlecase(Locale.getDefault()) else it.toString()
                 }
             }
+    }
+}
+
+class AuthViewModelFactory(
+    private val context: Context
+) : ViewModelProvider.Factory {
+
+    override fun <T : ViewModel> create(modelClass: Class<T>): T {
+        val viewModel = when (modelClass) {
+            AuthViewModel::class.java -> {
+                val dataStore = DataStoreProvider(context)
+                AuthViewModel(dataStore)
+            }
+
+            else -> {
+                throw IllegalStateException("Unknown view model class")
+            }
+        }
+        return viewModel as T
     }
 }

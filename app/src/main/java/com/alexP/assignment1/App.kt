@@ -1,9 +1,9 @@
 package com.alexP.assignment1
 
 import android.app.Application
-import com.alexP.assignment1.model.ContactsService
+import com.alexp.contactsprovider.data.ContactsProvider
 
 class App : Application() {
 
-    val contactService = ContactsService()
+    val contactService = ContactsProvider()
 }

@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.alexP.assignment1.R
 import com.alexP.assignment1.databinding.ItemContactBinding
-import com.alexP.assignment1.model.Contact
+import com.alexp.contactsprovider.data.Contact
 import com.alexP.assignment1.utils.loadCircularImage
 
 

@@ -10,7 +10,7 @@ android {
 
     defaultConfig {
         applicationId = "com.alexP.assignment1"
-        minSdk = 24
+        minSdk = 25
         targetSdk = 33
         versionCode = 1
         versionName = "1.0"
@@ -41,6 +41,10 @@ android {
 
 dependencies {
 
+    implementation(project(":contactsprovider:data"))
+    implementation(project(":textvalidation:data"))
+    implementation(project(":datastore:data"))
+
     // AndroidX Core KTX for Kotlin extensions
     implementation(libs.androidx.ktx)
 
@@ -55,8 +59,6 @@ dependencies {
 
     // Glide for efficient image loading and caching
     implementation(libs.glide)
-
-    // Testing dependencies
 
     // JUnit for unit testing
     testImplementation(libs.junit)
@@ -80,8 +82,5 @@ dependencies {
 
     // Card View
     implementation(libs.cardView)
-
-    // Fake data generation
-    implementation(libs.javaFaker)
 
 }

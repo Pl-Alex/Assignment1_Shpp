@@ -1,18 +1,21 @@
 package com.alexP.assignment1.ui.contactsActivity
 
+import android.content.ContentResolver
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
-import com.alexP.assignment1.model.Contact
-import com.alexP.assignment1.model.ContactsListener
-import com.alexP.assignment1.model.ContactsService
+import com.alexP.assignment1.App
+import com.alexp.contactsprovider.data.Contact
+import com.alexp.contactsprovider.data.ContactsListener
+import com.alexp.contactsprovider.data.ContactsProvider
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 class ContactsViewModel(
-    private val contactsServices: ContactsService
+    private val contactsServices: ContactsProvider
 ) : ViewModel() {
 
     private val _contacts = MutableLiveData<List<Contact>>()
@@ -61,9 +64,28 @@ class ContactsViewModel(
         contactsServices.addContact(contact.copy(id = contactsServices.getNewId()))
     }
 
-    fun addContacts(contacts: MutableList<Contact>){
-        for (contact in contacts){
+    fun addContacts(contentResolver: ContentResolver) {
+    val contacts = contactsServices.fetchContacts(contentResolver)
+        for (contact in contacts) {
             contactsServices.addContact(contact.copy(id = contactsServices.getNewId()))
         }
+    }
+}
+
+class ContactsViewModelFactory(
+    private val app: App
+) : ViewModelProvider.Factory {
+
+    override fun <T : ViewModel> create(modelClass: Class<T>): T {
+        val viewModel = when (modelClass) {
+            ContactsViewModel::class.java -> {
+                ContactsViewModel(app.contactService)
+            }
+
+            else -> {
+                throw IllegalStateException("Unknown view model class")
+            }
+        }
+        return viewModel as T
     }
 }

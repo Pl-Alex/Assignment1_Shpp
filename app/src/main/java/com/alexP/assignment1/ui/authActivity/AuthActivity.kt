@@ -5,28 +5,20 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.widget.Toast
-import androidx.datastore.core.DataStore
-import androidx.datastore.preferences.core.Preferences
-import androidx.datastore.preferences.preferencesDataStore
+import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import com.alexP.assignment1.databinding.ActivityAuthBinding
 import com.alexP.assignment1.ui.BaseActivity
 import com.alexP.assignment1.ui.myProfileActivity.MyProfileActivity
 import kotlinx.coroutines.launch
 
+const val EMAIL_NAV_KEY = "email"
 
 class AuthActivity : BaseActivity<ActivityAuthBinding>() {
 
-    private val dataStore: DataStore<Preferences> by preferencesDataStore(name = DATASTORE_NAME)
     private lateinit var viewModel: AuthViewModel
-
-    companion object {
-        const val DATASTORE_NAME = "user_preferences"
-        const val EMAIL = "email"
-        const val PASSWORD = "password"
-        const val REMEMBER_STATE = "remember_state"
-    }
 
     override fun inflate(inflater: LayoutInflater): ActivityAuthBinding {
         return ActivityAuthBinding.inflate(inflater)
@@ -35,70 +27,58 @@ class AuthActivity : BaseActivity<ActivityAuthBinding>() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        viewModel = ViewModelProvider(this)[AuthViewModel::class.java]
+        viewModel = ViewModelProvider(this, AuthViewModelFactory(this))[AuthViewModel::class.java]
 
-        setPreferencesValues()
         setListeners()
-    }
 
-    private fun setPreferencesValues() {
         lifecycleScope.launch {
-            if (viewModel.readBoolean(dataStore, REMEMBER_STATE) == true) {
-                binding?.inputEditTextEmail?.setText(viewModel.readString(dataStore, EMAIL))
-                binding?.inputEditTextPassword?.setText(viewModel.readString(dataStore, PASSWORD))
-                binding?.checkBoxRemember?.isChecked = true
+            repeatOnLifecycle(Lifecycle.State.RESUMED) {
+                viewModel.authState.collect { authState ->
+                    if (authState.isAutologin) {
+                        navToNextScreen(authState.navEmail)
+                    }
+                }
             }
         }
     }
 
     private fun setListeners() {
-        binding?.buttonRegister?.setOnClickListener {
-            onRegisterButtonPressed()
-        }
-
-        binding?.buttonSingInGoogle?.setOnClickListener{
-            Toast.makeText(this, "Sing in Google button pressed", Toast.LENGTH_SHORT).show()
+        with(binding) {
+            buttonRegister.setOnClickListener {
+                onRegisterButtonPressed()
+            }
+            buttonSingInGoogle.setOnClickListener {
+                Toast.makeText(
+                    this@AuthActivity,
+                    "Sing in Google button pressed",
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
         }
     }
 
     private fun onRegisterButtonPressed() {
-
-        val email = binding?.inputEditTextEmail?.text.toString()
-        val password = binding?.inputEditTextPassword?.text.toString()
-
-        val emailValidationError = viewModel.validateEmail(email)
-        val passwordValidationError = viewModel.validatePassword(password)
-
-        if (emailValidationError != null)
-            binding?.inputLayoutEmail?.error = getString(emailValidationError)
-
-        if (passwordValidationError != null)
-            binding?.inputLayoutPassword?.error = getString(passwordValidationError)
-
-        if (emailValidationError == null && passwordValidationError == null) {
-            lifecycleScope.launch {
-
-                viewModel.saveString(
-                    dataStore, EMAIL, email
-                )
-                viewModel.saveString(
-                    dataStore, PASSWORD, password
-                )
-                binding?.checkBoxRemember?.let {
-                    viewModel.saveBoolean(
-                        dataStore, REMEMBER_STATE,
-                        it.isChecked
-                    )
-                }
-            }
-
-            val intent = Intent(this, MyProfileActivity::class.java)
-            intent.putExtra(
-                EMAIL, viewModel.parseEmail(email)
-            )
-            startActivity(intent, ActivityOptions.makeSceneTransitionAnimation(this).toBundle())
-            finish()
+        val emailText = binding.inputEditTextEmail?.text.toString()
+        val passwordText = binding.inputEditTextPassword?.text.toString()
+        val isRememberMeChecked = binding.checkBoxRemember?.isChecked
+        if (viewModel.validateEmail(emailText).isSuccess
+            && viewModel.validatePassword(passwordText).isSuccess
+        ) {
+            onNavigate(emailText, passwordText, isRememberMeChecked)
         }
     }
 
+    private fun onNavigate(email: String, password: String, isRememberMeChecked: Boolean?) {
+        viewModel.saveAutologin(email, password, isRememberMeChecked)
+        navToNextScreen(email)
+    }
+
+    private fun navToNextScreen(email: String) {
+        val intent = Intent(this, MyProfileActivity::class.java)
+        intent.putExtra(
+            EMAIL_NAV_KEY, viewModel.parseEmail(email)
+        )
+        startActivity(intent, ActivityOptions.makeSceneTransitionAnimation(this).toBundle())
+        finish()
+    }
 }

@@ -13,7 +13,7 @@
     <string name="auth_activity_terms_and_conditions">By clicking Register you agree to our
         Terms \nand Conditions</string>
     <string name="auth_activity_already_have_an_account">Already have an account?</string>
-    <string name="auth_activity_sing_in">Sing in</string>
+    <string name="auth_activity_sign_in">Sign in</string>
     <string name="auth_activity_google" translatable="false">Google</string>
     <string name="auth_activity_or">or</string>
     <string name="auth_activity_lets_get_acquainted">Let\'s get acquainted</string>
@@ -47,6 +47,5 @@
     <string name="permission_not_granted" translatable="false">Permission Not Granted</string>
     <string name="contacts_activity_add_contacts">Add contact</string>
     <string name="search">search</string>
-
 
 </resources>

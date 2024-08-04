@@ -82,6 +82,7 @@
             android:layout_height="match_parent"
             android:lines="1"
             android:paddingTop="@dimen/auth_editText_padding"
+            android:textCursorDrawable="@null"
             android:textAppearance="?attr/textAppearanceLabelLarge"
             android:textColor="?attr/colorOnSurfaceVariant" />
     </com.google.android.material.textfield.TextInputLayout>
@@ -112,6 +113,7 @@
             android:inputType="textPassword"
             android:lines="1"
             android:paddingTop="@dimen/auth_editText_padding"
+            android:textCursorDrawable="@null"
             android:textAppearance="?attr/textAppearanceLabelLarge"
             android:textColor="?attr/colorOnSurfaceVariant" />
     </com.google.android.material.textfield.TextInputLayout>
@@ -190,16 +192,16 @@
         android:textAppearance="?attr/textAppearanceLabelSmall"
         android:textColor="?attr/colorOutline"
         app:layout_constraintBottom_toBottomOf="@id/bottomGuideline"
-        app:layout_constraintEnd_toStartOf="@id/textView_SingIn"
+        app:layout_constraintEnd_toStartOf="@id/textView_SignIn"
         app:layout_constraintHorizontal_chainStyle="packed"
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
-        android:id="@+id/textView_SingIn"
+        android:id="@+id/textView_SignIn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/auth_textView_SingIn_start_margin"
-        android:text="@string/auth_activity_sing_in"
+        android:text="@string/auth_activity_sign_in"
         android:textAppearance="?attr/textAppearanceLabelSmall"
         android:textColor="?attr/colorOnSurfaceVariant"
         app:layout_constraintEnd_toEndOf="parent"

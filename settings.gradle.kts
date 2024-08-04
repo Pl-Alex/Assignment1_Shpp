@@ -20,4 +20,6 @@ dependencyResolutionManagement {
 
 rootProject.name = "Assignment1"
 include(":app")
- 
+include(":textvalidation:data")
+include(":datastore:data")
+include(":contactsprovider:data")

@@ -221,16 +221,16 @@
         android:textAppearance="?attr/textAppearanceLabelSmall"
         android:textColor="?attr/colorOutline"
         app:layout_constraintBottom_toBottomOf="@id/bottomGuideline"
-        app:layout_constraintEnd_toStartOf="@id/textView_SingIn"
+        app:layout_constraintEnd_toStartOf="@id/textView_SignIn"
         app:layout_constraintHorizontal_chainStyle="packed"
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
-        android:id="@+id/textView_SingIn"
+        android:id="@+id/textView_SignIn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/auth_textView_SingIn_start_margin"
-        android:text="@string/auth_activity_sing_in"
+        android:text="@string/auth_activity_sign_in"
         android:textAppearance="?attr/textAppearanceLabelSmall"
         android:textColor="?attr/colorOnPrimary"
         app:layout_constraintEnd_toEndOf="parent"
