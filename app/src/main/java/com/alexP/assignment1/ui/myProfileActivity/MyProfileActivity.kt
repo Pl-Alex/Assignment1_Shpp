@@ -4,24 +4,22 @@ import android.app.ActivityOptions
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
-import androidx.datastore.preferences.core.booleanPreferencesKey
-import androidx.datastore.preferences.core.edit
+import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
-import com.alexP.assignment1.data.dataStore
-import com.alexP.assignment1.data.readEmail
 import com.alexP.assignment1.databinding.ActivityMyProfileBinding
-import com.alexP.assignment1.ui.authActivity.AuthActivity
 import com.alexP.assignment1.ui.BaseActivity
-import com.bumptech.glide.Glide
+import com.alexP.assignment1.ui.authActivity.AuthActivity
+import com.alexP.assignment1.utils.loadCircularImage
+import com.alexP.assignment1.utils.parseEmail
 import kotlinx.coroutines.launch
-import java.util.Locale
 
 class MyProfileActivity : BaseActivity<ActivityMyProfileBinding>() {
+
+    private lateinit var viewModel: MyProfileViewModel
 
     companion object {
         const val IMAGE_LINK =
             "https://unsplash.com/photos/_vnKbf9K-Vo/download?ixid=M3wxMjA3fDB8MXxhbGx8MTE4fHx8fHx8Mnx8MTcwMTgxMDA2MHw&force=true&w=640"
-        const val REMEMBER_STATE = "remember_state"
     }
 
     override fun inflate(inflater: LayoutInflater): ActivityMyProfileBinding {
@@ -31,49 +29,33 @@ class MyProfileActivity : BaseActivity<ActivityMyProfileBinding>() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        lifecycleScope.launch {
-            val email = readEmail(dataStore)
-            binding?.textViewNameSurname?.text = parseEmail(email!!)
-        }
+        viewModel =
+            ViewModelProvider(
+                this,
+                MyProfileViewModel.createFactory(this)
+            )[MyProfileViewModel::class.java]
 
-        binding?.let {
-            Glide.with(this)
-                .load(IMAGE_LINK)
-                .into(it.imageViewProfileImage)
-        }
+        binding.imageViewProfileImage.loadCircularImage(IMAGE_LINK)
 
         setListeners()
+        lifecycleScope.launch {
+            viewModel.emailState.collect { email ->
+                binding.textViewNameSurname.text = parseEmail(email)
+            }
+        }
     }
 
     private fun setListeners() {
-        binding?.buttonLogOut?.setOnClickListener {
+        binding.buttonLogOut.setOnClickListener {
             onLogOutButtonPressed()
         }
     }
 
     private fun onLogOutButtonPressed() {
-        lifecycleScope.launch {
-            cleanStorage()
-        }
+        viewModel.cleanStorage()
+
         val intent = Intent(this, AuthActivity::class.java)
         startActivity(intent, ActivityOptions.makeSceneTransitionAnimation(this).toBundle())
         finish()
-    }
-
-    private suspend fun cleanStorage() {
-        dataStore.edit { pref ->
-            pref[booleanPreferencesKey(REMEMBER_STATE)] = false
-        }
-    }
-
-    fun parseEmail(email: String): String {
-        val namePart = email.substringBefore('@')
-
-        return namePart.split('.')
-            .joinToString(" ") { it ->
-                it.replaceFirstChar {
-                    if (it.isLowerCase()) it.titlecase(Locale.getDefault()) else it.toString()
-                }
-            }
     }
 }

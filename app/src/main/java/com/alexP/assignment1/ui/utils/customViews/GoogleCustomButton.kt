@@ -17,7 +17,7 @@ class GoogleCustomButton(
     context: Context,
     attrs: AttributeSet?,
     defStyleAttr: Int,
-    defStyleRes: Int
+    defStyleRes: Int,
 ) : ConstraintLayout(context, attrs, defStyleAttr, defStyleRes) {
 
     private val binding: GoogleCustomButtonBinding

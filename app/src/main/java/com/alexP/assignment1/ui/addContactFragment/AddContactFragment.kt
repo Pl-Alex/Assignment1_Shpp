@@ -1,79 +1,124 @@
 package com.alexP.assignment1.ui.addContactFragment
 
-import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.DialogFragment
-import com.alexP.assignment1.R
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentFactory
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import com.alexP.assignment1.databinding.FragmentDialogAddContactBinding
-import com.alexP.assignment1.model.Contact
-import com.alexP.assignment1.utils.validator.EmailValidator
-import com.alexP.assignment1.utils.validator.EmptyValidator
-import com.alexP.assignment1.utils.validator.base.BaseValidator
-import com.bumptech.glide.Glide
-import com.bumptech.glide.request.RequestOptions
+import com.alexP.assignment1.utils.applyWindowInsets
+import com.alexP.assignment1.utils.loadCircularImage
+import com.alexp.contactsprovider.data.Contact
+import kotlinx.coroutines.launch
 
 
 class AddContactFragment(
-    private val iOnContactSavedListener: IOnContactSavedListener
+    private val onSaveAction: (Contact) -> Unit,
 ) : DialogFragment() {
 
     private lateinit var binding: FragmentDialogAddContactBinding
+    private val vm: AddContactViewModel by viewModels()
 
-    private var galleryUri: Uri? = null
-
-    private val galleryLauncher = registerForActivityResult(ActivityResultContracts.GetContent()) {
-        galleryUri = it
-        if (galleryUri == null) return@registerForActivityResult
-        try {
-            Glide.with(this).load(galleryUri).apply(RequestOptions.circleCropTransform())
-                .placeholder(R.drawable.default_contact_image)
-                .error(R.drawable.default_contact_image)
-                .into(binding.imageViewProfileImage)
-        } catch (e: Exception) {
-            e.printStackTrace()
+    private val galleryLauncher =
+        registerForActivityResult(ActivityResultContracts.GetContent()) { uri ->
+            if (uri == null) return@registerForActivityResult
+            try {
+                vm.setGalleryUri(uri)
+                binding.imageViewProfileImage.loadCircularImage(uri.toString())
+            } catch (e: Exception) {
+                e.printStackTrace()
+            }
         }
-
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
-        savedInstanceState: Bundle?
+        savedInstanceState: Bundle?,
     ): View {
-
         binding = FragmentDialogAddContactBinding.inflate(inflater, container, false)
+        binding.root.applyWindowInsets()
 
-        val toolbar = binding.topBar
-        toolbar.setNavigationOnClickListener {
+        observeValues()
+        binding.topBar.setNavigationOnClickListener {
             dismiss()
         }
-
         setListeners()
 
         return binding.root
     }
 
-
-    private fun setListeners() {
-        binding.buttonSave.setOnClickListener {
-            onButtonSavePressed()
-        }
-        binding.imageViewAddProfileImage.setOnClickListener {
-            galleryLauncher.launch("image/*")
+    private fun observeValues() {
+        lifecycleScope.launch {
+            vm.galleryUri.collect { uri ->
+                uri?.let {
+                    binding.imageViewProfileImage.loadCircularImage(it.toString())
+                }
+            }
         }
     }
 
-    private fun onButtonSavePressed() {
+    private fun setListeners() {
+        binding.apply {
+            buttonSave.setOnClickListener { onButtonSavePressed() }
+            imageViewAddProfileImage.setOnClickListener { galleryLauncher.launch("image/*") }
 
-        if (enteredDataIsInvalid()) return
+            inputEditTextUsername.setOnFocusChangeListener { _, hasFocus -> if (!hasFocus) validateUsername() }
+            inputEditTextCareer.setOnFocusChangeListener { _, hasFocus -> if (!hasFocus) validateCareer() }
+            inputEditTextEmail.setOnFocusChangeListener { _, hasFocus -> if (!hasFocus) validateEmail() }
+            inputEditTextPhone.setOnFocusChangeListener { _, hasFocus -> if (!hasFocus) validatePhone() }
+            inputEditTextAddress.setOnFocusChangeListener { _, hasFocus -> if (!hasFocus) validateAddress() }
+            inputEditTextDateOfBirth.setOnFocusChangeListener { _, hasFocus -> if (!hasFocus) validateDateOfBirth() }
+        }
+    }
+
+    private fun validateUsername(): Boolean {
+        val validationResult = vm.validateUsername(binding.inputEditTextUsername.text.toString())
+        binding.inputLayoutUsername.error = validationResult?.let { getString(it) } ?: ""
+        return validationResult == null
+    }
+
+    private fun validateCareer(): Boolean {
+        val validationResult = vm.validateCareer(binding.inputEditTextCareer.text.toString())
+        binding.inputLayoutCareer.error = validationResult?.let { getString(it) } ?: ""
+        return validationResult == null
+    }
+
+    private fun validateEmail(): Boolean {
+        val validationResult = vm.validateEmail(binding.inputEditTextEmail.text.toString())
+        binding.inputLayoutEmail.error = validationResult?.let { getString(it) } ?: ""
+        return validationResult == null
+    }
+
+    private fun validatePhone(): Boolean {
+        val validationResult = vm.validatePhone(binding.inputEditTextPhone.text.toString())
+        binding.inputLayoutPhone.error = validationResult?.let { getString(it) } ?: ""
+        return validationResult == null
+    }
+
+    private fun validateAddress(): Boolean {
+        val validationResult = vm.validateAddress(binding.inputEditTextAddress.text.toString())
+        binding.inputLayoutAddress.error = validationResult?.let { getString(it) } ?: ""
+        return validationResult == null
+    }
+
+    private fun validateDateOfBirth(): Boolean {
+        val validationResult =
+            vm.validateDateOfBirth(binding.inputEditTextDateOfBirth.text.toString())
+        binding.inputLayoutDateOfBirth.error = validationResult?.let { getString(it) } ?: ""
+        return validationResult == null
+    }
+
+    private fun onButtonSavePressed() {
+        if (isAnyEnteredDataInvalid()) return
 
         val contact = Contact(
             id = -1,
-            photo = galleryUri.toString(),
+            photo = vm.galleryUri.toString(),
             fullName = binding.inputEditTextUsername.text.toString(),
             career = binding.inputEditTextCareer.text.toString(),
             email = binding.inputEditTextEmail.text.toString(),
@@ -81,46 +126,26 @@ class AddContactFragment(
             address = binding.inputEditTextAddress.text.toString(),
             dateOfBirth = binding.inputEditTextDateOfBirth.text.toString()
         )
-
-        iOnContactSavedListener.setOnContactSavedListener(contact)
+        onSaveAction(contact)
         dismiss()
     }
 
-    private fun enteredDataIsInvalid(): Boolean {
-        val editTexts = listOf(
-            Pair(binding.inputEditTextEmail, binding.inputLayoutEmail),
-            Pair(binding.inputEditTextCareer, binding.inputLayoutCareer),
-            Pair(binding.inputEditTextUsername, binding.inputLayoutUsername),
-            Pair(binding.inputEditTextPhone, binding.inputLayoutPhone),
-            Pair(binding.inputEditTextAddress, binding.inputLayoutAddress),
-            Pair(binding.inputEditTextDateOfBirth, binding.inputLayoutDateOfBirth)
-        )
+    private fun isAnyEnteredDataInvalid(): Boolean {
+        val isUsernameValid = validateUsername()
+        val isCareerValid = validateCareer()
+        val isEmailValid = validateEmail()
+        val isPhoneValid = validatePhone()
+        val isAddressValid = validateAddress()
+        val isDateOfBirthValid = validateDateOfBirth()
 
-        var hasError = false
-
-        editTexts.forEach { (editText, inputLayout) ->
-            val text = editText.text.toString()
-            val validations = when (editText) {
-                binding.inputEditTextEmail -> {
-                    BaseValidator.validate(EmptyValidator(text), EmailValidator(text))
-                }
-
-                else -> {
-                    BaseValidator.validate(EmptyValidator(text))
-                }
-            }
-
-            inputLayout.error = if (!validations.isSuccess) {
-                getString(validations.message)
-            } else {
-                null
-            }
-
-            if (!validations.isSuccess) {
-                hasError = true
-            }
-        }
-
-        return hasError
+        return !(isUsernameValid && isCareerValid && isEmailValid && isPhoneValid && isAddressValid && isDateOfBirthValid)
     }
+}
+
+class MyFragmentFactory(private val onSaveAction: (Contact) -> Unit) : FragmentFactory() {
+    override fun instantiate(classLoader: ClassLoader, className: String): Fragment =
+        when (loadFragmentClass(classLoader, className)) {
+            AddContactFragment::class.java -> AddContactFragment(onSaveAction)
+            else -> super.instantiate(classLoader, className)
+        }
 }

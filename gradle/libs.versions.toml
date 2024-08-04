@@ -1,20 +1,23 @@
 [versions]
-ktx = "1.12.0"
-agp = "8.2.1"
+fragmentKtx = "1.8.2"
+ktx = "1.13.1"
+agp = "8.2.2"
 kotlin = "1.9.0"
-appcompat = "1.6.1"
-coroutine = "1.7.3"
-material = "1.11.0"
+appcompat = "1.7.0"
+coroutine = "1.8.0"
+material = "1.12.0"
 constraintLayout = "2.1.4"
-lifecycle = "2.6.2"
-glide = "4.12.0"
+lifecycle = "2.8.4"
+glide = "4.16.0"
 junit = "4.13.2"
-testExtJUnit = "1.1.5"
-espresso = "3.5.1"
-datastore = "1.0.0"
+testExtJUnit = "1.2.1"
+espresso = "3.6.1"
+datastore = "1.1.1"
 cardview = "1.0.0"
 javafaker = "1.0.2"
+jetbrainsKotlinJvm = "1.9.0"
 [libraries]
+androidx-fragment-ktx = { module = "androidx.fragment:fragment-ktx", version.ref = "fragmentKtx" }
 androidx-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "ktx" }
 androidx-appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "appcompat" }
 kotlinx-coroutines-android = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-android", version.ref = "coroutine" }
@@ -33,3 +36,5 @@ javaFaker = { group = "com.github.javafaker", name = "javafaker", version.ref = 
 [plugins]
 androidApplication = {id = "com.android.application", version.ref = "agp"}
 jetbrainsKotlin = {id = "org.jetbrains.kotlin.android", version.ref = "kotlin"}
+jetbrainsKotlinJvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "jetbrainsKotlinJvm" }
+androidLibrary = { id = "com.android.library", version.ref = "agp" }

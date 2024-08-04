@@ -5,8 +5,8 @@ import android.app.ActivityOptions
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Bundle
+import android.view.LayoutInflater
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.FragmentTransaction
 import androidx.lifecycle.ViewModelProvider
@@ -14,23 +14,22 @@ import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.alexP.assignment1.App
 import com.alexP.assignment1.R
 import com.alexP.assignment1.adapters.ContactsAdapter
 import com.alexP.assignment1.adapters.IContactActionListener
-import com.alexP.assignment1.dataProviders.ContactsLoader
 import com.alexP.assignment1.databinding.ActivityContactsBinding
-import com.alexP.assignment1.model.Contact
+import com.alexP.assignment1.ui.BaseActivity
 import com.alexP.assignment1.ui.addContactFragment.AddContactFragment
-import com.alexP.assignment1.ui.addContactFragment.IOnContactSavedListener
+import com.alexP.assignment1.ui.addContactFragment.MyFragmentFactory
 import com.alexP.assignment1.ui.authActivity.AuthActivity
+import com.alexP.assignment1.ui.contactsActivity.ContactsViewModel
 import com.alexP.assignment1.ui.utils.SpacingItemDecorator
-import com.alexP.assignment1.ui.utils.factory
+import com.alexp.contactsprovider.data.Contact
 import com.google.android.material.snackbar.Snackbar
 
 
-class ContactsActivity : AppCompatActivity() {
-
-    private lateinit var binding: ActivityContactsBinding
+class ContactsActivity : BaseActivity<ActivityContactsBinding>() {
     private lateinit var adapter: ContactsAdapter
 
     private lateinit var viewModel: ContactsViewModel
@@ -51,16 +50,21 @@ class ContactsActivity : AppCompatActivity() {
             }
         }
 
-    private var isXLargeLayout = false
+    private val onSaveAction: (Contact) -> Unit =
+        { contact: Contact -> viewModel.addContact(contact) }
+
+    override fun inflate(inflater: LayoutInflater): ActivityContactsBinding {
+        return ActivityContactsBinding.inflate(inflater)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        supportFragmentManager.fragmentFactory = MyFragmentFactory(onSaveAction)
         super.onCreate(savedInstanceState)
-        binding = ActivityContactsBinding.inflate(layoutInflater)
-        setContentView(binding.root)
 
-        isXLargeLayout = resources.getBoolean(R.bool.xLarge_layout)
-
-        viewModel = ViewModelProvider(this, factory())[ContactsViewModel::class.java]
+        viewModel = ViewModelProvider(
+            this,
+            ContactsViewModel.createFactory(application as App)
+        )[ContactsViewModel::class.java]
 
         setRecyclerView()
         setListeners()
@@ -103,7 +107,7 @@ class ContactsActivity : AppCompatActivity() {
             override fun onMove(
                 recyclerView: RecyclerView,
                 viewHolder: RecyclerView.ViewHolder,
-                target: RecyclerView.ViewHolder
+                target: RecyclerView.ViewHolder,
             ): Boolean {
                 return false
             }
@@ -132,21 +136,12 @@ class ContactsActivity : AppCompatActivity() {
 
     private fun showAddContactDialog() {
         val fragmentManager = supportFragmentManager
-        val fragment = AddContactFragment(object : IOnContactSavedListener{
-            override fun setOnContactSavedListener(contact: Contact) {
-                viewModel.addContact(contact)
-            }
-        })
-        if (isXLargeLayout) {
-            fragment.show(fragmentManager, "dialog")
-        } else {
-            val transaction = fragmentManager.beginTransaction()
-            transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
-            transaction
-                .add(android.R.id.content, fragment)
-                .addToBackStack(null)
-                .commit()
-        }
+        val transaction = fragmentManager.beginTransaction()
+        transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
+        transaction
+            .add(android.R.id.content, AddContactFragment::class.java, null)
+            .addToBackStack(null)
+            .commit()
     }
 
     private fun deleteContact(contact: Contact) {
@@ -164,7 +159,7 @@ class ContactsActivity : AppCompatActivity() {
     }
 
     private fun loadContactsFromDevice() {
-        viewModel.addContacts(ContactsLoader().fetchContacts(contentResolver))
+        viewModel.addContacts(contentResolver)
     }
 
     private fun tryToLoadContactsFromDevice() {
@@ -172,7 +167,8 @@ class ContactsActivity : AppCompatActivity() {
             ContextCompat.checkSelfPermission(
                 this,
                 Manifest.permission.READ_CONTACTS
-            ) -> {
+            ),
+            -> {
                 loadContactsFromDevice()
             }
 

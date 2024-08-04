@@ -8,8 +8,8 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.alexP.assignment1.R
 import com.alexP.assignment1.databinding.ItemContactBinding
-import com.alexP.assignment1.model.Contact
 import com.alexP.assignment1.utils.loadCircularImage
+import com.alexp.contactsprovider.data.Contact
 
 
 class ContactsDiffCallback : DiffUtil.ItemCallback<Contact>() {
@@ -25,7 +25,7 @@ class ContactsDiffCallback : DiffUtil.ItemCallback<Contact>() {
 }
 
 class ContactsAdapter(
-    private val userActionListener: IContactActionListener
+    private val userActionListener: IContactActionListener,
 ) : ListAdapter<Contact, ContactsAdapter.ContactsViewHolder>(ContactsDiffCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ContactsViewHolder {
@@ -41,8 +41,8 @@ class ContactsAdapter(
 
     class ContactsViewHolder(
         private val binding: ItemContactBinding,
-        private val userActionListener: IContactActionListener
-    ) : RecyclerView.ViewHolder(binding.root){
+        private val userActionListener: IContactActionListener,
+    ) : RecyclerView.ViewHolder(binding.root) {
         fun bind(contact: Contact) {
             with(binding) {
                 itemView.tag = contact
@@ -56,10 +56,10 @@ class ContactsAdapter(
                     imageViewContactImage.setImageResource(R.drawable.default_contact_image)
                 }
             }
-            binding.root.setOnClickListener{
+            binding.root.setOnClickListener {
                 onDeleteContactClick(it)
             }
-            binding.buttonTrash.setOnClickListener{
+            binding.buttonTrash.setOnClickListener {
                 onDeleteContactClick(it)
             }
         }
