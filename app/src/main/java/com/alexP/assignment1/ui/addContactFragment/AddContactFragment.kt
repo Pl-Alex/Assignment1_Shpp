@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.enableEdgeToEdge
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.Fragment
@@ -40,6 +41,7 @@ class AddContactFragment(
         container: ViewGroup?,
         savedInstanceState: Bundle?,
     ): View {
+        requireActivity().enableEdgeToEdge()
         binding = FragmentDialogAddContactBinding.inflate(inflater, container, false)
         binding.root.applyWindowInsets()
 
@@ -53,7 +55,7 @@ class AddContactFragment(
     }
 
     private fun observeValues() {
-        lifecycleScope.launch {
+        viewLifecycleOwner.lifecycleScope.launch {
             vm.galleryUri.collect { uri ->
                 uri?.let {
                     binding.imageViewProfileImage.loadCircularImage(it.toString())
