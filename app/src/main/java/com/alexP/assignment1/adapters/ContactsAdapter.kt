@@ -1,7 +1,6 @@
 package com.alexP.assignment1.adapters
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
@@ -11,18 +10,6 @@ import com.alexP.assignment1.databinding.ItemContactBinding
 import com.alexP.assignment1.utils.loadCircularImage
 import com.alexp.contactsprovider.data.Contact
 
-
-class ContactsDiffCallback : DiffUtil.ItemCallback<Contact>() {
-
-    override fun areItemsTheSame(oldItem: Contact, newItem: Contact): Boolean {
-        return oldItem.id == newItem.id
-    }
-
-    override fun areContentsTheSame(oldItem: Contact, newItem: Contact): Boolean {
-        return oldItem == newItem
-    }
-
-}
 
 class ContactsAdapter(
     private val userActionListener: IContactActionListener,
@@ -43,11 +30,12 @@ class ContactsAdapter(
         private val binding: ItemContactBinding,
         private val userActionListener: IContactActionListener,
     ) : RecyclerView.ViewHolder(binding.root) {
-        fun bind(contact: Contact) {
-            with(binding) {
-                itemView.tag = contact
-                buttonTrash.tag = contact
 
+        private lateinit var contact: Contact
+
+        fun bind(contact: Contact) {
+            this.contact = contact
+            with(binding) {
                 textViewContactFullName.text = contact.fullName
                 textViewContactCareer.text = contact.career
                 if (contact.photo.isNotBlank()) {
@@ -55,23 +43,27 @@ class ContactsAdapter(
                 } else {
                     imageViewContactImage.setImageResource(R.drawable.default_contact_image)
                 }
-            }
-            binding.root.setOnClickListener {
-                onDeleteContactClick(it)
-            }
-            binding.buttonTrash.setOnClickListener {
-                onDeleteContactClick(it)
-            }
-        }
 
-        private fun onDeleteContactClick(v: View) {
-            val contact = v.tag as Contact
-            when (v.id) {
-                R.id.button_trash -> {
+                buttonTrash.setOnClickListener {
                     userActionListener.onContactDelete(contact)
                 }
             }
+        }
 
+        fun getContact(): Contact {
+            return contact
         }
     }
+}
+
+class ContactsDiffCallback : DiffUtil.ItemCallback<Contact>() {
+
+    override fun areItemsTheSame(oldItem: Contact, newItem: Contact): Boolean {
+        return oldItem.id == newItem.id
+    }
+
+    override fun areContentsTheSame(oldItem: Contact, newItem: Contact): Boolean {
+        return oldItem == newItem
+    }
+
 }

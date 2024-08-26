@@ -44,9 +44,9 @@ fun parseEmail(email: String): String {
         }
 }
 
-fun getValidationResultMessage(validationResult: ValidationResult): Int {
+fun getValidationResultMessage(validationResult: ValidationResult): Int? {
     return when (validationResult) {
-        ValidationResult.SUCCESS -> R.string.text_validation_success
+        ValidationResult.SUCCESS -> null
         ValidationResult.EMPTY_FAILED -> R.string.text_validation_error_empty_field
         ValidationResult.EMAIL_FAILED -> R.string.text_validation_error_email
         ValidationResult.INVALID_CHARACTERS_FAILED -> R.string.text_validation_error_contain_invalid_characters

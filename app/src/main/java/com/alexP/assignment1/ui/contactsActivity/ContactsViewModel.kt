@@ -8,7 +8,6 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import androidx.lifecycle.viewmodel.initializer
 import androidx.lifecycle.viewmodel.viewModelFactory
-import com.alexP.assignment1.App
 import com.alexp.contactsprovider.data.Contact
 import com.alexp.contactsprovider.data.ContactsListener
 import com.alexp.contactsprovider.data.ContactsProvider
@@ -74,12 +73,11 @@ class ContactsViewModel(
     }
 
     companion object {
-        fun createFactory(app: App): ViewModelProvider.Factory = viewModelFactory {
-            initializer {
-                ContactsViewModel(
-                    contactsServices = app.contactService
-                )
+        fun createFactory(contactsServices: ContactsProvider): ViewModelProvider.Factory =
+            viewModelFactory {
+                initializer {
+                    ContactsViewModel(contactsServices)
+                }
             }
-        }
     }
 }

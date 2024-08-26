@@ -7,9 +7,9 @@ import android.content.pm.PackageManager
 import android.os.Bundle
 import android.view.LayoutInflater
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.activity.viewModels
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.FragmentTransaction
-import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -23,7 +23,6 @@ import com.alexP.assignment1.ui.BaseActivity
 import com.alexP.assignment1.ui.addContactFragment.AddContactFragment
 import com.alexP.assignment1.ui.addContactFragment.MyFragmentFactory
 import com.alexP.assignment1.ui.authActivity.AuthActivity
-import com.alexP.assignment1.ui.contactsActivity.ContactsViewModel
 import com.alexP.assignment1.ui.utils.SpacingItemDecorator
 import com.alexp.contactsprovider.data.Contact
 import com.google.android.material.snackbar.Snackbar
@@ -32,7 +31,9 @@ import com.google.android.material.snackbar.Snackbar
 class ContactsActivity : BaseActivity<ActivityContactsBinding>() {
     private lateinit var adapter: ContactsAdapter
 
-    private lateinit var viewModel: ContactsViewModel
+    private val vm: ContactsViewModel by viewModels {
+        ContactsViewModel.createFactory((application as App).contactService)
+    }
 
     private val requestPermissionLauncher =
         registerForActivityResult(
@@ -50,8 +51,9 @@ class ContactsActivity : BaseActivity<ActivityContactsBinding>() {
             }
         }
 
-    private val onSaveAction: (Contact) -> Unit =
-        { contact: Contact -> viewModel.addContact(contact) }
+    private val onSaveAction: (Contact) -> Unit = { contact: Contact ->
+        vm.addContact(contact)
+    }
 
     override fun inflate(inflater: LayoutInflater): ActivityContactsBinding {
         return ActivityContactsBinding.inflate(inflater)
@@ -60,11 +62,6 @@ class ContactsActivity : BaseActivity<ActivityContactsBinding>() {
     override fun onCreate(savedInstanceState: Bundle?) {
         supportFragmentManager.fragmentFactory = MyFragmentFactory(onSaveAction)
         super.onCreate(savedInstanceState)
-
-        viewModel = ViewModelProvider(
-            this,
-            ContactsViewModel.createFactory(application as App)
-        )[ContactsViewModel::class.java]
 
         setRecyclerView()
         setListeners()
@@ -99,7 +96,7 @@ class ContactsActivity : BaseActivity<ActivityContactsBinding>() {
             }
         })
 
-        viewModel.contacts.observe(this) {
+        vm.contacts.observe(this) {
             adapter.submitList(it.toMutableList())
         }
 
@@ -113,7 +110,7 @@ class ContactsActivity : BaseActivity<ActivityContactsBinding>() {
             }
 
             override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
-                deleteContact(viewHolder.itemView.tag as Contact)
+                deleteContact((viewHolder as ContactsAdapter.ContactsViewHolder).getContact())
             }
         }).attachToRecyclerView(binding.recyclerView)
 
@@ -145,7 +142,7 @@ class ContactsActivity : BaseActivity<ActivityContactsBinding>() {
     }
 
     private fun deleteContact(contact: Contact) {
-        viewModel.deleteContact(contact)
+        vm.deleteContact(contact)
 
         val snackbar = Snackbar.make(
             binding.root,
@@ -153,13 +150,13 @@ class ContactsActivity : BaseActivity<ActivityContactsBinding>() {
             Snackbar.LENGTH_LONG
         )
         snackbar.setAction(getString(R.string.undo)) {
-            viewModel.recoverContacts()
+            vm.recoverContacts()
         }
         snackbar.show()
     }
 
     private fun loadContactsFromDevice() {
-        viewModel.addContacts(contentResolver)
+        vm.addContacts(contentResolver)
     }
 
     private fun tryToLoadContactsFromDevice() {

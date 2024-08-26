@@ -60,7 +60,7 @@ class DataStoreProvider(private val context: Context) {
         return readString(EMAIL)
     }
 
-    suspend fun saveRememberMeState() {
+    private suspend fun saveRememberMeState() {
         saveBoolean(REMEMBER_STATE, true)
     }
 
