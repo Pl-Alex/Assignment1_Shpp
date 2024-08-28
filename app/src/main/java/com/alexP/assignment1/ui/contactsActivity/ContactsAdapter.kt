@@ -1,4 +1,4 @@
-package com.alexP.assignment1.adapters
+package com.alexP.assignment1.ui.contactsActivity
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -31,10 +31,7 @@ class ContactsAdapter(
         private val userActionListener: IContactActionListener,
     ) : RecyclerView.ViewHolder(binding.root) {
 
-        private lateinit var contact: Contact
-
         fun bind(contact: Contact) {
-            this.contact = contact
             with(binding) {
                 textViewContactFullName.text = contact.fullName
                 textViewContactCareer.text = contact.career
@@ -48,10 +45,6 @@ class ContactsAdapter(
                     userActionListener.onContactDelete(contact)
                 }
             }
-        }
-
-        fun getContact(): Contact {
-            return contact
         }
     }
 }

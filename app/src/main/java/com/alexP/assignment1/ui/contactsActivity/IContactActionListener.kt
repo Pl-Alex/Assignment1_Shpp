@@ -1,4 +1,4 @@
-package com.alexP.assignment1.adapters
+package com.alexP.assignment1.ui.contactsActivity
 
 import com.alexp.contactsprovider.data.Contact
 

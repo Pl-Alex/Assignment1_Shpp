@@ -16,12 +16,6 @@ import com.alexP.assignment1.utils.applyWindowInsets
 import com.alexP.assignment1.utils.getValidationResultMessage
 import com.alexP.assignment1.utils.loadCircularImage
 import com.alexp.contactsprovider.data.Contact
-import com.alexp.textvalidation.data.validateAddress
-import com.alexp.textvalidation.data.validateCareer
-import com.alexp.textvalidation.data.validateDateOfBirth
-import com.alexp.textvalidation.data.validateEmail
-import com.alexp.textvalidation.data.validatePhone
-import com.alexp.textvalidation.data.validateUsername
 import com.alexp.textvalidation.data.validator.base.ValidationResult
 import kotlinx.coroutines.launch
 
@@ -88,42 +82,42 @@ class AddContactFragment(
     }
 
     private fun validateUsername(): Boolean {
-        val validationResult = validateUsername(binding.inputEditTextUsername.text.toString())
+        val validationResult = vm.validateUsernameVm(binding.inputEditTextUsername.text.toString())
         binding.inputLayoutUsername.error =
             getValidationResultMessage(validationResult)?.let { getString(it) } ?: ""
         return validationResult == ValidationResult.SUCCESS
     }
 
     private fun validateCareer(): Boolean {
-        val validationResult = validateCareer(binding.inputEditTextCareer.text.toString())
+        val validationResult = vm.validateCareerVm(binding.inputEditTextCareer.text.toString())
         binding.inputLayoutCareer.error =
             getValidationResultMessage(validationResult)?.let { getString(it) } ?: ""
         return validationResult == ValidationResult.SUCCESS
     }
 
     private fun validateEmail(): Boolean {
-        val validationResult = validateEmail(binding.inputEditTextEmail.text.toString())
+        val validationResult = vm.validateEmailVm(binding.inputEditTextEmail.text.toString())
         binding.inputLayoutEmail.error =
             getValidationResultMessage(validationResult)?.let { getString(it) } ?: ""
         return validationResult == ValidationResult.SUCCESS
     }
 
     private fun validatePhone(): Boolean {
-        val validationResult = validatePhone(binding.inputEditTextPhone.text.toString())
+        val validationResult = vm.validatePhoneVm(binding.inputEditTextPhone.text.toString())
         binding.inputLayoutPhone.error =
             getValidationResultMessage(validationResult)?.let { getString(it) } ?: ""
         return validationResult == ValidationResult.SUCCESS
     }
 
     private fun validateAddress(): Boolean {
-        val validationResult = validateAddress(binding.inputEditTextAddress.text.toString())
+        val validationResult = vm.validateAddressVm(binding.inputEditTextAddress.text.toString())
         binding.inputLayoutAddress.error =
             getValidationResultMessage(validationResult)?.let { getString(it) } ?: ""
         return validationResult == ValidationResult.SUCCESS
     }
 
     private fun validateDateOfBirth(): Boolean {
-        val validationResult = validateDateOfBirth(binding.inputEditTextDateOfBirth.text.toString())
+        val validationResult = vm.validateDateOfBirthVm(binding.inputEditTextDateOfBirth.text.toString())
         binding.inputLayoutDateOfBirth.error =
             getValidationResultMessage(validationResult)?.let { getString(it) } ?: ""
         return validationResult == ValidationResult.SUCCESS

@@ -16,8 +16,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.alexP.assignment1.App
 import com.alexP.assignment1.R
-import com.alexP.assignment1.adapters.ContactsAdapter
-import com.alexP.assignment1.adapters.IContactActionListener
 import com.alexP.assignment1.databinding.ActivityContactsBinding
 import com.alexP.assignment1.ui.BaseActivity
 import com.alexP.assignment1.ui.addContactFragment.AddContactFragment
@@ -110,7 +108,9 @@ class ContactsActivity : BaseActivity<ActivityContactsBinding>() {
             }
 
             override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
-                deleteContact((viewHolder as ContactsAdapter.ContactsViewHolder).getContact())
+                val contact = vm.contacts.value
+                    ?.get((viewHolder as ContactsAdapter.ContactsViewHolder).adapterPosition)
+                contact?.let{ deleteContact(contact)}
             }
         }).attachToRecyclerView(binding.recyclerView)
 

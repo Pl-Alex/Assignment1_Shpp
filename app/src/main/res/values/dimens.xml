@@ -7,7 +7,6 @@
     <dimen name="auth_inputLayout_password_top_margin">24dp</dimen>
     <dimen name="auth_checkBox_remember_top_margin">16dp</dimen>
     <dimen name="auth_orLabel_top_margin">8dp</dimen>
-    <dimen name="auth_button_google_bottom_margin">8dp</dimen>
     <dimen name="auth_textView_orLabel_bottom_margin">8dp</dimen>
     <dimen name="auth_button_register_bottom_margin">16dp</dimen>
     <dimen name="auth_textView_termsAndConditions_bottom_margin">8dp</dimen>
@@ -26,7 +25,6 @@
     <dimen name="google_custom_button_cornerRadius">6dp</dimen>
     <dimen name="auth_activity_button_register_paddingVertical">12dp</dimen>
     <dimen name="auth_landscape_label1_top_margin">16dp</dimen>
-    <dimen name="auth_button_google_left_margin">8dp</dimen>
     <dimen name="auth_activity_button_register_marginTop">8dp</dimen>
     <dimen name="auth_textView_termsAndConditions_top_margin">16dp</dimen>
     <dimen name="auth_buttons_flow_gap">8dp</dimen>

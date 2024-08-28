@@ -11,7 +11,6 @@ import kotlinx.coroutines.flow.first
 
 
 private const val EMAIL = "email"
-private const val PASSWORD = "password"
 private const val REMEMBER_STATE = "remember_state"
 
 private const val DATASTORE_NAME = "user_preferences"
@@ -27,10 +26,9 @@ class DataStoreProvider(private val context: Context) {
         }
     }
 
-    suspend fun saveCredentials(email: String, password: String) {
-        saveRememberMeState()
+    suspend fun saveCredentials(email: String) {
+        saveRememberMeState(true)
         saveString(EMAIL, email)
-        saveString(PASSWORD, password)
     }
 
     private suspend fun saveBoolean(key: String, value: Boolean) {
@@ -60,14 +58,13 @@ class DataStoreProvider(private val context: Context) {
         return readString(EMAIL)
     }
 
-    private suspend fun saveRememberMeState() {
-        saveBoolean(REMEMBER_STATE, true)
+    suspend fun saveRememberMeState(isRememberMeChecked: Boolean) {
+        saveBoolean(REMEMBER_STATE, isRememberMeChecked)
     }
 
     suspend fun cleanStorage() {
         context.dataStore.edit { pref ->
             pref.remove(stringPreferencesKey(EMAIL))
-            pref.remove(stringPreferencesKey(PASSWORD))
         }
     }
 

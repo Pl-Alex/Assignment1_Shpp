@@ -14,8 +14,6 @@ import com.alexP.assignment1.ui.BaseActivity
 import com.alexP.assignment1.ui.myProfileActivity.MyProfileActivity
 import com.alexP.assignment1.utils.getValidationResultMessage
 import com.alexp.datastore.data.DataStoreProvider
-import com.alexp.textvalidation.data.validateEmail
-import com.alexp.textvalidation.data.validatePassword
 import com.alexp.textvalidation.data.validator.base.ValidationResult
 import kotlinx.coroutines.launch
 
@@ -31,7 +29,6 @@ class AuthActivity : BaseActivity<ActivityAuthBinding>() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
 
         setListeners()
 
@@ -66,11 +63,10 @@ class AuthActivity : BaseActivity<ActivityAuthBinding>() {
 
     private fun onRegisterButtonPressed() {
         if (isAnyEnteredDataInvalid()) return
-        val emailText = binding.inputEditTextEmail?.text.toString()
-        val passwordText = binding.inputEditTextPassword?.text.toString()
-        val isRememberMeChecked = binding.checkBoxRemember?.isChecked
-        onNavigate(emailText, passwordText, isRememberMeChecked)
-
+        val emailText = binding.inputEditTextEmail?.text.toString().lowercase()
+        val isRememberMeChecked = binding.checkBoxRemember?.isChecked ?: false
+        vm.saveState(emailText, isRememberMeChecked)
+        onNavigate(isRememberMeChecked)
     }
 
     private fun isAnyEnteredDataInvalid(): Boolean {
@@ -79,9 +75,14 @@ class AuthActivity : BaseActivity<ActivityAuthBinding>() {
         return !(isEmailValid && isPasswordValid)
     }
 
-    private fun onNavigate(email: String, password: String, isRememberMeChecked: Boolean?) {
-        vm.saveAutologin(email, password, isRememberMeChecked)
-        navToNextScreen()
+    private fun onNavigate(isRememberMeChecked: Boolean) {
+        lifecycleScope.launch {
+            vm.authState.collect { state ->
+                if (state.isAutologin == isRememberMeChecked) {
+                    navToNextScreen()
+                }
+            }
+        }
     }
 
     private fun navToNextScreen() {
@@ -91,14 +92,14 @@ class AuthActivity : BaseActivity<ActivityAuthBinding>() {
     }
 
     private fun validateEmail(): Boolean {
-        val validationResult = validateEmail(binding.inputEditTextEmail?.text.toString())
+        val validationResult = vm.validateEmailVm(binding.inputEditTextEmail?.text.toString())
         binding.inputLayoutEmail.error =
             getValidationResultMessage(validationResult)?.let { getString(it) } ?: ""
         return validationResult == ValidationResult.SUCCESS
     }
 
     private fun validatePassword(): Boolean {
-        val validationResult = validatePassword(binding.inputEditTextPassword?.text.toString())
+        val validationResult = vm.validatePasswordVm(binding.inputEditTextPassword?.text.toString())
         binding.inputLayoutPassword.error =
             getValidationResultMessage(validationResult)?.let { getString(it) } ?: ""
         return validationResult == ValidationResult.SUCCESS

@@ -17,7 +17,6 @@
     <string name="auth_activity_google" translatable="false">Google</string>
     <string name="auth_activity_or">or</string>
     <string name="auth_activity_lets_get_acquainted">Let\'s get acquainted</string>
-    <string name="text_validation_success" translatable="false">validation success</string>
     <string name="text_validation_error_empty_field">Please, fill empty field!</string>
     <string name="text_validation_error_email">Please, enter correct email!</string>
     <string name="text_validation_error_min_pass_length">"Password must have at least 8 characters "</string>

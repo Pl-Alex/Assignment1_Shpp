@@ -3,6 +3,7 @@ package com.alexP.assignment1.ui.myProfileActivity
 import android.app.ActivityOptions
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import androidx.activity.viewModels
 import androidx.lifecycle.lifecycleScope
@@ -33,6 +34,7 @@ class MyProfileActivity : BaseActivity<ActivityMyProfileBinding>() {
         setListeners()
         lifecycleScope.launch {
             vm.emailState.collect { email ->
+                Log.i("333", "email in myProfile: $email")
                 binding.textViewNameSurname.text = parseEmail(email)
             }
         }
