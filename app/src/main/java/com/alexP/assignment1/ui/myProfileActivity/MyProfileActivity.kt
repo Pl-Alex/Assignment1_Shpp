@@ -3,7 +3,6 @@ package com.alexP.assignment1.ui.myProfileActivity
 import android.app.ActivityOptions
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import androidx.activity.viewModels
 import androidx.lifecycle.lifecycleScope
@@ -11,7 +10,6 @@ import com.alexP.assignment1.databinding.ActivityMyProfileBinding
 import com.alexP.assignment1.ui.BaseActivity
 import com.alexP.assignment1.ui.authActivity.AuthActivity
 import com.alexP.assignment1.utils.loadCircularImage
-import com.alexP.assignment1.utils.parseEmail
 import com.alexp.datastore.data.DataStoreProvider
 import kotlinx.coroutines.launch
 
@@ -33,9 +31,8 @@ class MyProfileActivity : BaseActivity<ActivityMyProfileBinding>() {
 
         setListeners()
         lifecycleScope.launch {
-            vm.emailState.collect { email ->
-                Log.i("333", "email in myProfile: $email")
-                binding.textViewNameSurname.text = parseEmail(email)
+            vm.myProfileState.collect { state ->
+                binding.textViewNameSurname.text = state.username
             }
         }
     }

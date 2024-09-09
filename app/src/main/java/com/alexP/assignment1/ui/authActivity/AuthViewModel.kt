@@ -11,6 +11,7 @@ import com.alexp.textvalidation.data.validatePassword
 import com.alexp.textvalidation.data.validator.base.ValidationResult
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
@@ -23,25 +24,30 @@ class AuthViewModel(
 
     init {
         viewModelScope.launch {
-            updateAuthState()
+            _authState.update {
+                it.copy(
+                    username = dataStore.readUsername().first(),
+                    isAutologin = dataStore.credentialsAreNotEmpty().first()
+                )
+            }
+            dataStore.readUsername().collect { username ->
+                _authState.update { it.copy(username = username) }
+            }
+            dataStore.credentialsAreNotEmpty().collect { credentialsAreNotEmpty ->
+                _authState.update { it.copy(isAutologin = credentialsAreNotEmpty) }
+            }
         }
     }
 
-    private suspend fun updateAuthState() {
-        _authState.update {
-            it.copy(
-                navEmail = dataStore.readEmail(),
-                isAutologin = dataStore.readRememberMeState()
-                        && dataStore.readEmail().isNotEmpty()
-            )
-        }
-    }
-
-    fun saveState(email: String, isRememberMeChecked: Boolean) {
+    fun saveCredentials(email: String, password: String) {
         viewModelScope.launch {
-            dataStore.saveCredentials(email)
-            dataStore.saveRememberMeState(isRememberMeChecked)
-            updateAuthState()
+            dataStore.saveCredentials(email, password)
+        }
+    }
+
+    fun saveUsername(username: String) {
+        viewModelScope.launch {
+            dataStore.saveUsername(username)
         }
     }
 

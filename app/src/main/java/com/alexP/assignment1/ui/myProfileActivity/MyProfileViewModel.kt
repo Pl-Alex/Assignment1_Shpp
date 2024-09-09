@@ -15,13 +15,15 @@ class MyProfileViewModel(
     private val dataStore: DataStoreProvider,
 ) : ViewModel() {
 
-    private val _emailState = MutableStateFlow("")
-    val emailState get() = _emailState.asStateFlow()
+    private val _myProfileState = MutableStateFlow(MyProfileState())
+    val myProfileState get() = _myProfileState.asStateFlow()
 
     init {
         viewModelScope.launch {
-            _emailState.update {
-                dataStore.readEmail()
+            dataStore.readUsername().collect { username ->
+                _myProfileState.update {
+                    MyProfileState(username = username)
+                }
             }
         }
     }

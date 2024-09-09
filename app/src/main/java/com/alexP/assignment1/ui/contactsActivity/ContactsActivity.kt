@@ -108,8 +108,7 @@ class ContactsActivity : BaseActivity<ActivityContactsBinding>() {
             }
 
             override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
-                val contact = vm.contacts.value
-                    ?.get((viewHolder as ContactsAdapter.ContactsViewHolder).adapterPosition)
+                val contact = vm.contacts.value?.get(viewHolder.adapterPosition)
                 contact?.let{ deleteContact(contact)}
             }
         }).attachToRecyclerView(binding.recyclerView)

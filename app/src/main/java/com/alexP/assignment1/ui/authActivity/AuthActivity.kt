@@ -13,6 +13,7 @@ import com.alexP.assignment1.databinding.ActivityAuthBinding
 import com.alexP.assignment1.ui.BaseActivity
 import com.alexP.assignment1.ui.myProfileActivity.MyProfileActivity
 import com.alexP.assignment1.utils.getValidationResultMessage
+import com.alexP.assignment1.utils.parseEmail
 import com.alexp.datastore.data.DataStoreProvider
 import com.alexp.textvalidation.data.validator.base.ValidationResult
 import kotlinx.coroutines.launch
@@ -64,9 +65,15 @@ class AuthActivity : BaseActivity<ActivityAuthBinding>() {
     private fun onRegisterButtonPressed() {
         if (isAnyEnteredDataInvalid()) return
         val emailText = binding.inputEditTextEmail?.text.toString().lowercase()
-        val isRememberMeChecked = binding.checkBoxRemember?.isChecked ?: false
-        vm.saveState(emailText, isRememberMeChecked)
-        onNavigate(isRememberMeChecked)
+        val passwordText = binding.inputEditTextPassword?.text.toString()
+        val username = parseEmail(emailText)
+
+        vm.saveUsername(username)
+        if(binding.checkBoxRemember?.isChecked == true){
+            vm.saveCredentials(emailText, passwordText)
+        }
+
+        onNavigate(username)
     }
 
     private fun isAnyEnteredDataInvalid(): Boolean {
@@ -75,10 +82,10 @@ class AuthActivity : BaseActivity<ActivityAuthBinding>() {
         return !(isEmailValid && isPasswordValid)
     }
 
-    private fun onNavigate(isRememberMeChecked: Boolean) {
+    private fun onNavigate(username: String) {
         lifecycleScope.launch {
             vm.authState.collect { state ->
-                if (state.isAutologin == isRememberMeChecked) {
+                if (state.username == username) {
                     navToNextScreen()
                 }
             }
