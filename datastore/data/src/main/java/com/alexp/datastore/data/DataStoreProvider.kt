@@ -11,9 +11,8 @@ import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.map
 
 
-private val emailKey = stringPreferencesKey("email")
-private val usernameKey = stringPreferencesKey("username")
-private val passwordKey = stringPreferencesKey("password")
+private const val emailKey = "email"
+private const val passwordKey = "password"
 
 private const val DATASTORE_NAME = "user_preferences"
 
@@ -28,23 +27,18 @@ class DataStoreProvider(private val context: Context) {
     }
 
     suspend fun saveCredentials(email: String, password: String) {
-        writeValue(emailKey, email)
-        writeValue(passwordKey, password)
+        writeValue(stringPreferencesKey(emailKey), email)
+        writeValue(stringPreferencesKey(passwordKey), password)
     }
 
-    fun credentialsAreNotEmpty(): Flow<Boolean> {
-        return combine(readString(emailKey), readString(passwordKey)){email, password ->
-            email.isNotEmpty() && password.isNotEmpty()
+    fun getCredentials(): Flow<Pair<String, String>> {
+        return combine(
+            readString(stringPreferencesKey(emailKey)),
+            readString(stringPreferencesKey(passwordKey))
+        ) { email, password ->
+            email to password
         }
     }
-
-    suspend fun saveUsername(username: String) {
-        writeValue(usernameKey, username)
-    }
-
-    /* private suspend fun readString(dataStoreKey: Preferences.Key<String>): String {
-         return context.dataStore.data.first()[dataStoreKey] ?: ""
-     }*/
 
     private fun readString(dataStoreKey: Preferences.Key<String>): Flow<String> {
         return context.dataStore.data.map { preferences ->
@@ -52,15 +46,14 @@ class DataStoreProvider(private val context: Context) {
         }
     }
 
-    fun readUsername(): Flow<String> {
-        return readString(usernameKey)
+    fun readEmail(): Flow<String> {
+        return readString(stringPreferencesKey(emailKey))
     }
 
     suspend fun cleanStorage() {
         context.dataStore.edit { pref ->
-            pref.remove(emailKey)
-            pref.remove(passwordKey)
-            pref.remove(usernameKey)
+            pref.remove(stringPreferencesKey(emailKey))
+            pref.remove(stringPreferencesKey(passwordKey))
         }
     }
 

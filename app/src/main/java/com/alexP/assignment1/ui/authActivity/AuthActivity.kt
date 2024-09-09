@@ -68,8 +68,7 @@ class AuthActivity : BaseActivity<ActivityAuthBinding>() {
         val passwordText = binding.inputEditTextPassword?.text.toString()
         val username = parseEmail(emailText)
 
-        vm.saveUsername(username)
-        if(binding.checkBoxRemember?.isChecked == true){
+        if (binding.checkBoxRemember?.isChecked == true) {
             vm.saveCredentials(emailText, passwordText)
         }
 
@@ -84,10 +83,8 @@ class AuthActivity : BaseActivity<ActivityAuthBinding>() {
 
     private fun onNavigate(username: String) {
         lifecycleScope.launch {
-            vm.authState.collect { state ->
-                if (state.username == username) {
-                    navToNextScreen()
-                }
+            vm.authState.collect {
+                navToNextScreen()
             }
         }
     }

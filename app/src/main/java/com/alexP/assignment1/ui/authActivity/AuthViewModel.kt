@@ -24,17 +24,14 @@ class AuthViewModel(
 
     init {
         viewModelScope.launch {
+            val (email, password) = dataStore.getCredentials().first()
             _authState.update {
                 it.copy(
-                    username = dataStore.readUsername().first(),
-                    isAutologin = dataStore.credentialsAreNotEmpty().first()
+                    isAutologin = email.isNotEmpty() && password.isNotEmpty()
                 )
             }
-            dataStore.readUsername().collect { username ->
-                _authState.update { it.copy(username = username) }
-            }
-            dataStore.credentialsAreNotEmpty().collect { credentialsAreNotEmpty ->
-                _authState.update { it.copy(isAutologin = credentialsAreNotEmpty) }
+            dataStore.getCredentials().collect { (email, password) ->
+                _authState.update { it.copy(isAutologin = email.isNotEmpty() && password.isNotEmpty()) }
             }
         }
     }
@@ -45,11 +42,6 @@ class AuthViewModel(
         }
     }
 
-    fun saveUsername(username: String) {
-        viewModelScope.launch {
-            dataStore.saveUsername(username)
-        }
-    }
 
     fun validateEmailVm(email: String): ValidationResult {
         return validateEmail(email)

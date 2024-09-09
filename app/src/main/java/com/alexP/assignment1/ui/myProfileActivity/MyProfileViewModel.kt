@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import androidx.lifecycle.viewmodel.initializer
 import androidx.lifecycle.viewmodel.viewModelFactory
+import com.alexP.assignment1.utils.parseEmail
 import com.alexp.datastore.data.DataStoreProvider
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -20,9 +21,10 @@ class MyProfileViewModel(
 
     init {
         viewModelScope.launch {
-            dataStore.readUsername().collect { username ->
+            dataStore.readEmail().collect { email ->
+                val formattedName = parseEmail(email)
                 _myProfileState.update {
-                    MyProfileState(username = username)
+                    MyProfileState(username = formattedName)
                 }
             }
         }

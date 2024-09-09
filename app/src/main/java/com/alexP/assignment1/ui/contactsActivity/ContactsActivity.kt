@@ -137,7 +137,7 @@ class ContactsActivity : BaseActivity<ActivityContactsBinding>() {
         transaction
             .add(android.R.id.content, AddContactFragment::class.java, null)
             .addToBackStack(null)
-            .commit()
+        transaction.commit()
     }
 
     private fun deleteContact(contact: Contact) {

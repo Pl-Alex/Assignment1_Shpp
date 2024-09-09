@@ -39,7 +39,7 @@ fun parseEmail(email: String): String {
     return namePart.split('.')
         .joinToString(" ") { it ->
             it.replaceFirstChar {
-                if (it.isLowerCase()) it.titlecase(Locale.getDefault()) else it.toString()
+                it.titlecase(Locale.getDefault())
             }
         }
 }
