@@ -1,3 +1,5 @@
+enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
+
 pluginManagement {
     repositories {
         google()
@@ -20,4 +22,5 @@ dependencyResolutionManagement {
 
 rootProject.name = "Assignment1"
 include(":app")
- 
+include(":core:textvalidation")
+include(":core:datastore")
