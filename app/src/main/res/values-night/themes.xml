@@ -1,26 +1,33 @@
 <resources>
     <!-- Base application theme. -->
     <style name="Base.Theme.Assignment1" parent="Theme.Material3.DayNight.NoActionBar">
-        <item name="colorPrimary">@color/dark_gray</item>
-        <item name="colorSecondary">@color/orange</item>
 
-        <item name="colorBackgroundFloating">@color/dark_gray</item>
+        <item name="colorSurface">@color/dark_grey</item>
+        <item name="colorSurfaceVariant">@color/blue</item>
+
+        <item name="colorOnSurface">@color/light_grey_1</item>
+        <item name="colorOnSurfaceVariant">@color/white</item>
+
+        <item name="colorOutline">@color/light_grey_1</item>
+        <item name="colorOutlineVariant">@color/light_grey_2</item>
 
         <item name="colorOnPrimary">@color/white</item>
-        <item name="colorOnSecondary">@color/white</item>
-        <item name="colorOnBackground">@color/white</item>
+        <item name="colorPrimary">@color/blue</item>
+        <item name="colorSecondary">@color/white</item>
+
+
         <item name="colorError">@color/red</item>
-        <item name="android:textColorHint">@color/orange</item>
-        <item name="colorOutline">@color/light_gray_1</item>
+        <item name="colorAccent">@color/orange</item>
+
 
         <item name="textAppearanceHeadlineMedium">@style/TextAppearance.Assignment1.HeadlineMedium
+        </item>
+        <item name="textAppearanceHeadlineSmall">@style/TextAppearance.Assignment1.HeadlineSmall
         </item>
         <item name="textAppearanceLabelLarge">@style/TextAppearance.Assignment1.LabelLarge</item>
         <item name="textAppearanceLabelMedium">@style/TextAppearance.Assignment1.LabelMedium</item>
         <item name="textAppearanceLabelSmall">@style/TextAppearance.Assignment1.LabelSmall</item>
         <item name="textAppearanceBodyMedium">@style/TextAppearance.Assignment1.BodyMedium</item>
-
-        <item name="textInputFilledStyle">@style/TextInputLayoutStyle</item>
     </style>
 
     <style name="Theme.Assignment1" parent="Base.Theme.Assignment1" />

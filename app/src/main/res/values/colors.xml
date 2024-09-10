@@ -4,7 +4,8 @@
     <color name="black">#000</color>
     <color name="blue">#242235</color>
     <color name="orange">#FB5E06</color>
-    <color name="light_gray_1">#B2B2B3</color>
-    <color name="dark_gray">#212121</color>
+    <color name="light_grey_1">#B2B2B3</color>
+    <color name="dark_grey">#212121</color>
     <color name="red">#FF0000</color>
+    <color name="light_grey_2">#828282</color>
 </resources>
