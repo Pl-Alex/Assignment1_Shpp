@@ -12,7 +12,7 @@
     <string name="auth_activity_register">Зареєструватись</string>
     <string name="auth_activity_terms_and_conditions">Натискаючи Зареєструватись ви погоджуєтесь з нашими</string>
     <string name="auth_activity_already_have_an_account">Вже маєте акаунт?</string>
-    <string name="auth_activity_sing_in">Увійти</string>
+    <string name="auth_activity_sign_in">Увійти</string>
     <string name="auth_activity_or">або</string>
     <string name="auth_activity_lets_get_acquainted">Давай знайомитись</string>
     <string name="text_validation_error_empty_field">Заповніть пусте поле!</string>
@@ -21,4 +21,16 @@
     <string name="text_validation_error_max_pass_length">Пароль повинен бути меншим за 24 знаки</string>
     <string name="text_validation_error_contain_invalid_characters">Пароль мусить містити тільки A-Z,  a-z, числа або спеціальні символи</string>
     <string name="text_validation_error_needs_specified_characters">Пароль мусить містити як мінімум один знак кожного типу: A-Z,  a-z, числа або спеціальні символи</string>
+    <string name="item_contact_delete_contact">Видалити контакт</string>
+    <string name="item_contact_name_surname">Повне ім\'я</string>
+    <string name="item_contact_career">Діяльність</string>
+    <string name="contacts_activity_contacts">Контакти</string>
+    <string name="add_contact_image">додати фото</string>
+    <string name="save">зберегти</string>
+    <string name="phone">Телефон</string>
+    <string name="address">Адреса</string>
+    <string name="dateOfBirth">Дата народження</string>
+    <string name="contact_deleted">Контакт видалено</string>
+    <string name="contacts_activity_add_contacts">Додати контакт</string>
+    <string name="search">Пошук</string>
 </resources>

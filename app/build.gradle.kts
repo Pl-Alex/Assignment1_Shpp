@@ -5,11 +5,11 @@ plugins {
 
 
 android {
-    namespace = "com.alexP.assignment1"
+    namespace = "com.alexP.socialnetwork"
     compileSdk = 34
 
     defaultConfig {
-        applicationId = "com.alexP.assignment1"
+        applicationId = "com.alexP.socialnetwork"
         minSdk = 24
         targetSdk = 33
         versionCode = 1
@@ -41,8 +41,13 @@ android {
 
 dependencies {
 
+    implementation(projects.core.datastore)
+    implementation(projects.core.textvalidation)
+
+
     // AndroidX Core KTX for Kotlin extensions
     implementation(libs.androidx.ktx)
+    implementation(libs.androidx.activity.ktx)
 
     // AndroidX AppCompat for backward-compatible UI features
     implementation(libs.androidx.appcompat)
@@ -70,9 +75,6 @@ dependencies {
     // Kotlin Coroutines for asynchronous programming
     implementation(libs.kotlinx.coroutines.android)
     implementation(libs.kotlinx.coroutines.core)
-
-    // DataStore for data storage using Kotlin Coroutines
-    implementation(libs.datastorePreferences)
 
     // AndroidX Lifecycle components for managing UI-related data
     implementation(libs.lifecycleRuntime)

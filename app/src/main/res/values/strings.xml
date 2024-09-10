@@ -1,5 +1,5 @@
-<resources>
-    <string name="my_profile_activity_app_name">Assignment1</string>
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <string name="my_profile_activity_app_name" tools:ignore="Typos">Assignment1</string>
     <string name="my_profile_activity_log_out">Log out</string>
     <string name="my_profile_activity_settings">Settings</string>
     <string name="my_profile_activity_go_settings_tip">Go to settings and fill out the profile</string>
@@ -13,11 +13,10 @@
     <string name="auth_activity_terms_and_conditions">By clicking Register you agree to our
         Terms \nand Conditions</string>
     <string name="auth_activity_already_have_an_account">Already have an account?</string>
-    <string name="auth_activity_sing_in">Sing in</string>
+    <string name="auth_activity_sign_in">Sign in</string>
     <string name="auth_activity_google" translatable="false">Google</string>
     <string name="auth_activity_or">or</string>
     <string name="auth_activity_lets_get_acquainted">Let\'s get acquainted</string>
-    <string name="text_validation_success" translatable="false">validation success</string>
     <string name="text_validation_error_empty_field">Please, fill empty field!</string>
     <string name="text_validation_error_email">Please, enter correct email!</string>
     <string name="text_validation_error_min_pass_length">"Password must have at least 8 characters "</string>
@@ -29,4 +28,23 @@
     <string name="facebook" translatable="false">facebook</string>
     <string name="linkedin" translatable="false">linkedin</string>
     <string name="instagram" translatable="false">instagram</string>
+    <string name="item_contact_delete_contact">delete contact</string>
+    <string name="item_contact_name_surname">Name Surname</string>
+    <string name="item_contact_career">Career</string>
+    <string name="contacts_activity_contacts">Contacts</string>
+    <string name="add_contact_image">add contact image</string>
+    <string name="save">save</string>
+    <string name="username" translatable="false">Username</string>
+    <string name="email" translatable="false">Email</string>
+    <string name="phone">Phone</string>
+    <string name="address">Address</string>
+    <string name="dateOfBirth">Date of birth</string>
+    <string name="email_address_hint" translatable="false">name@gmail.com</string>
+    <string name="phone_hint" translatable="false">(264)–654–3762</string>
+    <string name="undo" translatable="false">UNDO</string>
+    <string name="contact_deleted">Contact deleted</string>
+    <string name="permission_not_granted" translatable="false">Permission Not Granted</string>
+    <string name="contacts_activity_add_contacts">Add contact</string>
+    <string name="search">search</string>
+
 </resources>

@@ -1,4 +1,5 @@
 [versions]
+activityKtx = "1.9.2"
 ktx = "1.12.0"
 appcompat = "1.6.1"
 coroutine = "1.7.3"
@@ -9,8 +10,12 @@ glide = "4.12.0"
 junit = "4.13.2"
 testExtJUnit = "1.1.5"
 espresso = "3.5.1"
-datastore = "1.0.0"
+datastore = "1.1.1"
+jetbrainsKotlinJvm = "1.9.0"
+agp = "8.1.2"
+kotlin = "1.9.0"
 [libraries]
+androidx-activity-ktx = { module = "androidx.activity:activity-ktx", version.ref = "activityKtx" }
 androidx-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "ktx" }
 androidx-appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "appcompat" }
 kotlinx-coroutines-android = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-android", version.ref = "coroutine" }
@@ -25,3 +30,6 @@ testExtJUnit = { group = "androidx.test.ext", name = "junit", version.ref = "tes
 espressoCore = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espresso" }
 datastorePreferences = { group = "androidx.datastore", name = "datastore-preferences", version.ref = "datastore" }
 [plugins]
+jetbrains-kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "jetbrainsKotlinJvm" }
+android-library = { id = "com.android.library", version.ref = "agp" }
+jetbrains-kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
