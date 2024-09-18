@@ -16,7 +16,7 @@
         tools:targetApi="33">
 
         <activity
-            android:name=".ui.screens.signup.AuthActivity"
+            android:name=".ui.screens.contacts.ContactsActivity"
             android:exported="true">
 
             <intent-filter>
