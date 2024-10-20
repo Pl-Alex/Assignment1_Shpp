@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.alexP.socialnetwork.databinding.ItemContactBinding
+import com.alexP.socialnetwork.utils.loadCircularImage
 import com.alexp.contactsprovider.Contact
 
 class ContactsAdapter : ListAdapter<Contact, ContactsAdapter.ContactsViewHolder>(ContactsDiffCallback()) {
@@ -28,6 +29,7 @@ class ContactsAdapter : ListAdapter<Contact, ContactsAdapter.ContactsViewHolder>
             with(binding) {
                 textViewContactFullName.text = contact.fullName
                 textViewContactCareer.text = contact.career
+                imageViewContactImage.loadCircularImage(contact.photo)
             }
         }
     }

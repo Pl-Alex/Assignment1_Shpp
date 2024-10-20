@@ -19,7 +19,7 @@ class ContactsProvider {
             Contact(
                 id = it.toLong(),
                 phone = faker.phoneNumber().phoneNumber(),
-                photo = "",
+                photo = IMAGE_LINK,
                 fullName = faker.name().name(),
                 career = faker.job().title(),
                 email = faker.internet().emailAddress(),
@@ -36,6 +36,11 @@ class ContactsProvider {
 
     fun removeListener(listener: ContactsListener) {
         listeners.remove(listener)
+    }
+
+    companion object {
+        const val IMAGE_LINK =
+            "https://unsplash.com/photos/_vnKbf9K-Vo/download?ixid=M3wxMjA3fDB8MXxhbGx8MTE4fHx8fHx8Mnx8MTcwMTgxMDA2MHw&force=true&w=640"
     }
 
 }
