@@ -132,20 +132,11 @@
         app:layout_constraintStart_toStartOf="@id/leftGuideline"
         app:layout_constraintTop_toBottomOf="@id/inputLayoutPassword" />
 
-    <Button
+    <com.alexP.socialnetwork.utils.customViews.GoogleCustomButton
         android:id="@+id/buttonSingInGoogle"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/auth_layout_button_singInGoogle_margin_bottom"
-        android:backgroundTint="@color/white"
-        android:text="@string/auth_activity_google"
-        android:textAllCaps="true"
-        android:textAppearance="?attr/textAppearanceLabelMedium"
-        android:textColor="@color/black"
-        app:cornerRadius="@dimen/auth_activity_button_signInGoogle_cornerRadius"
-        app:icon="@drawable/google_logo"
-        app:iconGravity="textStart"
-        app:iconTint="@null"
         app:layout_constraintBottom_toTopOf="@id/textViewOrLabel"
         app:layout_constraintEnd_toEndOf="@id/rightGuideline"
         app:layout_constraintStart_toStartOf="@id/leftGuideline" />
