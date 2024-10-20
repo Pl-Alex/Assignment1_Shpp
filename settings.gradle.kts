@@ -24,3 +24,4 @@ rootProject.name = "Assignment1"
 include(":app")
 include(":core:textvalidation")
 include(":core:datastore")
+include(":core:contactsprovider")

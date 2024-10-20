@@ -4,7 +4,7 @@ plugins {
 }
 
 android {
-    namespace = "com.alexp.datastore"
+    namespace = "com.alexp.contactsprovider"
     compileSdk = 34
 
     defaultConfig {
@@ -33,14 +33,12 @@ android {
 }
 
 dependencies {
+    // Fake data generation
+    implementation(libs.javaFaker)
 
     implementation(libs.androidx.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.material)
-
-    // DataStore for data storage using Kotlin Coroutines
-    implementation(libs.datastorePreferences)
-
     testImplementation(libs.junit)
     androidTestImplementation(libs.testExtJUnit)
     androidTestImplementation(libs.espressoCore)

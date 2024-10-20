@@ -13,7 +13,6 @@ import com.alexP.socialnetwork.databinding.ActivityAuthBinding
 import com.alexP.socialnetwork.ui.screens.base.BaseActivity
 import com.alexP.socialnetwork.ui.screens.myprofile.MyProfileActivity
 import com.alexP.socialnetwork.utils.getValidationResultMessage
-import com.alexP.socialnetwork.utils.parseEmail
 import com.alexp.datastore.DataStoreProvider
 import com.alexp.textvalidation.validator.base.ValidationResult
 import kotlinx.coroutines.launch

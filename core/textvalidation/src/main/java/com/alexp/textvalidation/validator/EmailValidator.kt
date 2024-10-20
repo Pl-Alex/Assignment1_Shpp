@@ -17,7 +17,7 @@ class EmailValidator(private val email: String) : BaseValidator() {
                     "\\." +
                     "[a-zA-Z0-9][a-zA-Z0-9\\-]{0,25}" +
                     ")+")
-        );
+        )
 
         return if (patternEmailAddress.matcher(email).matches())
             SUCCESS else EMAIL_FAILED

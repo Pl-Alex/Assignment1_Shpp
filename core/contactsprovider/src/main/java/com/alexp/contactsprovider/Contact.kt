@@ -1,4 +1,4 @@
-package com.alexP.socialnetwork.ui.screens.contacts
+package com.alexp.contactsprovider
 
 data class Contact(
     val id: Long,
