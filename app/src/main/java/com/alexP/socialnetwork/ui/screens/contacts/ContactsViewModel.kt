@@ -50,6 +50,10 @@ class ContactsViewModel(
         deletedContacts.clear()
     }
 
+    fun addContact(contact: Contact) {
+        contactsServices.addContact(contact.copy(id = contactsServices.getNewId()))
+    }
+
     fun addContacts(contentResolver: ContentResolver) {
         val contacts = contactsServices.fetchContacts(contentResolver)
         for (contact in contacts) {

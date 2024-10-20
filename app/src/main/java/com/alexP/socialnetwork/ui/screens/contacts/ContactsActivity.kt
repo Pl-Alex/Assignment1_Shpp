@@ -1,12 +1,15 @@
 package com.alexP.socialnetwork.ui.screens.contacts
 
 import android.Manifest
+import android.app.ActivityOptions
+import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Bundle
 import android.view.LayoutInflater
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import androidx.core.content.ContextCompat
+import androidx.fragment.app.FragmentTransaction
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -14,7 +17,10 @@ import androidx.recyclerview.widget.RecyclerView
 import com.alexP.socialnetwork.App
 import com.alexP.socialnetwork.R
 import com.alexP.socialnetwork.databinding.ActivityContactsBinding
+import com.alexP.socialnetwork.ui.screens.addcontact.AddContactFragment
+import com.alexP.socialnetwork.ui.screens.addcontact.MyFragmentFactory
 import com.alexP.socialnetwork.ui.screens.base.BaseActivity
+import com.alexP.socialnetwork.ui.screens.signup.AuthActivity
 import com.alexP.socialnetwork.utils.SpacingItemDecorator
 import com.alexp.contactsprovider.Contact
 import com.google.android.material.snackbar.Snackbar
@@ -43,21 +49,48 @@ class ContactsActivity : BaseActivity<ActivityContactsBinding>() {
             }
         }
 
+    private val onSaveAction: (Contact) -> Unit = { contact: Contact ->
+        vm.addContact(contact)
+    }
+
     override fun inflate(inflater: LayoutInflater): ActivityContactsBinding {
         return ActivityContactsBinding.inflate(inflater)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        supportFragmentManager.fragmentFactory = MyFragmentFactory(onSaveAction)
         super.onCreate(savedInstanceState)
 
         setRecyclerView()
+        setListeners()
         tryToLoadContactsFromDevice()
+    }
+
+    private fun setListeners() {
+        binding.addContactButton.setOnClickListener {
+            showAddContactDialog()
+        }
+        binding.topAppBar.setNavigationOnClickListener {
+            startActivity(
+                Intent(this, AuthActivity::class.java),
+                ActivityOptions.makeSceneTransitionAnimation(this).toBundle()
+            )
+            finish()
+        }
     }
 
     private fun setRecyclerView() {
         adapter = ContactsAdapter(object : IContactActionListener {
             override fun onContactDelete(contact: Contact) {
                 deleteContact(contact)
+            }
+        })
+
+        adapter.registerAdapterDataObserver(object :
+            RecyclerView.AdapterDataObserver() {
+            override fun onItemRangeInserted(positionStart: Int, itemCount: Int) {
+                if (positionStart == 0)
+                    binding.recyclerView.scrollToPosition(positionStart)
             }
         })
 
@@ -96,6 +129,16 @@ class ContactsActivity : BaseActivity<ActivityContactsBinding>() {
         if (itemAnimator is DefaultItemAnimator) {
             itemAnimator.supportsChangeAnimations = false
         }
+    }
+
+    private fun showAddContactDialog() {
+        val fragmentManager = supportFragmentManager
+        val transaction = fragmentManager.beginTransaction()
+        transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
+        transaction
+            .add(android.R.id.content, AddContactFragment::class.java, null)
+            .addToBackStack(null)
+        transaction.commit()
     }
 
     private fun deleteContact(contact: Contact) {

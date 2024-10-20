@@ -48,7 +48,7 @@ dependencies {
 
     // AndroidX Core KTX for Kotlin extensions
     implementation(libs.androidx.ktx)
-    implementation(libs.androidx.activity.ktx)
+    implementation(libs.androidx.fragment.ktx)
 
     // AndroidX AppCompat for backward-compatible UI features
     implementation(libs.androidx.appcompat)

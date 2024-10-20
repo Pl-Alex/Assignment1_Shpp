@@ -1,5 +1,5 @@
 [versions]
-activityKtx = "1.9.3"
+fragmentKtx = "1.8.4"
 ktx = "1.13.1"
 appcompat = "1.7.0"
 coroutine = "1.8.0"
@@ -16,8 +16,8 @@ agp = "8.6.1"
 kotlin = "1.9.10"
 javafaker = "1.0.2"
 [libraries]
-androidx-activity-ktx = { module = "androidx.activity:activity-ktx", version.ref = "activityKtx" }
 androidx-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "ktx" }
+androidx-fragment-ktx = { module = "androidx.fragment:fragment-ktx", version.ref = "fragmentKtx" }
 androidx-appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "appcompat" }
 kotlinx-coroutines-android = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-android", version.ref = "coroutine" }
 kotlinx-coroutines-core = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-core", version.ref = "coroutine" }
