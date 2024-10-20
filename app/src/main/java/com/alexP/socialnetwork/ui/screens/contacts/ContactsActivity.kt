@@ -100,6 +100,16 @@ class ContactsActivity : BaseActivity<ActivityContactsBinding>() {
 
     private fun deleteContact(contact: Contact) {
         vm.deleteContact(contact)
+
+        val snackbar = Snackbar.make(
+            binding.root,
+            getString(R.string.contact_deleted),
+            Snackbar.LENGTH_LONG
+        )
+        snackbar.setAction(getString(R.string.undo)) {
+            vm.recoverContacts()
+        }
+        snackbar.show()
     }
 
     private fun loadContactsFromDevice() {

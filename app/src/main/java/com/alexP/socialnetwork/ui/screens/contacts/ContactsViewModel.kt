@@ -11,6 +11,7 @@ import androidx.lifecycle.viewmodel.viewModelFactory
 import com.alexp.contactsprovider.Contact
 import com.alexp.contactsprovider.ContactsListener
 import com.alexp.contactsprovider.ContactsProvider
+import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
@@ -22,6 +23,8 @@ class ContactsViewModel(
     val contacts: LiveData<List<Contact>> = _contacts
 
     private val deletedContacts = mutableListOf<Contact>()
+
+    private var cleanDeletedContactsJob: Job? = null
 
     private val listener: ContactsListener = {
         _contacts.value = it
@@ -40,6 +43,13 @@ class ContactsViewModel(
         contactsServices.addListener(listener)
     }
 
+    fun recoverContacts() {
+        deletedContacts.forEach {
+            contactsServices.addContact(it)
+        }
+        deletedContacts.clear()
+    }
+
     fun addContacts(contentResolver: ContentResolver) {
         val contacts = contactsServices.fetchContacts(contentResolver)
         for (contact in contacts) {
@@ -51,6 +61,11 @@ class ContactsViewModel(
         if (deletedContacts.contains(contact)) return
         deletedContacts.add(contact)
         contactsServices.deleteContact(contact)
+
+        cleanDeletedContactsJob = viewModelScope.launch {
+            delay(5000)
+            deletedContacts.remove(contact)
+        }
     }
 
     companion object {

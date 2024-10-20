@@ -21,7 +21,7 @@ class ContactsProvider {
             Contact(
                 id = it.toLong(),
                 phone = faker.phoneNumber().phoneNumber(),
-                photo = IMAGE_LINK,
+                photo = "",
                 fullName = faker.name().name(),
                 career = faker.job().title(),
                 email = faker.internet().emailAddress(),
@@ -105,10 +105,4 @@ class ContactsProvider {
         }
         return contacts
     }
-
-    companion object {
-        const val IMAGE_LINK =
-            "https://unsplash.com/photos/_vnKbf9K-Vo/download?ixid=M3wxMjA3fDB8MXxhbGx8MTE4fHx8fHx8Mnx8MTcwMTgxMDA2MHw&force=true&w=640"
-    }
-
 }
