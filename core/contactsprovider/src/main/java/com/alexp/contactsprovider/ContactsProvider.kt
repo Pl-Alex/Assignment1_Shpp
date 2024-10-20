@@ -44,6 +44,15 @@ class ContactsProvider {
         return contacts.first().id + 1
     }
 
+    fun deleteContact(contact: Contact) {
+        val indexToDelete = contacts.indexOfFirst { it.id == contact.id }
+        if (indexToDelete != -1) {
+            contacts = ArrayList(contacts)
+            contacts.removeAt(indexToDelete)
+            notifyChanges()
+        }
+    }
+
     fun addContact(contact: Contact) {
         val newContacts = ArrayList(contacts)
         newContacts.add(0, contact)

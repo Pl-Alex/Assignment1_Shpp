@@ -5,11 +5,14 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.viewModelScope
 import androidx.lifecycle.viewmodel.initializer
 import androidx.lifecycle.viewmodel.viewModelFactory
 import com.alexp.contactsprovider.Contact
 import com.alexp.contactsprovider.ContactsListener
 import com.alexp.contactsprovider.ContactsProvider
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
 class ContactsViewModel(
     private val contactsServices: ContactsProvider,
@@ -17,6 +20,8 @@ class ContactsViewModel(
 
     private val _contacts = MutableLiveData<List<Contact>>()
     val contacts: LiveData<List<Contact>> = _contacts
+
+    private val deletedContacts = mutableListOf<Contact>()
 
     private val listener: ContactsListener = {
         _contacts.value = it
@@ -40,6 +45,12 @@ class ContactsViewModel(
         for (contact in contacts) {
             contactsServices.addContact(contact.copy(id = contactsServices.getNewId()))
         }
+    }
+
+    fun deleteContact(contact: Contact) {
+        if (deletedContacts.contains(contact)) return
+        deletedContacts.add(contact)
+        contactsServices.deleteContact(contact)
     }
 
     companion object {
