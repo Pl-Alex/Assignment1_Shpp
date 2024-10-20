@@ -1,5 +1,6 @@
 package com.alexP.socialnetwork.ui.screens.contacts
 
+import android.content.ContentResolver
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -32,6 +33,13 @@ class ContactsViewModel(
 
     private fun loadContacts() {
         contactsServices.addListener(listener)
+    }
+
+    fun addContacts(contentResolver: ContentResolver) {
+        val contacts = contactsServices.fetchContacts(contentResolver)
+        for (contact in contacts) {
+            contactsServices.addContact(contact.copy(id = contactsServices.getNewId()))
+        }
     }
 
     companion object {
