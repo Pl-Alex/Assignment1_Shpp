@@ -13,5 +13,10 @@ class ContactsDetailsFragment : Fragment(R.layout.fragment_contact_details) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentContactDetailsBinding.bind(view)
+
+        binding.topBar.setNavigationOnClickListener {
+            requireActivity().onBackPressedDispatcher.onBackPressed()
+        }
+
     }
 }

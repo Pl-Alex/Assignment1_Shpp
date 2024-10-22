@@ -50,6 +50,9 @@ dependencies {
     implementation(libs.androidx.ktx)
     implementation(libs.androidx.fragment.ktx)
 
+    implementation(libs.androidx.navigation.fragment.ktx)
+    implementation(libs.androidx.navigation.ui.ktx)
+
     // AndroidX AppCompat for backward-compatible UI features
     implementation(libs.androidx.appcompat)
 

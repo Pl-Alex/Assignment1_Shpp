@@ -1,10 +1,13 @@
 package com.alexP.socialnetwork.ui.screens.contacts
 
+import android.util.Log
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.alexP.socialnetwork.R
 import com.alexP.socialnetwork.databinding.ItemContactBinding
 import com.alexP.socialnetwork.utils.loadCircularImage
 import com.alexp.contactsprovider.Contact
@@ -32,8 +35,16 @@ class ContactsAdapter(
             with(binding) {
                 textViewContactFullName.text = contact.fullName
                 textViewContactCareer.text = contact.career
-                imageViewContactImage.loadCircularImage(contact.photo)
-                buttonTrash.setOnClickListener {
+                if (contact.photo.isNotBlank()) {
+                    imageViewContactImage.loadCircularImage(contact.photo)
+                } else {
+                    imageViewContactImage.setImageResource(R.drawable.default_contact_image)
+                }
+
+                binding.root.setOnClickListener{
+                    userActionListener.onContactDetails(contact)
+                }
+                binding.buttonTrash.setOnClickListener{
                     userActionListener.onContactDelete(contact)
                 }
             }

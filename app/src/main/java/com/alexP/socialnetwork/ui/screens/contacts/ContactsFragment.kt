@@ -8,6 +8,7 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -76,6 +77,10 @@ class ContactsFragment : Fragment(R.layout.fragment_contacts) {
         adapter = ContactsAdapter(object : IContactActionListener {
             override fun onContactDelete(contact: Contact) {
                 deleteContact(contact)
+            }
+
+            override fun onContactDetails(contact: Contact) {
+                findNavController().navigate(R.id.action_contactsFragment_to_contactsDetailsFragment)
             }
         })
 
