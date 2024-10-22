@@ -3,10 +3,11 @@ package com.alexP.socialnetwork.ui.screens.contacts
 import android.Manifest
 import android.content.pm.PackageManager
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DefaultItemAnimator
@@ -16,14 +17,14 @@ import androidx.recyclerview.widget.RecyclerView
 import com.alexP.socialnetwork.App
 import com.alexP.socialnetwork.R
 import com.alexP.socialnetwork.databinding.FragmentContactsBinding
+import com.alexP.socialnetwork.ui.screens.base.BaseFragment
 import com.alexP.socialnetwork.utils.SpacingItemDecorator
 import com.alexp.contactsprovider.Contact
 import com.google.android.material.snackbar.Snackbar
 
 
-class ContactsFragment : Fragment(R.layout.fragment_contacts) {
+class ContactsFragment : BaseFragment<FragmentContactsBinding>() {
 
-    private lateinit var binding: FragmentContactsBinding
     private lateinit var adapter: ContactsAdapter
 
     private val vm: ContactsViewModel by viewModels {
@@ -46,6 +47,10 @@ class ContactsFragment : Fragment(R.layout.fragment_contacts) {
             }
         }
 
+    override fun inflate(inflater: LayoutInflater, container: ViewGroup?): FragmentContactsBinding {
+        return FragmentContactsBinding.inflate(inflater, container, false)
+    }
+
     private val onSaveAction: (Contact) -> Unit = { contact: Contact ->
         vm.addContact(contact)
     }
@@ -53,7 +58,6 @@ class ContactsFragment : Fragment(R.layout.fragment_contacts) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 //        supportFragmentManager.fragmentFactory = MyFragmentFactory(onSaveAction)
         super.onViewCreated(view, savedInstanceState)
-        binding = FragmentContactsBinding.bind(view)
 
         setRecyclerView()
         setListeners()
