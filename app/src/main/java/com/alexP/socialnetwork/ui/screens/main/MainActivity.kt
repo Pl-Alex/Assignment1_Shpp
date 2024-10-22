@@ -1,12 +1,6 @@
 package com.alexP.socialnetwork.ui.screens.main
 
-import android.view.LayoutInflater
-import com.alexP.socialnetwork.databinding.ActivityMainBinding
-import com.alexP.socialnetwork.ui.screens.base.BaseActivity
+import androidx.appcompat.app.AppCompatActivity
+import com.alexP.socialnetwork.R
 
-class MainActivity : BaseActivity<ActivityMainBinding>() {
-    override fun inflate(inflater: LayoutInflater): ActivityMainBinding {
-        return ActivityMainBinding.inflate(inflater)
-    }
-
-}
+class MainActivity : AppCompatActivity(R.layout.activity_main)

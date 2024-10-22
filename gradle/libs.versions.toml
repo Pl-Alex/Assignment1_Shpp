@@ -1,42 +1,59 @@
 [versions]
+
+android-gradlePlugin = "8.6.1"
+
+kotlin = "1.9.10"
 fragmentKtx = "1.8.4"
 ktx = "1.13.1"
 appcompat = "1.7.0"
 coroutine = "1.8.0"
-material = "1.12.0"
-constraintLayout = "2.1.4"
 lifecycle = "2.8.6"
+datastore = "1.1.1"
+navigationKtx = "2.8.3"
+javafaker = "1.0.2"
+
+# UI Tools
+material = "1.12.0"
 glide = "4.16.0"
+constraintLayout = "2.1.4"
+
+# Test
 junit = "4.13.2"
 testExtJUnit = "1.2.1"
 espresso = "3.6.1"
-datastore = "1.1.1"
+
+# Gradle plugins
 jetbrainsKotlinJvm = "1.9.0"
-agp = "8.6.1"
-kotlin = "1.9.10"
-javafaker = "1.0.2"
-navigationFragmentKtx = "2.8.3"
-navigationUiKtx = "2.8.3"
+
 [libraries]
-androidx-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "ktx" }
+
+androidx-ktx = { module = "androidx.core:core-ktx", version.ref = "ktx" }
 androidx-fragment-ktx = { module = "androidx.fragment:fragment-ktx", version.ref = "fragmentKtx" }
-androidx-appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "appcompat" }
-kotlinx-coroutines-android = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-android", version.ref = "coroutine" }
-kotlinx-coroutines-core = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-core", version.ref = "coroutine" }
-material = { group = "com.google.android.material", name = "material", version.ref = "material" }
-constraintLayout = { group = "androidx.constraintlayout", name = "constraintlayout", version.ref = "constraintLayout" }
-lifecycleRuntime = { group = "androidx.lifecycle", name = "lifecycle-runtime-ktx", version.ref = "lifecycle" }
-lifecycleViewmodel = { group = "androidx.lifecycle", name = "lifecycle-viewmodel-ktx", version.ref = "lifecycle" }
-glide = { group = "com.github.bumptech.glide", name = "glide", version.ref = "glide" }
-junit = { group = "junit", name = "junit", version.ref = "junit" }
-testExtJUnit = { group = "androidx.test.ext", name = "junit", version.ref = "testExtJUnit" }
-espressoCore = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espresso" }
-datastorePreferences = { group = "androidx.datastore", name = "datastore-preferences", version.ref = "datastore" }
-javaFaker = { group = "com.github.javafaker", name = "javafaker", version.ref = "javafaker"}
-androidx-navigation-fragment-ktx = { group = "androidx.navigation", name = "navigation-fragment-ktx", version.ref = "navigationFragmentKtx" }
-androidx-navigation-ui-ktx = { group = "androidx.navigation", name = "navigation-ui-ktx", version.ref = "navigationUiKtx" }
+androidx-navigation-fragment-ktx = { module = "androidx.navigation:navigation-fragment-ktx", version.ref = "navigationKtx" }
+androidx-navigation-ui-ktx = { module = "androidx.navigation:navigation-ui-ktx", version.ref = "navigationKtx" }
+androidx-appcompat = { module = "androidx.appcompat:appcompat", version.ref = "appcompat" }
+androidx-datastorePreferences = { module = "androidx.datastore:datastore-preferences", version.ref = "datastore" }
+
+kotlinx-coroutines-android = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-android", version.ref = "coroutine" }
+kotlinx-coroutines-core = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "coroutine" }
+
+lifecycleRuntime = { module = "androidx.lifecycle:lifecycle-runtime-ktx", version.ref = "lifecycle" }
+lifecycleViewmodel = { module = "androidx.lifecycle:lifecycle-viewmodel-ktx", version.ref = "lifecycle" }
+
+# UI Tools
+glide = { module = "com.github.bumptech.glide:glide", version.ref = "glide" }
+material = { module = "com.google.android.material:material", version.ref = "material" }
+constraintLayout = { module = "androidx.constraintlayout:constraintlayout", version.ref = "constraintLayout" }
+
+# Test
+junit = { module = "junit:junit", version.ref = "junit" }
+testExtJUnit = { module = "androidx.test.ext:junit", version.ref = "testExtJUnit" }
+espressoCore = { module = "androidx.test.espresso:espresso-core", version.ref = "espresso" }
+
+javaFaker = { module = "com.github.javafaker:javafaker", version.ref = "javafaker"}
+
 [plugins]
-androidApplication = {id = "com.android.application", version.ref = "agp"}
+androidApplication = {id = "com.android.application", version.ref = "android-gradlePlugin" }
 jetbrainsKotlin = {id = "org.jetbrains.kotlin.android", version.ref = "kotlin"}
 jetbrains-kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "jetbrainsKotlinJvm" }
-android-library = { id = "com.android.library", version.ref = "agp" }
+android-library = { id = "com.android.library", version.ref = "android-gradlePlugin" }

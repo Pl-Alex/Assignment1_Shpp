@@ -35,11 +35,7 @@ class ContactsAdapter(
             with(binding) {
                 textViewContactFullName.text = contact.fullName
                 textViewContactCareer.text = contact.career
-                if (contact.photo.isNotBlank()) {
-                    imageViewContactImage.loadCircularImage(contact.photo)
-                } else {
-                    imageViewContactImage.setImageResource(R.drawable.default_contact_image)
-                }
+                imageViewContactImage.loadCircularImage(contact.photo)
 
                 binding.root.setOnClickListener{
                     userActionListener.onContactDetails(contact)
