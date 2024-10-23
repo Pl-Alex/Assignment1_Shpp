@@ -1,4 +1,4 @@
-package com.alexP.socialnetwork.ui.screens.contacts
+package com.alexP.socialnetwork.ui.screens.contacts.adapter
 
 import com.alexp.contactsprovider.Contact
 

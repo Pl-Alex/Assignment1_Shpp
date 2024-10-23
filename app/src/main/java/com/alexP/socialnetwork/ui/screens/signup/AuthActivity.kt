@@ -10,7 +10,7 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import com.alexP.socialnetwork.databinding.ActivityAuthBinding
-import com.alexP.socialnetwork.ui.screens.base.BaseActivity
+import com.alexP.socialnetwork.ui.base.BaseActivity
 import com.alexP.socialnetwork.ui.screens.myprofile.MyProfileActivity
 import com.alexP.socialnetwork.utils.getValidationResultMessage
 import com.alexp.datastore.DataStoreProvider

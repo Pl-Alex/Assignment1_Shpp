@@ -1,13 +1,10 @@
-package com.alexP.socialnetwork.ui.screens.contacts
+package com.alexP.socialnetwork.ui.screens.contacts.adapter
 
-import android.util.Log
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.alexP.socialnetwork.R
 import com.alexP.socialnetwork.databinding.ItemContactBinding
 import com.alexP.socialnetwork.utils.loadCircularImage
 import com.alexp.contactsprovider.Contact

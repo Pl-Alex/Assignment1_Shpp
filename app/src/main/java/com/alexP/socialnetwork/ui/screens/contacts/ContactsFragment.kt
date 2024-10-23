@@ -17,7 +17,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.alexP.socialnetwork.App
 import com.alexP.socialnetwork.R
 import com.alexP.socialnetwork.databinding.FragmentContactsBinding
-import com.alexP.socialnetwork.ui.screens.base.BaseFragment
+import com.alexP.socialnetwork.ui.base.BaseFragment
+import com.alexP.socialnetwork.ui.screens.contacts.adapter.ContactsAdapter
+import com.alexP.socialnetwork.ui.screens.contacts.adapter.IContactActionListener
 import com.alexP.socialnetwork.utils.SpacingItemDecorator
 import com.alexp.contactsprovider.Contact
 import com.google.android.material.snackbar.Snackbar

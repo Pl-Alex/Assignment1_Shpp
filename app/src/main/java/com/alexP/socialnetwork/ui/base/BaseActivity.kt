@@ -1,4 +1,4 @@
-package com.alexP.socialnetwork.ui.screens.base
+package com.alexP.socialnetwork.ui.base
 
 import android.os.Bundle
 import android.view.LayoutInflater
