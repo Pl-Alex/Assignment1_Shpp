@@ -1,4 +1,4 @@
-package com.alexP.socialnetwork.ui.screens.contacts
+package com.alexP.socialnetwork.ui.screens.contacts.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -33,7 +33,11 @@ class ContactsAdapter(
                 textViewContactFullName.text = contact.fullName
                 textViewContactCareer.text = contact.career
                 imageViewContactImage.loadCircularImage(contact.photo)
-                buttonTrash.setOnClickListener {
+
+                binding.root.setOnClickListener{
+                    userActionListener.onContactDetails(contact)
+                }
+                binding.buttonTrash.setOnClickListener{
                     userActionListener.onContactDelete(contact)
                 }
             }

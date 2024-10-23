@@ -43,4 +43,5 @@
     <dimen name="my_profile_textView_career_top_margin">8dp</dimen>
     <dimen name="my_profile_textView_nameSurname_top_margin">24dp</dimen>
     <dimen name="my_profile_textView_settingsTip_bottom_margin">16dp</dimen>
+    <dimen name="contacts_profile_bottom_margin">150dp</dimen>
 </resources>

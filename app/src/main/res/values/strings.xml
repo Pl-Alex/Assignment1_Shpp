@@ -46,5 +46,7 @@
     <string name="permission_not_granted" translatable="false">Permission Not Granted</string>
     <string name="contacts_activity_add_contacts">Add contact</string>
     <string name="search">search</string>
+    <string name="profile">Profile</string>
+    <string name="message">message</string>
 
 </resources>

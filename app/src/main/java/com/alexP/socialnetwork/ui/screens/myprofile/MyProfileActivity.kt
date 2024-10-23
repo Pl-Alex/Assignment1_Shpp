@@ -8,7 +8,7 @@ import androidx.activity.viewModels
 import androidx.lifecycle.lifecycleScope
 import com.alexP.socialnetwork.databinding.ActivityMyProfileBinding
 import com.alexP.socialnetwork.ui.screens.signup.AuthActivity
-import com.alexP.socialnetwork.ui.screens.base.BaseActivity
+import com.alexP.socialnetwork.ui.base.BaseActivity
 import com.alexP.socialnetwork.utils.loadCircularImage
 import com.alexp.datastore.DataStoreProvider
 import kotlinx.coroutines.launch

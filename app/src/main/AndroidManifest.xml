@@ -18,7 +18,7 @@
         tools:targetApi="33">
 
         <activity
-            android:name=".ui.screens.contacts.ContactsActivity"
+            android:name=".ui.mainactivity.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

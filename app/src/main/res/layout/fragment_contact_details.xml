@@ -4,13 +4,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="?attr/colorBackgroundFloating">
+    android:background="?attr/colorSurface"
+    tools:context=".ui.screens.contactsdetails.ContactsDetailsFragment"
+    tools:layout_editor_absoluteX="0dp"
+    tools:layout_editor_absoluteY="0dp">
 
     <View
-        android:id="@+id/topContainer"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:background="?attr/colorPrimary"
+        android:background="?attr/colorSurfaceVariant"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHeight_percent="0.5"
         app:layout_constraintStart_toStartOf="parent"
@@ -44,46 +46,35 @@
         android:orientation="vertical"
         app:layout_constraintGuide_end="@dimen/my_profile_layout_margin" />
 
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/centralVerticalGuideline"
-        android:layout_width="wrap_content"
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/topbar_layout"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.5" />
+        android:background="?attr/colorSurfaceVariant"
+        app:layout_constraintTop_toTopOf="parent">
 
-    <TextView
-        android:id="@+id/textView_settings"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/my_profile_activity_settings"
-        android:textAppearance="?attr/textAppearanceHeadlineMedium"
-        android:textColor="?attr/colorOnPrimary"
-        app:layout_constraintBottom_toBottomOf="@id/button_log_out"
-        app:layout_constraintStart_toStartOf="@id/leftGuideline"
-        app:layout_constraintTop_toTopOf="@id/button_log_out" />
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/topBar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:minHeight="?attr/actionBarSize"
+            app:navigationIcon="@drawable/ic_back"
+            app:title="@string/profile"
+            app:titleCentered="true"
+            app:titleTextAppearance="?attr/textAppearanceHeadlineSmall"
+            app:titleTextColor="?attr/colorOnSurfaceVariant" />
 
-    <Button
-        android:id="@+id/button_log_out"
-        style="@style/Assignment1.BorderedButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:paddingHorizontal="@dimen/my_profile_button_log_out_padding_horizontal"
-        android:text="@string/my_profile_activity_log_out"
-        android:textAppearance="?attr/textAppearanceLabelSmall"
-        android:textColor="?attr/colorOutline"
-        app:layout_constraintEnd_toEndOf="@id/rightGuideline"
-        app:layout_constraintTop_toTopOf="@id/topGuideline"
-        app:strokeColor="?attr/colorOutline" />
+    </com.google.android.material.appbar.AppBarLayout>
 
 
     <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/imageView_profileImage"
         android:layout_width="@dimen/my_profile_picture_size"
         android:layout_height="@dimen/my_profile_picture_size"
-        android:layout_marginEnd="@dimen/my_profile_imageView_profileImage_end_margin"
         android:scaleType="centerCrop"
-        app:layout_constraintEnd_toEndOf="@id/centralVerticalGuideline"
-        app:layout_constraintTop_toBottomOf="@id/button_log_out"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/topbar_layout"
         app:shapeAppearanceOverlay="@style/rounded"
         app:srcCompat="@drawable/default_profile_image" />
 
@@ -94,9 +85,10 @@
         android:layout_marginTop="@dimen/my_profile_textView_nameSurname_top_margin"
         android:text="Name Surname"
         android:textAppearance="?attr/textAppearanceLabelLarge"
-        android:textColor="?attr/colorOnPrimary"
-        app:layout_constraintStart_toStartOf="@id/centralVerticalGuideline"
-        app:layout_constraintTop_toTopOf="@id/imageView_profileImage"
+        android:textColor="?attr/colorOnSurfaceVariant"
+        app:layout_constraintEnd_toEndOf="@id/imageView_profileImage"
+        app:layout_constraintStart_toStartOf="@id/imageView_profileImage"
+        app:layout_constraintTop_toBottomOf="@id/imageView_profileImage"
         tools:ignore="HardcodedText" />
 
     <TextView
@@ -123,59 +115,35 @@
         app:layout_constraintStart_toStartOf="@id/textView_career"
         app:layout_constraintTop_toBottomOf="@id/textView_career" />
 
-    <TextView
-        android:id="@+id/textView_goToSettings"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/my_profile_textView_settingsTip_bottom_margin"
-        android:text="@string/my_profile_activity_go_settings_tip"
-        android:textAppearance="?attr/textAppearanceLabelSmall"
-        android:textColor="?attr/colorOnBackground"
-        app:layout_constraintBottom_toTopOf="@id/button_editProfile"
-        app:layout_constraintEnd_toEndOf="@id/button_editProfile"
-        app:layout_constraintStart_toStartOf="@id/button_editProfile" />
-
     <Button
-        android:id="@+id/button_editProfile"
-        style="@style/Assignment1.BorderedButton"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/my_profile_button_editProfile_bottom_margin16dp"
-        android:text="@string/my_profile_activity_edit_profile"
-        android:textAppearance="?attr/textAppearanceLabelSmall"
-        android:textColor="?attr/colorOnBackground"
-        app:layout_constraintBottom_toTopOf="@id/button_viewMyContacts"
-        app:layout_constraintEnd_toEndOf="@id/button_viewMyContacts"
-        app:layout_constraintStart_toStartOf="@id/centralVerticalGuideline"
-        app:strokeColor="?attr/colorOnBackground" />
-
-    <Button
-        android:id="@+id/button_viewMyContacts"
+        android:id="@+id/button_message"
         style="@style/Assignment1.ColorButton"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:backgroundTint="?attr/colorAccent"
         android:letterSpacing="0.09"
-        android:text="@string/my_profile_activity_view_my_contacts"
+        android:text="@string/message"
         android:textAllCaps="true"
         android:textAppearance="?attr/textAppearanceLabelMedium"
-        android:textColor="?attr/colorOnTertiary"
+        android:textColor="?attr/colorSurface"
         app:layout_constraintBottom_toBottomOf="@id/bottomGuideline"
         app:layout_constraintEnd_toEndOf="@id/rightGuideline"
-        app:layout_constraintStart_toStartOf="@id/centralVerticalGuideline" />
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@id/leftGuideline" />
 
     <androidx.constraintlayout.helper.widget.Flow
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/contacts_profile_bottom_margin"
         android:orientation="horizontal"
         app:constraint_referenced_ids="imageView_socialLogo1,imageView_socialLogo2,imageView_socialLogo3"
         app:flow_horizontalGap="@dimen/my_profile_icons_flow_gap"
         app:flow_horizontalStyle="packed"
         app:flow_wrapMode="chain"
-        app:layout_constraintBottom_toBottomOf="@id/bottomGuideline"
-        app:layout_constraintEnd_toEndOf="@id/centralVerticalGuideline"
+        app:layout_constraintBottom_toTopOf="@id/button_message"
+        app:layout_constraintEnd_toEndOf="@id/rightGuideline"
         app:layout_constraintStart_toStartOf="@id/leftGuideline"
-        app:layout_constraintTop_toBottomOf="@id/topContainer" />
+        tools:layout_editor_absoluteY="442dp" />
 
     <ImageView
         android:id="@+id/imageView_socialLogo1"

@@ -39,7 +39,7 @@ dependencies {
     implementation(libs.material)
 
     // DataStore for data storage using Kotlin Coroutines
-    implementation(libs.datastorePreferences)
+    implementation(libs.androidx.datastorePreferences)
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.testExtJUnit)
